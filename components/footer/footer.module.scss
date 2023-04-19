@@ -1,0 +1,14 @@
+@import 'variables';
+@import 'mixins';
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    @include flex(center, center);
+    background-color: $footer-color;
+    color: $light-color;
+    z-index: 9;
+}
