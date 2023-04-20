@@ -1,3 +1,4 @@
+
 @mixin flex($justify: center, $align: center, $direction: null) {
     display: flex;
     justify-content: $justify;
@@ -7,22 +8,19 @@
     }
   }
 
-  @mixin theme($mode) {
-    $primary-color: if($mode == 'light', $primary-color-light, $primary-color-dark);
-    $secondary-color: if($mode == 'light', $secondary-color-light, $secondary-color-dark);
-  
-    body {
-      background-color: if($mode == 'light', #fff, #333);
-      color: if($mode == 'light', #333, #fff);
-    }
-  
-    /* Use the primary and secondary colors throughout your styles */
-    a {
-      color: $primary-color;
-    }
-  
-    /* Additional styles for each mode */
-    @if $mode == 'dark' {
-      /* Additional styles for dark mode */
+  @mixin theme ($mode: null) {
+    $bg: transparent;
+    $clr: transparent;
+    @if ($mode == 'dark') {
+      $bg: $bg-clr-dark;
+      $clr: $text-clr-dark;
+    } @else {
+      $bg: $bg-clr;
+      $clr: $text-clr;
+    } 
+
+   header, main, footer {
+      background-color: $bg;
+      color: $clr;
     }
   }

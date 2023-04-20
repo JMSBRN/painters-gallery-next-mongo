@@ -4,9 +4,9 @@ import styles from './layout.module.scss';
 const Layout = ({ children }: { children: ReactElement }) => {
   const { layout, main } = styles;
   return (
-    <div className={layout}>
+    <main className={layout}>
       <div className={main}>{children}</div>
-    </div>
+    </main>
   );
 };
 

@@ -8,7 +8,5 @@
     right: 0;
     height: 80px;
     @include flex(center, center);
-    background-color: $footer-color;
-    color: $light-color;
     z-index: 9;
 }
