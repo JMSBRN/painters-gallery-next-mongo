@@ -7,16 +7,24 @@
     left: 0;
     right: 0;
     height: 80px;
-    padding: 0 20px;
-    @include flex(space-between, center);
     z-index: 9;
+    @include flex(center, center);
+  }
+  
+  .headerContainer {
+    @include flex(space-between, center);
     & nav  {
-        min-width: 500px;
-        @include flex(space-arround, center);
-        & a {
+      min-width: 550px;
+      @include flex(space-arround, center);
+      & a {
         text-decoration: none;
         color: $light;
         margin-right: 20px;
       }
     }
-}
+  }
+  .authLink {
+    margin-right: 20px;
+    text-decoration: none;
+    color: $light;
+  }

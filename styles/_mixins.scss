@@ -1,4 +1,3 @@
-
 @mixin flex($justify: center, $align: center, $direction: null) {
     display: flex;
     justify-content: $justify;
@@ -31,7 +30,11 @@
       background-color: black;
       color: white
     }
-    .test {
-      background-color: $secondary;
+    form label, input {
+      color: $text;
     }
+    form button {
+      background-color: $primary;
+    }
+
   }

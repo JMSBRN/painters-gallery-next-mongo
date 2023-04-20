@@ -9,16 +9,21 @@ interface HeaderProps {
 }
 const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
-    const { header } = styles;
+  const { header, headerContainer, authLink } = styles;
   return (
     <header className={header}>
-      <nav>
-          <Link href='/'>home</Link>
-          <Link href='/about'>about</Link>
-          <Link href='/galleries'>galleries</Link>
-          <Link href='/help'>help</Link>
-      </nav>
-      <ThemeSwitcher isDark={isDark} setIsDark={setIsDark}/>
+      <div className={headerContainer}>
+        <nav>
+          <Link href="/">home</Link>
+          <Link href="/about">about</Link>
+          <Link href="/galleries">galleries</Link>
+          <Link href="/help">help</Link>
+        </nav>
+        <>
+          <Link className={authLink} href={'/auth'}>sig nup</Link>
+          <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
+        </>
+      </div>
     </header>
   );
 };
