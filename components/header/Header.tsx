@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './header.module.scss';
-import ThemeBtn from '../theme-btn/ThemeBtn';
+import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
+import Link from 'next/link';
 
 interface HeaderProps {
   isDark: boolean;
@@ -11,7 +12,13 @@ const Header = (props: HeaderProps) => {
     const { header } = styles;
   return (
     <header className={header}>
-      <ThemeBtn isDark={isDark} setIsDark={setIsDark}/>
+      <nav>
+          <Link href='/'>home</Link>
+          <Link href='/about'>about</Link>
+          <Link href='/galleries'>galleries</Link>
+          <Link href='/help'>help</Link>
+      </nav>
+      <ThemeSwitcher isDark={isDark} setIsDark={setIsDark}/>
     </header>
   );
 };

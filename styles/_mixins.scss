@@ -9,18 +9,29 @@
   }
 
   @mixin theme ($mode: null) {
-    $bg: transparent;
-    $clr: transparent;
+    $bg: $bg-clr;
+    $text: $text-clr;
+    $primary: $primary-clr;
+    $secondary: $secondary-clr;
     @if ($mode == 'dark') {
       $bg: $bg-clr-dark;
-      $clr: $text-clr-dark;
-    } @else {
-      $bg: $bg-clr;
-      $clr: $text-clr;
-    } 
+      $text: $text-clr-dark;
+      $primary: $primary-clr-dark;
+      $secondary: $secondary-clr-dark;
+    }
 
-   header, main, footer {
+    header{
+      background-color: $primary;
+    }
+    main {
       background-color: $bg;
-      color: $clr;
+      color: $text;
+    }
+    footer {
+      background-color: black;
+      color: white
+    }
+    .test {
+      background-color: $secondary;
     }
   }
