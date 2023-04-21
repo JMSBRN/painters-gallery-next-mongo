@@ -1,9 +1,12 @@
 import { TextField, Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import styles from './signupForm.module.scss';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setUser } from '@/features/users/usersSlice';
 
 const SignUpForm = () => {
   const { signupForm, formInput } = styles;
+  const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +17,7 @@ const SignUpForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(setUser(formData));
   };
 
   const handleChange = (
