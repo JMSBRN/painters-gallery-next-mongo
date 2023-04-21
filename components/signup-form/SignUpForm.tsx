@@ -15,9 +15,10 @@ const SignUpForm = () => {
     confirmPassword: '',
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setUser(formData));
+    const { name, email, password } = formData;
   };
 
   const handleChange = (
