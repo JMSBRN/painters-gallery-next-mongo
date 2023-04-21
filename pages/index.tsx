@@ -19,7 +19,7 @@ const Home = ({users}: { users: User[]}) => {
   return (
     <>
       <div>
-        {JSON.stringify(users)}
+        home
       </div>
     </>
   );
