@@ -1,6 +1,6 @@
 import clientPromise from '@/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { updateMongoDb } from '@/utils/apiUtils';
+import { updateMongoDb } from '@/pages/api/users/mongoEndPoints';
 
 const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = await clientPromise;
@@ -8,3 +8,9 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default handle;
+
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
