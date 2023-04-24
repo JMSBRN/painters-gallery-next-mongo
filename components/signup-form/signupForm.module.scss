@@ -1,6 +1,38 @@
-.signupForm {
+@import 'variables';
+@import 'mixins';
+
+.formContainer {
     margin: 0 auto;
     max-width: 500px;
 }
+.signupForm {
+   width: 100%;
+}
+.showPswBtn {
+    width: 100px;
+    margin-top: 20px;
+    padding: 3px;
+    border-radius: 3px;
+    border: none;
+    &:hover {
+        background-color: $primary-clr;
+        color: $text-clr-dark;
+        cursor: pointer;
 
+    }
+}
+.cretedUserMsg {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 9%;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    text-align: center;
+    @include flex(center, center, column);
+    background-color: rgb(255, 0, 0, 0.5);
+    color: white;
+    cursor: pointer;
+    z-index: 9;
+}
 

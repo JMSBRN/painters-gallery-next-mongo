@@ -26,8 +26,8 @@ export const getUsers = async (id?: string) => {
   const data = await apiCall('GET', id);
   return data;
 };
-export const addUser = async () => {
-  const data = await apiCall('POST');
+export const addUser = async (bodyData: User) => {
+  const data = await apiCall('POST', undefined, bodyData);
   return data;
 };
 export const updateUser = async (id: string, bodyData: User) => {
