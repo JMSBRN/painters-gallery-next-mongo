@@ -1,0 +1,40 @@
+import { User } from '@/features/users/interfaces';
+
+export const apiCall = async (method: string, id?: string, bodyData?: User) => {
+  const options: RequestInit | undefined = {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bodyData),
+  };
+  if (id) {
+    if (bodyData) {
+      const res = await fetch(`/api/users/${id}`, options);
+      const data = await res.json();
+      return data;
+    } else {
+      const res = await fetch(`/api/users/${id}`, options);
+      const data = await res.json();
+      return data;
+    }
+  } else {
+    const res = await fetch('/api/users/', options);
+    const data = await res.json();
+    return data;
+  }
+};
+export const getUsers = async (id?: string) => {
+  const data = await apiCall('GET', id);
+  return data;
+};
+export const addUser = async () => {
+  const data = await apiCall('POST');
+  return data;
+};
+export const updateUser = async (id: string, bodyData: User) => {
+  const data = await apiCall('PUT', id, bodyData);
+  return data;
+};
+export const deleteUser = async (id: string) => {
+  const data = await apiCall('DELETE', id);
+  return data;
+};
