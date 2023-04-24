@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './signupForm.module.scss';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setUser } from '@/features/users/usersSlice';
+import { ErrorMessages, Regex } from '@/constants/constants';
 
 const SignUpForm = () => {
   const { signupForm, formInput } = styles;
@@ -19,6 +20,12 @@ const SignUpForm = () => {
     e.preventDefault();
     dispatch(setUser(formData));
     const { name, email, password } = formData;
+    console.log({
+      name,
+      email,
+      password
+    });
+    
   };
 
   const handleChange = (
@@ -41,6 +48,11 @@ const SignUpForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            required={true}
+            inputProps={{
+              pattern: Regex.FIRST_NAME,
+              title: ErrorMessages.FIRST_NAME
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -52,6 +64,7 @@ const SignUpForm = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            required={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -63,6 +76,11 @@ const SignUpForm = () => {
             type="password"
             value={formData.password}
             onChange={handleChange}
+            required={true}
+            inputProps={{
+              pattern: Regex.PASSWORD,
+              title: ErrorMessages.PASSWORD
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -74,6 +92,11 @@ const SignUpForm = () => {
             type="password"
             value={formData.confirmPassword}
             onChange={handleChange}
+            required={true}
+            inputProps={{
+              pattern: Regex.PASSWORD,
+              title: ErrorMessages.PASSWORD
+            }}
           />
         </Grid>
         <Grid item xs={12}>
