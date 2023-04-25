@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './form.module.scss';
-import { Regex, ErrorMessages } from '@/constants/constants';
+import { Regex, RegexHelperMessages } from '@/constants/constants';
 import { Grid, TextField, Button } from '@mui/material';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 
@@ -18,7 +18,7 @@ const Form = (props: FormProps) => {
     useEffect(() => {
       setShowPassword(false);
     }, [loginForm, formData]);
-    const { existByName, existByEmail, confirm } = signUpErrors;
+    const { nameError, emailError, passwordError } = signUpErrors;
 
   return (   
   <>
@@ -35,10 +35,10 @@ const Form = (props: FormProps) => {
             required={true}
             inputProps={{
               pattern: Regex.FIRST_NAME,
-              title: ErrorMessages.FIRST_NAME
+              title: RegexHelperMessages.FIRST_NAME
             }}
-            helperText={existByName}
-            error={!!existByName}
+            helperText={nameError}
+            error={!!nameError}
           />
         </Grid>
         {!loginForm && 
@@ -52,8 +52,8 @@ const Form = (props: FormProps) => {
             value={formData.email}
             onChange={handleChange}
             required={true}
-            helperText={existByEmail}
-            error={!!existByEmail}
+            helperText={emailError}
+            error={!!emailError}
           />
         </Grid>
         }
@@ -69,9 +69,10 @@ const Form = (props: FormProps) => {
             required={true}
             inputProps={{
               pattern: Regex.PASSWORD,
-              title: ErrorMessages.PASSWORD
+              title: RegexHelperMessages.PASSWORD
             }}
-            error={!!confirm}
+            helperText={loginForm && passwordError}
+            error={!!passwordError}
           />
         </Grid>
         {!loginForm && 
@@ -87,10 +88,10 @@ const Form = (props: FormProps) => {
             required={true}
             inputProps={{
               pattern: Regex.PASSWORD,
-              title: ErrorMessages.PASSWORD
+              title: RegexHelperMessages.PASSWORD
             }}
-            helperText={confirm}
-            error={!!confirm}
+            helperText={passwordError}
+            error={!!passwordError}
           />
         </Grid>
         }
@@ -101,7 +102,12 @@ const Form = (props: FormProps) => {
         </Grid>
       </Grid>
     </form>
-    <button className={showPswBtn} onClick={() => setShowPassword(!showPassword)}>{showPassword ? 'hide password': 'show password'}</button>
+    <button 
+     className={showPswBtn}
+     onClick={() => setShowPassword(!showPassword)}
+     >
+      {showPassword ? 'hide password': 'show password'}
+    </button>
   </>
   );
 };

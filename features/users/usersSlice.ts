@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../users/interfaces';
+import { RootState } from '@/srore/store';
 
 interface InitialState {
     user: User;
@@ -26,4 +27,5 @@ const usersSlice = createSlice({
 });
 
 export const { setUser } = usersSlice.actions;
+export const selectUser = (state: RootState) => state.users;
 export default usersSlice.reducer;

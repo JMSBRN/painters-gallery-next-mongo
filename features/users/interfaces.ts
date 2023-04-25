@@ -1,4 +1,5 @@
 export interface User {
+    _id?: string;
     name: string;
     email: string;
     password: string;
@@ -6,7 +7,7 @@ export interface User {
 }
 
 export interface SignUpErrors {
-    confirm: string,
-    existByName: string,
-    existByEmail: string
+    nameError: string,
+    emailError: string,
+    passwordError: string,
 }
