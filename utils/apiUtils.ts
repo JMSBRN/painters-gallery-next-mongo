@@ -38,3 +38,9 @@ export const deleteUser = async (id: string) => {
   const data = await apiCall('DELETE', id);
   return data;
 };
+
+export const findUserByName = async (name: string) => {
+  const users: User[] = await getUsers();
+  const findedUser = users.find( el => el.name === name);
+  return findedUser;
+};

@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './form.module.scss';
 import { Regex, ErrorMessages } from '@/constants/constants';
 import { Grid, TextField, Button } from '@mui/material';
-import { User } from '@/features/users/interfaces';
+import { SignUpErrors, User } from '@/features/users/interfaces';
 
 interface FormProps {
     formData: User;
-    confirmError: string;
+    signUpErrors: Partial<SignUpErrors>;
     loginForm: boolean;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     handleChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 const Form = (props: FormProps) => {
-    const { signupForm, formInput, formContainer, showPswBtn } = styles;
-    const { loginForm, formData, confirmError, handleChange, handleSubmit } = props;
+    const { signupForm, formInput, showPswBtn } = styles;
+    const { loginForm, formData, signUpErrors, handleChange, handleSubmit } = props;
     const[showPassword, setShowPassword] = useState<boolean>(false);
-    
+    useEffect(() => {
+      setShowPassword(false);
+    }, [loginForm, formData]);
+    const { exist , confirm } = signUpErrors;
+
   return (   
   <>
     <form className={signupForm} onSubmit={handleSubmit}>
@@ -33,6 +37,8 @@ const Form = (props: FormProps) => {
               pattern: Regex.FIRST_NAME,
               title: ErrorMessages.FIRST_NAME
             }}
+            helperText={exist}
+            error={!!exist}
           />
         </Grid>
         {!loginForm && 
@@ -63,7 +69,7 @@ const Form = (props: FormProps) => {
               pattern: Regex.PASSWORD,
               title: ErrorMessages.PASSWORD
             }}
-            error={!!confirmError}
+            error={!!confirm}
           />
         </Grid>
         {!loginForm && 
@@ -81,8 +87,8 @@ const Form = (props: FormProps) => {
               pattern: Regex.PASSWORD,
               title: ErrorMessages.PASSWORD
             }}
-            helperText={confirmError}
-            error={!!confirmError}
+            helperText={confirm}
+            error={!!confirm}
           />
         </Grid>
         }
