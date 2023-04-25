@@ -44,3 +44,14 @@ export const findUserByName = async (name: string) => {
   const findedUser = users.find( el => el.name === name);
   return findedUser;
 };
+export const findUserByEmail = async (email: string) => {
+  const users: User[] = await getUsers();
+  const findedUser = users.find( el => el.email === email);
+  return findedUser;
+};
+
+export const findUser = async (name: string, email: string) => {
+  const userByName = await findUserByName(name);
+  const userByEmail = await findUserByEmail(email);
+   return {userByName, userByEmail};
+};

@@ -18,7 +18,7 @@ const Form = (props: FormProps) => {
     useEffect(() => {
       setShowPassword(false);
     }, [loginForm, formData]);
-    const { exist , confirm } = signUpErrors;
+    const { existByName, existByEmail, confirm } = signUpErrors;
 
   return (   
   <>
@@ -37,8 +37,8 @@ const Form = (props: FormProps) => {
               pattern: Regex.FIRST_NAME,
               title: ErrorMessages.FIRST_NAME
             }}
-            helperText={exist}
-            error={!!exist}
+            helperText={existByName}
+            error={!!existByName}
           />
         </Grid>
         {!loginForm && 
@@ -52,6 +52,8 @@ const Form = (props: FormProps) => {
             value={formData.email}
             onChange={handleChange}
             required={true}
+            helperText={existByEmail}
+            error={!!existByEmail}
           />
         </Grid>
         }

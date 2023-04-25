@@ -7,5 +7,6 @@ export interface User {
 
 export interface SignUpErrors {
     confirm: string,
-    exist: string
+    existByName: string,
+    existByEmail: string
 }

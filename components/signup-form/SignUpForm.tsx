@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from './signupForm.module.scss';
-import { addUser, findUserByName, getUsers } from '@/utils/apiUtils';
+import { addUser, getUsers, findUser } from '@/utils/apiUtils';
 import Form from '../form/Form';
-import { SignUpErrors, User } from '@/features/users/interfaces';
+import { SignUpErrors } from '@/features/users/interfaces';
 
 const SignUpForm = () => {
   const { formContainer } = styles;
@@ -25,9 +25,11 @@ const SignUpForm = () => {
     e.preventDefault();
     const confirmed = password.localeCompare(confirmPassword, 'en', { sensitivity: 'base' }) === 0;
     if(confirmed) {
-       const findedUser = await findUserByName(name);
-        if(findedUser) {
-          setSignUpErrors( { exist: 'User with this name already exist' });
+        const {userByName, userByEmail} = await findUser(name, email);
+        if(userByName) {
+          userByName && setSignUpErrors( { existByName: 'User with this name already exist' });
+        } else if (userByEmail) {
+          userByEmail && setSignUpErrors( { existByEmail: 'User with this email already exist' });
         } else {
           setLoginForm(true);
           setSignUpErrors(initSignUpErrors);
@@ -71,3 +73,7 @@ const SignUpForm = () => {
   );
 };
 export default SignUpForm;
+function findedUser(): { userByName: any; userByEmail: any; } | PromiseLike<{ userByName: any; userByEmail: any; }> {
+  throw new Error('Function not implemented.');
+}
+
