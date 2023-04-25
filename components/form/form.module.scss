@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+
+.signupForm {
+   width: 100%;
+}
+.showPswBtn {
+    width: 100px;
+    margin-top: 20px;
+    padding: 3px;
+    border-radius: 3px;
+    border: none;
+    &:hover {
+        background-color: $primary-clr;
+        color: $text-clr-dark;
+        cursor: pointer;
+
+    }
+}
