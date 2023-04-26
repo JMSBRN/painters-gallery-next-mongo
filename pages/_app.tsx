@@ -7,6 +7,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '@/srore/store';
+import Router from 'next/router';
+import NextNProgress from 'nextjs-progressbar';
+import NProgress from 'nprogress';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -21,6 +24,39 @@ export default function App({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <div className={isDark ? 'theme-dark' : 'theme'}>
           <Header isDark={isDark} setIsDark={setIsDark} />
+          <NextNProgress
+             color="#cb1414"
+             startPosition={0.3}
+             stopDelayMs={200}
+             height={3}
+             options={{ showSpinner: false }}
+             transformCSS={(css) => {
+              // css is the default css string. You can modify it and return it or return your own css.
+              const modifiedCss = `
+              /* add your custom css here */
+              ${css}
+  
+              /* modify the progress bar height */
+              #nprogress .bar {
+                margin-top: 80px;
+                height: 5px;
+              }
+  
+              /* modify the progress bar color */
+              #nprogress .peg {
+                display: none;
+              }
+              #nprogress .bar {
+                background-color: rgba(206, 42, 42, 0.6);
+              }
+              #nprogress .spinner-icon {
+                border-top-color: #29D;
+                border-left-color: #29D;
+              }
+            `;
+              return <style>{modifiedCss}</style>;
+            }}
+          />
           <Layout>
             <Component {...pageProps} />
           </Layout>
@@ -30,3 +66,15 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done();
+});

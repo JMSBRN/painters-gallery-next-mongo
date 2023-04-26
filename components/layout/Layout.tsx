@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
+import React  from 'react';
 import styles from './layout.module.scss';
 
-const Layout = ({ children }: { children: ReactElement }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   const { layout, main } = styles;
   return (
     <main className={layout}>
