@@ -3,14 +3,17 @@ import '../styles/main.scss';
 import Layout from '@/components/layout/Layout';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '@/srore/store';
 import Loader from '@/components/progress-line/ProgressLine';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import { selectUsers } from '@/features/users/usersSlice';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isDark, setIsDark] = useState<boolean>(false);
+  
   return (
     <>
       <Head>

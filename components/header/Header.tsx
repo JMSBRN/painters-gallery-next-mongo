@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
+import { User } from '@/features/users/interfaces';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { selectUsers, setUser } from '@/features/users/usersSlice';
 
 interface HeaderProps {
   isDark: boolean;
@@ -9,7 +12,18 @@ interface HeaderProps {
 }
 const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
-  const { header, headerContainer, authLink } = styles;
+  const { header, headerContainer, authLink, userNameStyle, logedUserContainer } = styles;
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(selectUsers);
+
+  useEffect(() => {
+    dispatch(setUser(JSON.parse(localStorage.getItem('user') || '{}')));
+  }, [dispatch]);
+  
+  const  handlClickLogOut = () => {
+    dispatch(setUser({} as User));
+    localStorage.clear();
+  };
   return (
     <header className={header}>
       <div className={headerContainer}>
@@ -24,6 +38,14 @@ const Header = (props: HeaderProps) => {
           <Link className={authLink} href={'/auth'}>Sign Up</Link>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>
+        <div className={logedUserContainer}>
+          {user.name && 
+          <>
+           <div className={userNameStyle}>{user.name}</div>
+           <button onClick={handlClickLogOut}>log out</button>
+          </>
+          }
+        </div>
       </div>
     </header>
   );

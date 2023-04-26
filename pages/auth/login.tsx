@@ -1,14 +1,17 @@
 import Form from '@/components/form/Form';
 import Loader from '@/components/loader/Loader';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './login.module.scss';
 import { SignUpErrors } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import { findUserByName } from '@/utils/apiUtils';
 import router from 'next/router';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { selectUsers, setUser } from '@/features/users/usersSlice';
 
 const Login = () => {
   const {formContainer, loaderContainer} = styles;
+  const dispatch = useAppDispatch();
   const initFormData = {
     name: '',
     email: '',
@@ -32,7 +35,9 @@ const Login = () => {
     const data = await findUserByName(name);
     if(data?._id) {
       if(data.password === password) {
+        localStorage.setItem('user', JSON.stringify(data));
         router.push(`/painters/${data._id}`);
+        dispatch(setUser(data));
       } else {
         setLoading(false);
         setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
@@ -53,7 +58,12 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-  
+
+  const { user } = useAppSelector(selectUsers);
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
   return (
     <div className={formContainer}>
       <div className={loaderContainer}>

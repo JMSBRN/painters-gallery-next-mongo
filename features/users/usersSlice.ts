@@ -7,12 +7,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-    user: {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    },
+    user: {} as User,
 };
 
 const usersSlice = createSlice({
@@ -21,11 +16,10 @@ const usersSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
          state.user = action.payload;
-         console.log(state.user);
         }
     }
 });
 
 export const { setUser } = usersSlice.actions;
-export const selectUser = (state: RootState) => state.users;
+export const selectUsers = (state: RootState) => state.users;
 export default usersSlice.reducer;
