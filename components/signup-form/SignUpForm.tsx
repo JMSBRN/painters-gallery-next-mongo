@@ -5,9 +5,10 @@ import Form from '../form/Form';
 import { SignUpErrors } from '@/features/users/interfaces';
 import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
+import Loader from '../loader/Loader';
 
 const SignUpForm = () => {
-  const { formContainer } = styles;
+  const { formContainer, loaderContainer } = styles;
   const initFormData = {
     name: '',
     email: '',
@@ -22,20 +23,25 @@ const SignUpForm = () => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loginForm, setLoginForm] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { name, email, password, confirmPassword } = formData;
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const confirmed = password.localeCompare(confirmPassword, 'en', { sensitivity: 'base' }) === 0;
     if(confirmed) {
         const { userByName, userByEmail } = await findUser(name, email);
         if(userByName) {
-          userByName && setSignUpErrors( { nameError:  FormErrorMessages.NAME_ERROR});
+          setLoading(false);
+          setSignUpErrors( { nameError:  FormErrorMessages.NAME_ERROR});
         } else if (userByEmail) {
-          userByEmail && setSignUpErrors( { emailError: FormErrorMessages.EMAIL_ERROR });
+          setLoading(false);
+          setSignUpErrors( { emailError: FormErrorMessages.EMAIL_ERROR });
         } else {
           setLoginForm(true);
+          setLoading(false);
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
           await addUser({
@@ -46,19 +52,22 @@ const SignUpForm = () => {
         }
     } else {
       if(!loginForm) {
+        setLoading(false);
         setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_CONFIRM_ERROR });
       }
     }  
      if (loginForm) {
       setSignUpErrors(initSignUpErrors);
-       const data = await findUserByName(name);
-       if(data?._id) {
+      const data = await findUserByName(name);
+      if(data?._id) {
         if(data.password === password) {
           router.push(`/painters/${data._id}`);
         } else {
+          setLoading(false);
           setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
         }
-       } else {
+      } else {
+         setLoading(false);
         setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR});
        }
      }
@@ -76,6 +85,9 @@ const SignUpForm = () => {
 
   return (
     <div className={formContainer}>
+      <div className={loaderContainer}>
+      {loading && <Loader /> }
+      </div>
       <Form 
        loginForm={loginForm}
        signUpErrors={signUpErrors}
