@@ -20,6 +20,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/help">help</Link>
         </nav>
         <>
+          <Link className={authLink} href={'/auth/login'}>Log In</Link>
           <Link className={authLink} href={'/auth'}>Sign Up</Link>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>

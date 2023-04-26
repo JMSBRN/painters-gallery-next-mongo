@@ -22,7 +22,6 @@ const SignUpForm = () => {
   };
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
-  const [loginForm, setLoginForm] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { name, email, password, confirmPassword } = formData;
   const router = useRouter();
@@ -40,7 +39,6 @@ const SignUpForm = () => {
           setLoading(false);
           setSignUpErrors( { emailError: FormErrorMessages.EMAIL_ERROR });
         } else {
-          setLoginForm(true);
           setLoading(false);
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
@@ -49,28 +47,12 @@ const SignUpForm = () => {
             email,
             password
           });
+          router.push('/auth/login');
         }
     } else {
-      if(!loginForm) {
         setLoading(false);
         setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_CONFIRM_ERROR });
-      }
     }  
-     if (loginForm) {
-      setSignUpErrors(initSignUpErrors);
-      const data = await findUserByName(name);
-      if(data?._id) {
-        if(data.password === password) {
-          router.push(`/painters/${data._id}`);
-        } else {
-          setLoading(false);
-          setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
-        }
-      } else {
-         setLoading(false);
-        setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR});
-       }
-     }
   };
 
   const handleChange = (
@@ -89,7 +71,7 @@ const SignUpForm = () => {
       {loading && <Loader /> }
       </div>
       <Form 
-       loginForm={loginForm}
+       loginForm={false}
        signUpErrors={signUpErrors}
        formData={formData}
        handleChange={handleChange}
