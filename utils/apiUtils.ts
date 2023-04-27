@@ -8,16 +8,16 @@ export const apiCall = async (method: string, id?: string, bodyData?: User) => {
   };
   if (id) {
     if (bodyData) {
-      const res = await fetch(`/api/users/${id}`, options);
+      const res = await fetch(`http://localhost:3000/api/users/${id}`, options);
       const data = await res.json();
       return data;
     } else {
-      const res = await fetch(`/api/users/${id}`, options);
+      const res = await fetch(`http://localhost:3000/api/users/${id}`);
       const data = await res.json();
       return data;
     }
   } else {
-    const res = await fetch('/api/users/', options);
+    const res = await fetch('http://localhost:3000/api/users/', options);
     const data = await res.json();
     return data;
   }
@@ -26,6 +26,7 @@ export const getUsers = async (id?: string) => {
   const data = await apiCall('GET', id);
   return data;
 };
+
 export const addUser = async (bodyData: User) => {
   const data = await apiCall('POST', undefined, bodyData);
   return data;
