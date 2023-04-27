@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setUser } from '@/features/users/usersSlice';
+import { useRouter } from 'next/router';
 
 interface HeaderProps {
   isDark: boolean;
@@ -15,7 +16,7 @@ const Header = (props: HeaderProps) => {
   const { header, headerContainer, authLink, userNameStyle, logedUserContainer } = styles;
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUsers);
-
+  const router = useRouter();
   useEffect(() => {
     dispatch(setUser(JSON.parse(localStorage.getItem('user') || '{}')));
   }, [dispatch]);
@@ -23,6 +24,7 @@ const Header = (props: HeaderProps) => {
   const  handlClickLogOut = () => {
     dispatch(setUser({} as User));
     localStorage.clear();
+    router.push('/');
   };
   return (
     <header className={header}>
