@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import clientPromise from '@/lib/mongodb';
-import { updateMongoDb } from '@/pages/api/users/mongoEndPoints';
+import { updateMongoDb } from '@/lib/mongoEndPoints';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

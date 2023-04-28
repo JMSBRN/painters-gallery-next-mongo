@@ -9,31 +9,29 @@ export const updateMongoDb = async (
   nameCollection: string
 ) => {
   const { method } = req;
-  const { userId } = req.query;
-  const rgx = /^[0-9a-fA-F]{24}$/.test(userId as string);
+  const id = req.query.userId as string;
+  const rgx = /^[0-9a-fA-F]{24}$/.test(id as string);
   const db = client.db(nameDb);
-  if (userId) {
+  if (id) {
     if (rgx) {
       switch (method) {
         case 'GET':
-          const id = req.query.userId as string;
           const user = await db
             .collection(nameCollection)
             .findOne({ _id: new ObjectId(id) });
           if (user) {
             res.status(200).json(user);
           } else {
-            res.status(404).json({ message: 'User not found' });
+            res.status(404).json({ message: 'data not found' });
           }
           break;
         case 'PUT':
-          const userId = req.query.userId as string;
           try {
             const updatedUser = req.body;
             await db
               .collection(nameCollection)
-              .updateOne({ _id: new ObjectId(userId) }, { $set: updatedUser });
-            res.status(200).json({ message: 'User updated' });
+              .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+            res.status(200).json({ message: 'data updated' });
           } catch (e) {
             console.error(e);
             res.status(500).json({ message: 'Server error' });
@@ -41,11 +39,10 @@ export const updateMongoDb = async (
           break;
         case 'DELETE':
           try {
-            const userId = req.query.userId as string;
             await db
               .collection(nameCollection)
-              .deleteOne({ _id: new ObjectId(userId) });
-            res.status(200).json({ message: 'User deleted' });
+              .deleteOne({ _id: new ObjectId(id) });
+            res.status(200).json({ message: 'data deleted' });
           } catch (e) {
             console.error(e);
             res.status(500).json({ message: 'Server error' });
@@ -62,8 +59,8 @@ export const updateMongoDb = async (
     switch (method) {
       case 'GET':
         try {
-          const users = await db.collection('users').find().toArray();
-          res.status(200).json(users);
+          const data = await db.collection(nameCollection).find().toArray();
+          res.status(200).json(data);
         } catch (e) {
           console.error(e);
           res.status(500).json({ message: 'Server error' });
@@ -71,9 +68,9 @@ export const updateMongoDb = async (
         break;
       case 'POST':
         try {
-          const newUser = req.body;
-          await db.collection('users').insertOne(newUser);
-          res.status(201).json({ message: 'User created' });
+          const newData = req.body;
+          await db.collection(nameCollection).insertOne(newData);
+          res.status(201).json({ message: 'new data created' });
         } catch (e) {
           console.error(e);
           res.status(500).json({ message: 'Server error' });

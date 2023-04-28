@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { GridFSBucket, MongoClient } from 'mongodb';
-import { createReadStream, unlink, unlinkSync } from 'fs';
+import { createReadStream, unlinkSync } from 'fs';
 import formidable from 'formidable';
 import { join } from 'path';
-import { cwd, stdout } from 'process';
+import { cwd } from 'process';
 
 export const config = {
   api: {
@@ -41,7 +41,7 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       await client.connect();
 
       const db = client.db(process.env.MONGODB_DB);
-      const collection = db.collection('test');
+      const collection = db.collection('images');
       const result = await collection.insertOne({
         name: (files.image as any).originalFilename,
         newName: (files.image as any).newFilename,

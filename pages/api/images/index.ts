@@ -4,7 +4,7 @@ import { updateMongoDb } from '@/lib/mongoEndPoints';
 
 const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = await clientPromise;
-  updateMongoDb(req, res, client, 'painters', 'users');
+  updateMongoDb(req, res, client, 'painters', 'images');
 };
 
 export default handle;
