@@ -42,27 +42,22 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       size: (files.image as any).size,
       mimetype: (files.image as any).mimetype,
     };
+    const filePath = join(cwd(), '/public/images/', `${(files.image as any).newFilename}`);
     try {
       await client.connect();
-
       const db = client.db(process.env.MONGODB_DB);
       const collection = db.collection('images');
       const result = await collection.insertOne(initUploadData);
-      const filePath = join(cwd(), '/public/images/', `${(files.image as any).newFilename}`);
       const fileStream = createReadStream(filePath);
 
-      const bucket = new GridFSBucket(db, { bucketName: 'images' });
-      const data = await bucket.find().toArray();
-      process.stdout.write(`${JSON.stringify(result.insertedId)}\n`);
-      process.stdout.write(`${JSON.stringify(data)}\n`);
-
+      const bucket = new GridFSBucket(db, { bucketName: 'images'});      
       const uploadStream = bucket.openUploadStreamWithId(
         new ObjectId(result.insertedId),
         initUploadData.name
-      );
-      fileStream.pipe(uploadStream);
-      
-      uploadStream.on('error', (error) => {
+        );
+        fileStream.pipe(uploadStream);
+        
+        uploadStream.on('error', (error) => {
         console.error(error);
         res.status(500).send('An error occurred while uploading the image');        
         process.stdout.write('error');
@@ -70,15 +65,17 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
 
       uploadStream.on('finish', () => {
         res.status(201).json({ id: result.insertedId });
-        process.stdout.write('Image saved to MongoDB');
+        process.stdout.write('Image saved to MongoDB \n');
         client.close();
       });
     } catch (error) {
       console.error(error);
       res.status(500).send('An error occurred while uploading the image');
     } finally {
-      process.stdout.write('end');
+      process.stdout.write('end\n');
       await client.close();
+      unlinkSync(filePath);
     }
   });
 }
+  

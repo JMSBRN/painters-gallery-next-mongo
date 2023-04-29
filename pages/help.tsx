@@ -1,22 +1,12 @@
 import React from 'react';
 
-const Help = ({ data }: { data: string[] } ) => {
+const Help = () => {  
   return (
     <div>
-      {
-       JSON.stringify(data)
-      }
+      help
     </div>
+
   );
 };
 
 export default Help;
-
-export async function getServerSideProps() {
-   const res = await fetch('http://localhost:3000/api/images/');
-   const data = await res.json();
-  
-  return {
-    props: { data },
-  };
-}
