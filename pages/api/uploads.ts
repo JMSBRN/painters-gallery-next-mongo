@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { GridFSBucket, MongoClient, ObjectId } from 'mongodb';
-import { createReadStream, unlinkSync } from 'fs';
 import formidable from 'formidable';
 import { join } from 'path';
 import { cwd } from 'process';
+import { connectToDatabase } from '@/lib/mongoUtils';
 
 export const config = {
   api: {
@@ -35,7 +34,7 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       res.status(500).send('An error occurred while uploading the image');
       return;
     }
-    const client = new MongoClient(process.env.MONGODB_URI!);
+    const { client, db } = await connectToDatabase();;
     const initUploadData = {
       name: (files.image as any).originalFilename,
       newName: (files.image as any).newFilename,
@@ -45,36 +44,16 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
     const filePath = join(cwd(), '/public/images/', `${(files.image as any).newFilename}`);
     try {
       await client.connect();
-      const db = client.db(process.env.MONGODB_DB);
       const collection = db.collection('images');
       const result = await collection.insertOne(initUploadData);
-      const fileStream = createReadStream(filePath);
-
-      const bucket = new GridFSBucket(db, { bucketName: 'images'});      
-      const uploadStream = bucket.openUploadStreamWithId(
-        new ObjectId(result.insertedId),
-        initUploadData.name
-        );
-        fileStream.pipe(uploadStream);
-        
-        uploadStream.on('error', (error) => {
-        console.error(error);
-        res.status(500).send('An error occurred while uploading the image');        
-        process.stdout.write('error');
-      });
-
-      uploadStream.on('finish', () => {
-        res.status(201).json({ id: result.insertedId });
-        process.stdout.write('Image saved to MongoDB \n');
-        client.close();
-      });
+       if(result.insertedId) {
+        res.status(201).send('file uploaded');
+       }
     } catch (error) {
       console.error(error);
       res.status(500).send('An error occurred while uploading the image');
     } finally {
-      process.stdout.write('end\n');
       await client.close();
-      unlinkSync(filePath);
     }
   });
 }

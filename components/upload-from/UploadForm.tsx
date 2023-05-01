@@ -5,15 +5,15 @@ import React, { useState } from 'react';
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       setFile(file);
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (file) {
       setUploading(true);
       setError(null);
@@ -26,8 +26,6 @@ import React, { useState } from 'react';
         });
         if (!response.ok) {
           throw new Error('Failed to upload image');
-        } else {
-          setUploading(false);
         }
       } catch (error) {
         console.error(error);
