@@ -52,3 +52,29 @@ export const uploadGridFSFile = async (pathToDir: string, db: Db, fileName: stri
  
   }
 };
+
+export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, fileNameforFind?: string) => {
+  if(!!fileNameforFind) {
+    const files = await db.collection(`${bucketName}.files`).find({ filename: fileNameforFind }).toArray(); 
+    const images = await Promise.all(
+      files.map(async (file) => {
+        const data = await db.collection(`${bucketName}.chunks`).findOne({ files_id: file._id });
+        return {...file, data: `data:${file.contentType};base64,${data?.data.toString('base64')}`};
+      })
+      );
+      const filesInString = JSON.stringify(images);
+    
+    return filesInString;
+  } else {
+    const files = await db.collection(`${bucketName}.files`).find().toArray(); 
+    const images = await Promise.all(
+      files.map(async (file) => {
+        const data = await db.collection(`${bucketName}.chunks`).findOne({ files_id: file._id });
+        return {...file, data: `data:${file.contentType};base64,${data?.data.toString('base64')}`};
+      })
+      );
+      const filesInString = JSON.stringify(images);
+    
+    return filesInString;
+  }
+};
