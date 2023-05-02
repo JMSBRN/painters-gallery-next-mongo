@@ -1,5 +1,5 @@
 import { createReadStream, unlink } from 'fs';
-import { readdir } from 'fs/promises';
+import { readdir, writeFile } from 'fs/promises';
 import { MongoClient, Db, GridFSBucket } from 'mongodb';
 import { join } from 'path';
 import { cwd } from 'process';
@@ -26,18 +26,9 @@ export const connectToDatabase = async (): Promise<{ client: MongoClient; db: Db
   return { client, db };
 };
 
-export const getfileNamesFromDir = async (path: string) => {
-    const files = await readdir(path);
-     if(files.length) {
-         return files;
-     } else {
-        return;
-     }
-};
-
-export const uploadGridFSFile = async (pathToDir: string, db: Db, fileName: string) => {
-  const bucket = new GridFSBucket(db, { bucketName: 'testo'});
-  const files = await getfileNamesFromDir(join(cwd(), '/public/images'));
+export const uploadGridFSFile = async (pathToDir: string, db: Db, bucketName: string, fileName: string) => {
+  const bucket = new GridFSBucket(db, { bucketName: bucketName});
+  const files = await getfileNamesFromDir(join(cwd(), pathToDir));
   if(files?.length) {
     const filePath = join(cwd(), pathToDir, `${files[0]}`);
     const contentType  = mime.lookup(files[0]) as string;
@@ -76,5 +67,22 @@ export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, f
       const filesInString = JSON.stringify(images);
     
     return filesInString;
+  }
+};
+
+export const getfileNamesFromDir = async (path: string) => {
+    const files = await readdir(path);
+     if(files.length) {
+         return files;
+     } else {
+        return;
+     }
+};
+export const writeFileAsync = async (filePath: string, fileContent: string) => {
+  try {
+    await writeFile(filePath, fileContent);
+    console.log(`File "${filePath}" has been saved.`);
+  } catch (err) {
+    throw err;
   }
 };

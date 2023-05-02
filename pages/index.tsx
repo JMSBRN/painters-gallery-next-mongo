@@ -1,15 +1,10 @@
-import UploadForm from '@/components/upload-from/UploadForm';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const Home = () => {
-  useEffect(() => {
-  
-  }, []);
-  
+const Home = () => {  
   return (
     <>
       <div>
-        <UploadForm />
+       home
       </div>
     </>
   );

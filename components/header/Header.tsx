@@ -6,6 +6,9 @@ import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
+import { unlink } from 'fs';
+import { join } from 'path';
+import { cwd } from 'process';
 
 interface HeaderProps {
   isDark: boolean;
@@ -21,10 +24,11 @@ const Header = (props: HeaderProps) => {
     dispatch(setUser(JSON.parse(localStorage.getItem('user') || '{}')));
   }, [dispatch]);
   
-  const  handlClickLogOut = () => {
+  const  handlClickLogOut = async () => {
     dispatch(setUser({} as User));
     localStorage.clear();
     router.push('/');
+    await fetch('/api/deleteuser');
   };
   return (
     <header className={header}>

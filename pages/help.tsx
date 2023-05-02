@@ -1,7 +1,6 @@
 import React from 'react';
-import { connectToDatabase, uploadGridFSFile } from '@/lib/mongoUtils';
 
-const Help = ({ data }: { data: {}} ) => {  
+const Help = () => {  
   return (
     <div>
       help
@@ -11,11 +10,3 @@ const Help = ({ data }: { data: {}} ) => {
 };
 
 export default Help;
-export const getStaticProps = async() => {
-  const data = {};
-  const { db } = await connectToDatabase();
-  await uploadGridFSFile('/public/images', db, 'user_f');   
-  return {
-    props: data
-  };
-};
