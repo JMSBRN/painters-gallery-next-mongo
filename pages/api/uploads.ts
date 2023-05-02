@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import formidable from 'formidable';
-import { join } from 'path';
-import { cwd } from 'process';
 import { connectToDatabase } from '@/lib/mongoUtils';
 
 export const config = {
@@ -34,14 +32,13 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       res.status(500).send('An error occurred while uploading the image');
       return;
     }
-    const { client, db } = await connectToDatabase();;
+    const { client, db } = await connectToDatabase();
     const initUploadData = {
       name: (files.image as any).originalFilename,
       newName: (files.image as any).newFilename,
       size: (files.image as any).size,
       mimetype: (files.image as any).mimetype,
     };
-    const filePath = join(cwd(), '/public/images/', `${(files.image as any).newFilename}`);
     try {
       await client.connect();
       const collection = db.collection('images');
