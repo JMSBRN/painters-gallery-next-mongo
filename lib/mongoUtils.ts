@@ -81,7 +81,6 @@ export const getfileNamesFromDir = async (path: string) => {
 export const writeFileAsync = async (filePath: string, fileContent: string) => {
   try {
     await writeFile(filePath, fileContent);
-    console.log(`File "${filePath}" has been saved.`);
   } catch (err) {
     throw err;
   }
