@@ -43,13 +43,11 @@ const SignUpForm = ({ users }: { users: string}) => {
           setLoading(false);
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
-          // await addUser({
-          //   name,
-          //   email,
-          //   password
-          // });
-          console.log(JSON.stringify({ name, email, password }));
-          
+          await fetch('/api/adduser', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ name, email, password }),
+           });
           router.push('/auth/login');
         }
     } else {

@@ -2,6 +2,7 @@ import React from 'react';
 import { connectToDatabase, downLoadFilesFromMongoBucket } from '@/lib/mongoUtils';
 import Image from 'next/image';
 import { ImageFromMongo } from '@/lib/interfacesforMongo';
+import { GetServerSideProps } from 'next';
 
 const about = ({images}: { images: string }) => {
   const arr: ImageFromMongo[] = JSON.parse(images);
@@ -25,7 +26,7 @@ const about = ({images}: { images: string }) => {
 
 export default about;
 
-export const getStaticProps = async () => {
+export const getServerSideProps:GetServerSideProps = async () => {
   const { db } = await connectToDatabase();
   const images = await downLoadFilesFromMongoBucket(db, 'testo');
    return {

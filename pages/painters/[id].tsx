@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { User } from '@/features/users/interfaces';
 import UploadForm from '@/components/upload-from/UploadForm';
 import { join } from 'path';
 import { getCollectionData, writeFileAsync } from '@/lib/mongoUtils';
 import { cwd } from 'process';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setUser } from '@/features/users/usersSlice';
 
 const Painter = ({ user }: { user: string}) => {
-  const userParsed: User = JSON.parse(user);
+  const parsedUser: User = JSON.parse(user);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+   dispatch(setUser(parsedUser));
+  }, [dispatch, parsedUser]);
   const handleClick = async () => {
-     const res = await fetch('/api/upload-image');
-     const data = await res.json();
-  };
+    await fetch('/api/upload-image');
+    };
   return (
-    <div>{userParsed.name}
+    <div>{parsedUser.name}
        <UploadForm />
          <button onClick={handleClick}>upload image to mongo</button>
     </div>

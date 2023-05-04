@@ -89,6 +89,15 @@ export const writeFileAsync = async (filePath: string, fileContent: string) => {
   }
 };
 
+export const clearAllFilesInFolder = async (folderPath: string) => {
+  const files = await readdir(folderPath);
+  for (const file of files) {
+    unlink(`${folderPath}/${file}`, (err) => {
+      if (err) throw err;
+    });
+  }
+};
+
 export const getCollectionData = async (collectionName: string, id?: string) => {
   const { db } = await connectToDatabase();
   if(id) {
@@ -111,9 +120,9 @@ export const getCollectionData = async (collectionName: string, id?: string) => 
   }
 };
 
-export const addUser = async (nameCollection: string, newUser: User) => {
+export const addDataToCollection = async (nameCollection: string, newData: any) => {
   const { db } = await connectToDatabase();
-  await db.collection(nameCollection).insertOne(newUser as any);
+  await db.collection(nameCollection).insertOne(newData as any);
 };
 export const updateUser = async (nameCollection: string, id: string, updatedUser: User) => {
   const { db } = await connectToDatabase();

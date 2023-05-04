@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
@@ -6,9 +6,6 @@ import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
-import { unlink } from 'fs';
-import { join } from 'path';
-import { cwd } from 'process';
 
 interface HeaderProps {
   isDark: boolean;
@@ -20,14 +17,13 @@ const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUsers);
   const router = useRouter();
-  useEffect(() => {
-    dispatch(setUser(JSON.parse(localStorage.getItem('user') || '{}')));
-  }, [dispatch]);
   
   const  handlClickLogOut = async () => {
     dispatch(setUser({} as User));
     router.push('/');
-    await fetch('/api/deleteuser');
+    const res = await fetch('/api/deleteusers');
+    console.log(await res.json());
+    
   };
   return (
     <header className={header}>
