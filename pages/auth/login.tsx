@@ -1,17 +1,15 @@
 import Form from '@/components/form/Form';
 import Loader from '@/components/loader/Loader';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './login.module.scss';
-import { SignUpErrors } from '@/features/users/interfaces';
+import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
-import { findUserByName } from '@/utils/apiUtils';
+import { getCollectionData } from '@/lib/mongoUtils';
 import router from 'next/router';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { selectUsers, setUser } from '@/features/users/usersSlice';
+import { GetServerSideProps } from 'next';
 
-const Login = () => {
+const Login = ({ users }: { users: string }) => {
   const {formContainer, loaderContainer} = styles;
-  const dispatch = useAppDispatch();
   const initFormData = {
     name: '',
     email: '',
@@ -26,18 +24,17 @@ const Login = () => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
+  const [usersDb, setUsersDb] = useState<User[]>(JSON.parse(users));
   const {name, password} = formData;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
-    const data = await findUserByName(name);
-    if(data?._id) {
-      if(data.password === password) {
-        localStorage.setItem('user', JSON.stringify(data));
-        router.push(`/painters/${data._id}`);
-        dispatch(setUser(data));
+    const user = usersDb.find(el => el.name === name);
+    if(user?._id) {
+      if(user.password === password) {
+        router.push(`/painters/${user._id}`);
       } else {
         setLoading(false);
         setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
@@ -59,11 +56,6 @@ const Login = () => {
     });
   };
 
-  const { user } = useAppSelector(selectUsers);
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-  }, [user]);
-
   return (
     <div className={formContainer}>
       <div className={loaderContainer}>
@@ -81,3 +73,10 @@ const Login = () => {
 };
 
 export default Login;
+
+export const getServerSideProps:GetServerSideProps<{ users: string}> = async() => {
+   const users = await getCollectionData('users') as string;
+   return {
+    props: {users}
+  };
+};

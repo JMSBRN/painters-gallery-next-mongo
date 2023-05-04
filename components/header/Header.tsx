@@ -26,7 +26,6 @@ const Header = (props: HeaderProps) => {
   
   const  handlClickLogOut = async () => {
     dispatch(setUser({} as User));
-    localStorage.clear();
     router.push('/');
     await fetch('/api/deleteuser');
   };

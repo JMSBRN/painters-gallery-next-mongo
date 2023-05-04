@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import styles from './signupForm.module.scss';
-import { addUser, findUser, findUserByName } from '@/utils/apiUtils';
 import Form from '../form/Form';
-import { SignUpErrors } from '@/features/users/interfaces';
+import { SignUpErrors, User } from '@/features/users/interfaces';
 import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
 import Loader from '../loader/Loader';
 
-const SignUpForm = () => {
+const SignUpForm = ({ users }: { users: string}) => {
   const { formContainer, loaderContainer } = styles;
   const initFormData = {
     name: '',
@@ -23,6 +22,7 @@ const SignUpForm = () => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
+  const [usersDb, setUsersDb] = useState<User[]>(JSON.parse(users));
   const { name, email, password, confirmPassword } = formData;
   const router = useRouter();
 
@@ -31,7 +31,8 @@ const SignUpForm = () => {
     setLoading(true);
     const confirmed = password.localeCompare(confirmPassword, 'en', { sensitivity: 'base' }) === 0;
     if(confirmed) {
-        const { userByName, userByEmail } = await findUser(name, email);
+       const userByName = usersDb.find(el => el.name === name);
+       const userByEmail = usersDb.find(el => el.email === email);
         if(userByName) {
           setLoading(false);
           setSignUpErrors( { nameError:  FormErrorMessages.NAME_ERROR});
@@ -42,11 +43,13 @@ const SignUpForm = () => {
           setLoading(false);
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
-          await addUser({
-            name,
-            email,
-            password
-          });
+          // await addUser({
+          //   name,
+          //   email,
+          //   password
+          // });
+          console.log(JSON.stringify({ name, email, password }));
+          
           router.push('/auth/login');
         }
     } else {

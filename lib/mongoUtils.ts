@@ -1,3 +1,6 @@
+
+import { User } from '@/features/users/interfaces';
+import { ObjectId } from 'mongodb';
 import { createReadStream, unlink } from 'fs';
 import { readdir, writeFile } from 'fs/promises';
 import { MongoClient, Db, GridFSBucket } from 'mongodb';
@@ -84,4 +87,60 @@ export const writeFileAsync = async (filePath: string, fileContent: string) => {
   } catch (err) {
     throw err;
   }
+};
+
+export const getCollectionData = async (collectionName: string, id?: string) => {
+  const { db } = await connectToDatabase();
+  if(id) {
+    const user = (await db
+    .collection(collectionName)
+    .findOne({ _id: new ObjectId(id) }));
+  if (user) {
+    return JSON.stringify(user);
+  } else {
+    return 'data not found ';
+  }
+  }
+  const users = await db
+  .collection(collectionName)
+  .find().toArray();
+  if (users) {
+    return JSON.stringify(users);
+  } else {
+    return 'data not found ';
+  }
+};
+
+export const addUser = async (nameCollection: string, newUser: User) => {
+  const { db } = await connectToDatabase();
+  await db.collection(nameCollection).insertOne(newUser as any);
+};
+export const updateUser = async (nameCollection: string, id: string, updatedUser: User) => {
+  const { db } = await connectToDatabase();
+  await db
+  .collection(nameCollection)
+  .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+};
+export const deleteUser = async (nameCollection: string, id: string) => {
+  const { db } = await connectToDatabase();
+  await db
+  .collection(nameCollection)
+  .deleteOne({ _id: new ObjectId(id) });
+};
+
+export const findUserByName = async (name: string) => {
+  const users: User[] = JSON.parse(await getCollectionData('users') as string);
+  const findedUser = users.find( el => el.name === name);
+  return findedUser;
+};
+export const findUserByEmail = async (email: string) => {
+  const users: User[] = JSON.parse(await getCollectionData('users') as string);
+  const findedUser = users.find( el => el.email === email);
+  return findedUser;
+};
+
+export const findUser = async (name: string, email: string) => {
+  const userByName = await findUserByName(name);
+  const userByEmail = await findUserByEmail(email);
+   return {userByName, userByEmail};
 };
