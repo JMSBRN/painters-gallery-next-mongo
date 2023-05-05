@@ -73,8 +73,8 @@ export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, f
   }
 };
 
-export const getfileNamesFromDir = async (path: string) => {
-    const files = await readdir(path);
+export const getfileNamesFromDir = async (folderPath: string) => {
+    const files = await readdir(folderPath);
      if(files.length) {
          return files;
      } else {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { User } from '@/features/users/interfaces';
 import UploadForm from '@/components/upload-from/UploadForm';
 import { join } from 'path';
@@ -26,8 +26,24 @@ const Painter = ({ user }: { user: string}) => {
   };
   
   export default Painter;
+
+  export const getStaticPaths: GetStaticPaths = async () => {
+    const users: string = await getCollectionData('users');
+    const parsedUsers: User[] = JSON.parse(users);
+    const paths = parsedUsers.map( el => {
+      return { 
+        params: {
+          id: el._id
+        }
+      };
+    });
+    return {
+      paths, 
+      fallback: false
+    };
+  };
   
-  export const getServerSideProps: GetServerSideProps<{user: string}> = async (context) => {
+  export const getStaticProps: GetStaticProps<{user: string}> = async (context) => {
   const id = context.params?.id as string ; 
   const user: string = await getCollectionData('users', id);
    await writeFileAsync(join(cwd(), '/public/users/', `${id as string}.txt`), user);
