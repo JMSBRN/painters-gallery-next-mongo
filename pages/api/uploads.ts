@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import formidable from 'formidable';
-import { connectToDatabase } from '@/lib/mongoUtils';
+import { connectToDatabase, uploadGridFSFile } from '@/lib/mongoUtils';
 
 export const config = {
   api: {
@@ -22,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 async function handlePost(req: NextApiRequest, res: NextApiResponse) {
   const options = {
-    uploadDir: './public/images',
     keepExtensions: true,
   };
   const form = new formidable.IncomingForm(options);
@@ -43,9 +42,17 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       await client.connect();
       const collection = db.collection('images');
       const result = await collection.insertOne(initUploadData);
-       if(result.insertedId) {
-        res.status(201).send('file uploaded');
-       }
+      const filePath = (files.image as any).filepath;
+     const resultUploader = await uploadGridFSFile(
+      filePath,
+      db,
+      'testo',
+      initUploadData.name,
+      initUploadData.mimetype
+      );
+     if(result && resultUploader) {
+      res.status(201).json({ message: 'file uploaded'});
+     }
     } catch (error) {
       console.error(error);
       res.status(500).send('An error occurred while uploading the image');

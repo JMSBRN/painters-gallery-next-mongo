@@ -14,13 +14,9 @@ const Painter = ({ user }: { user: string}) => {
   useEffect(() => {
    dispatch(setUser(parsedUser));
   }, [dispatch, parsedUser]);
-  const handleClick = async () => {
-    await fetch('/api/upload-image');
-    };
   return (
     <div>{parsedUser.name}
        <UploadForm />
-         <button onClick={handleClick}>upload image to mongo</button>
     </div>
     );
   };
@@ -46,7 +42,6 @@ const Painter = ({ user }: { user: string}) => {
   export const getStaticProps: GetStaticProps<{user: string}> = async (context) => {
   const id = context.params?.id as string ; 
   const user: string = await getCollectionData('users', id);
-   await writeFileAsync(join(cwd(), '/public/users/', `${id as string}.txt`), user);
   return {
     props: {
       user

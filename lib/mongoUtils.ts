@@ -29,22 +29,26 @@ export const connectToDatabase = async (): Promise<{ client: MongoClient; db: Db
   return { client, db };
 };
 
-export const uploadGridFSFile = async (pathToDir: string, db: Db, bucketName: string, fileName: string) => {
-  const bucket = new GridFSBucket(db, { bucketName: bucketName});
-  const files = await getfileNamesFromDir(join(cwd(), pathToDir));
-  if(files?.length) {
-    const filePath = join(cwd(), pathToDir, `${files[0]}`);
-    const contentType  = mime.lookup(files[0]) as string;
-    const readStream = createReadStream(filePath).pipe(bucket.openUploadStream(fileName, {
-      contentType: contentType
-    }));
-    readStream.on('close', () => {
-      unlink(filePath, (er) => {
-        if(er) throw er;
-      });
-    });
- 
-  }
+export const uploadGridFSFile = async (
+  filePath: string,
+  db: Db,
+  bucketName: string,
+  fileName: string,
+  contentType: string
+) => {
+  const bucket = new GridFSBucket(db, { bucketName: bucketName });
+  
+  const uploadStream = bucket.openUploadStream(fileName, {
+    contentType: contentType,
+  });
+  
+  const readStream = createReadStream(filePath);
+  readStream.pipe(uploadStream);
+  
+  return new Promise((resolve, reject) => {
+    uploadStream.on('finish', resolve);
+    uploadStream.on('error', reject);
+  });
 };
 
 export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, fileNameforFind?: string) => {
