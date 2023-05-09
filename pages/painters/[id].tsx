@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setUser } from '@/features/users/usersSlice';
 import { ImageFromMongo } from '@/lib/interfacesforMongo';
 import Image from 'next/image';
+import Loader from '@/components/loader/Loader';
 
 interface PainterProps { user: string, id: string};
 
@@ -30,6 +31,9 @@ const Painter = ({ user, id }: PainterProps ) => {
   const usersPictures = images.filter(el => el.filename.split('/')[1] === id);
   return (
     <div>{parsedUser.name}
+    {
+     !usersPictures.length && <Loader />
+    }
        <UploadForm />
        {
         usersPictures.map((el, idx) => 
