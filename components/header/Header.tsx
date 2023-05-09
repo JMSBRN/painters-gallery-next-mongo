@@ -21,9 +21,6 @@ const Header = (props: HeaderProps) => {
   const  handlClickLogOut = async () => {
     dispatch(setUser({} as User));
     router.push('/');
-    const res = await fetch('/api/deleteusers');
-    console.log(await res.json());
-    
   };
   return (
     <header className={header}>

@@ -25,12 +25,13 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
     keepExtensions: true,
   };
   const form = new formidable.IncomingForm(options);
-  form.parse(req, async (err, undefined, files) => {
+  form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error(err);
       res.status(500).send('An error occurred while uploading the image');
       return;
     }
+    const idUser = fields.user_id as string;
     const { client, db } = await connectToDatabase();
     const initUploadData = {
       name: (files.image as any).originalFilename,
@@ -43,11 +44,12 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       const collection = db.collection('images');
       const result = await collection.insertOne(initUploadData);
       const filePath = (files.image as any).filepath;
-     const resultUploader = await uploadGridFSFile(
+      const bucketFileName = `${initUploadData.name}/${idUser}`;
+      const resultUploader = await uploadGridFSFile(
       filePath,
       db,
       'testo',
-      initUploadData.name,
+      bucketFileName,
       initUploadData.mimetype
       );
      if(result && resultUploader) {
@@ -61,4 +63,3 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
     }
   });
 }
-  

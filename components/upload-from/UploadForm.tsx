@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
  const  UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { id } = useRouter().query; 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -19,8 +21,9 @@ import React, { useState } from 'react';
       setError(null);
       const formData = new FormData();
       formData.append('image', file);
+      formData.append('user_id', `${id}`);
       try {
-        const response = await fetch('/api/uploads', {
+        const response = await fetch('/api/uploads/', {
           method: 'POST',
           body: formData,
         });
