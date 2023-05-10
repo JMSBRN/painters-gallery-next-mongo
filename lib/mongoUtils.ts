@@ -4,9 +4,6 @@ import { ObjectId } from 'mongodb';
 import { createReadStream, unlink } from 'fs';
 import { readdir, writeFile } from 'fs/promises';
 import { MongoClient, Db, GridFSBucket } from 'mongodb';
-import { join } from 'path';
-import { cwd } from 'process';
-import mime from 'mime-types';
 
 const uri = process.env.MONGODB_URI as string;
 const dbName = process.env.MONGODB_DB as string;

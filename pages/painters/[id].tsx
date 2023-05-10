@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { User } from '@/features/users/interfaces';
 import UploadForm from '@/components/upload-from/UploadForm';
-import { getCollectionData } from '@/lib/mongoUtils';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setUser } from '@/features/users/usersSlice';
 import { ImageFromMongo } from '@/lib/interfacesforMongo';
 import Image from 'next/image';
 import Loader from '@/components/loader/Loader';
+import { useRouter } from 'next/router';
 
-interface PainterProps { user: string, id: string};
-
-const Painter = ({ user, id }: PainterProps ) => {
-  const parsedUser: User = JSON.parse(user);
+const Painter = () => {
+  const dispatch = useAppDispatch();
+  const [userDb, setUserDb] = useState<User>({} as User);
   const [images, setImages] = useState<ImageFromMongo[]>([]);
+  const { id } = useRouter().query;
+
+ useEffect(() => {
+   const f = async () => {
+     const res = await fetch(`/api/users/${id}`);
+     const data: User = await res.json();
+     setUserDb(data);
+     dispatch(setUser(data));
+   };
+   f();
+ }, [dispatch, id, userDb]);
+ 
   useEffect(() => {
     const f =async () => {
       const res = await fetch('/api/images');
@@ -24,13 +34,9 @@ const Painter = ({ user, id }: PainterProps ) => {
     f();
   }, [images]);
   
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-   dispatch(setUser(parsedUser));
-  }, [dispatch, parsedUser]);
   const usersPictures = images.filter(el => el.filename.split('/')[1] === id);
   return (
-    <div>{parsedUser.name}
+    <div>{userDb.name}
     {
      !usersPictures.length && <Loader />
     }
@@ -52,31 +58,3 @@ const Painter = ({ user, id }: PainterProps ) => {
   };
   
   export default Painter;
-
-  export const getStaticPaths: GetStaticPaths = async () => {
-    const users: string = await getCollectionData('users');
-    const parsedUsers: User[] = JSON.parse(users);
-    const paths = parsedUsers.map( el => {
-      return { 
-        params: {
-          id: el._id
-        }
-      };
-    });
-    return {
-      paths, 
-      fallback: false
-    };
-  };
-  
-  export const getStaticProps: GetStaticProps<{user: string}> = async (context) => {
-  const id = context.params?.id as string ; 
-  const user: string = await getCollectionData('users', id);
-
-  return {
-    props: {
-      id,
-      user,
-    }
-  };
-};

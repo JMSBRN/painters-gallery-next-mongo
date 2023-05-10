@@ -5,9 +5,8 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
     if(req.method === 'POST') {
         try {
           if(req.body) {
-            res.status(201).json({ message: 'data sent'});
             await addDataToCollection('users', req.body);
-            
+            res.status(201).json({ message: 'data sent'});
           } else {
             res.status(404).json({ message: 'data not found'});
           }
@@ -24,7 +23,7 @@ export default handler;
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: true,
     externalResolver: true,
   },
 };
