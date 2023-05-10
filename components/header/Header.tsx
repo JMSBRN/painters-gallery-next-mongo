@@ -17,9 +17,9 @@ const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUsers);
   const router = useRouter();
-  const [logged, setLogged] = useState<boolean>(true);
+  const [logged, setLogged] = useState(true);
   
-  const handlClickLogOut = async () => {
+  const handlClickLogOut = () => {
     dispatch(setUser({} as User));
     setLogged(false);
     router.push('/');
@@ -40,7 +40,7 @@ const Header = (props: HeaderProps) => {
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>
         <div className={logedUserContainer}>
-          {(user.name && logged) && 
+          {(!!user.name && logged) && 
           <>
            <div className={userNameStyle}>{user.name}</div>
            <button onClick={handlClickLogOut}>log out</button>
