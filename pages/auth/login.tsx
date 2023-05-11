@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import Form from '@/components/form/Form';
 import Loader from '@/components/loader/Loader';
-import React, { useState } from 'react';
 import styles from './login.module.scss';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';

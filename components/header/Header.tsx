@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
@@ -17,11 +17,9 @@ const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUsers);
   const router = useRouter();
-  const [logged, setLogged] = useState(true);
   
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
-    setLogged(false);
     router.push('/');
   };
 
@@ -40,7 +38,7 @@ const Header = (props: HeaderProps) => {
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>
         <div className={logedUserContainer}>
-          {(!!user.name && logged) && 
+          {(user.name) && 
           <>
            <div className={userNameStyle}>{user.name}</div>
            <button onClick={handlClickLogOut}>log out</button>
