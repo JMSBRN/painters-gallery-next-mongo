@@ -5,10 +5,11 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setUser } from '@/features/users/usersSlice';
 import { ImageFromMongo } from '@/lib/interfacesforMongo';
 import Image from 'next/image';
-import Loader from '@/components/loader/Loader';
 import { useRouter } from 'next/router';
+import styles from './painter.module.scss';
 
 const Painter = () => {
+  const { imagesStyle } = styles;
   const dispatch = useAppDispatch();
   const [images, setImages] = useState<ImageFromMongo[]>([]);
   const { id } = useRouter().query;
@@ -37,6 +38,7 @@ const Painter = () => {
   return (
     <div>
        <UploadForm />
+       <div className={imagesStyle}>
        {
         userImages.map((el, idx) => 
           <div key={idx.toString()}>
@@ -49,6 +51,7 @@ const Painter = () => {
           </div>
         )
        }
+       </div>
     </div>
     );
   };
