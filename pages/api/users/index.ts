@@ -5,13 +5,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
         try {
           const result =  await getCollectionData('users');
-          result && res.status(200).json(JSON.parse(result));
+          const data = JSON.parse(result);
+          if(data) {
+          res.status(200).json(data);
+          }
         } catch (error) {
             console.error(error);
-            res.status(500).send('Server error');
+            res.status(500).json('Server error');
         }
     } else {
-        res.status(405).send('Method not allowed');
+        res.status(405).json('Method not allowed');
     }
 };
 

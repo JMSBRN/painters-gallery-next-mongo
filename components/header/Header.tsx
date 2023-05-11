@@ -31,6 +31,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
+          { user.name &&  <Link href={`/painters/${user._id}`}>gallery</Link> }
         </nav>
         <>
           <Link className={authLink} href={'/auth/login'}>Log In</Link>
@@ -38,7 +39,7 @@ const Header = (props: HeaderProps) => {
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>
         <div className={logedUserContainer}>
-          {(user.name) && 
+          {user.name && 
           <>
            <div className={userNameStyle}>{user.name}</div>
            <button onClick={handlClickLogOut}>log out</button>

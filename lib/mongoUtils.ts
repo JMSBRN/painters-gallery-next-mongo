@@ -110,14 +110,15 @@ export const getCollectionData = async (collectionName: string, id?: string) => 
   } else {
     return 'data not found ';
   }
-  }
-  const users = await db
-  .collection(collectionName)
-  .find().toArray();
-  if (users) {
-    return JSON.stringify(users);
   } else {
-    return 'data not found ';
+    const users = await db
+    .collection(collectionName)
+    .find().toArray();
+    if (users) {
+      return JSON.stringify(users);
+    } else {
+      return 'data not found ';
+    }
   }
 };
 

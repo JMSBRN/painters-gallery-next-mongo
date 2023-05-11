@@ -40,15 +40,16 @@ const SignUpForm = ({ users }: { users: string}) => {
           setLoading(false);
           setSignUpErrors( { emailError: FormErrorMessages.EMAIL_ERROR });
         } else {
-          setLoading(false);
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
-          await fetch('/api/adduser', {
+          const result = await fetch('/api/adduser', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ name, email, password }),
-           });
-          router.push('/auth/login');
+          });
+          if (result) {
+             router.push('/auth/login');
+           }
         }
     } else {
         setLoading(false);
@@ -71,6 +72,7 @@ const SignUpForm = ({ users }: { users: string}) => {
       <div className={loaderContainer}>
       {loading && <Loader /> }
       </div>
+      { !loading && 
       <Form 
        loginForm={false}
        signUpErrors={signUpErrors}
@@ -78,6 +80,7 @@ const SignUpForm = ({ users }: { users: string}) => {
        handleChange={handleChange}
        handleSubmit={handleSubmit}
       />
+      }
     </div>
   );
 };

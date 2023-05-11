@@ -33,15 +33,12 @@ const Painter = () => {
     f();
   }, [images]);
   
-  const usersPictures = images.filter(el => el.filename.split('/')[1] === id);
+  const userImages = images.filter(el => el.filename.split('/')[1] === id);
   return (
-    <div>{user.name}
-    {
-     !usersPictures.length && <Loader />
-    }
+    <div>
        <UploadForm />
        {
-        usersPictures.map((el, idx) => 
+        userImages.map((el, idx) => 
           <div key={idx.toString()}>
              <Image
               width={20}

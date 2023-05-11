@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from '@/components/form/Form';
 import Loader from '@/components/loader/Loader';
 import styles from './login.module.scss';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
-import { getCollectionData } from '@/lib/mongoUtils';
 import router from 'next/router';
-import { GetServerSideProps } from 'next';
 
-const Login = ({ users }: { users: string }) => {
+const Login = () => {
   const {formContainer, loaderContainer} = styles;
   const initFormData = {
     name: '',
@@ -24,9 +22,17 @@ const Login = ({ users }: { users: string }) => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
-  const [usersDb, setUsersDb] = useState<User[]>(JSON.parse(users));
+  const [usersDb, setUsersDb] = useState<User[]>([]);
   const {name, password} = formData;
-
+  useEffect(() => {
+    const f = async () => {
+      const res = await fetch('/api/users/');
+      const data: User[] = await res.json();
+      setUsersDb(data);
+    };
+    f();
+  }, []);
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -73,10 +79,3 @@ const Login = ({ users }: { users: string }) => {
 };
 
 export default Login;
-
-export const getServerSideProps:GetServerSideProps<{ users: string}> = async() => {
-   const users = await getCollectionData('users') as string;
-   return {
-    props: {users}
-  };
-};
