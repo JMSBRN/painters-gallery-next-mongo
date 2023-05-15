@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'variables';
+
+.uploadForm {
+  width: 100%;
+  max-width: 400px;
+  @include flex(space-around, center);
+}
+.selectBtn{
+  width: 150px;
+  color: $text-clr;
+}
+.submitBtn{
+  width: 150px;
+  color: $text-clr;
+}

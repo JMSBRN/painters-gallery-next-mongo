@@ -41,8 +41,6 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
     };
     try {
       await client.connect();
-      const collection = db.collection('images');
-      const result = await collection.insertOne(initUploadData);
       const filePath = (files.image as any).filepath;
       const bucketFileName = `${initUploadData.name}/${idUser}`;
       const resultUploader = await uploadGridFSFile(
@@ -52,7 +50,7 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       bucketFileName,
       initUploadData.mimetype
       );
-     if(result && resultUploader) {
+     if(resultUploader) {
       res.status(201).json({ message: 'file uploaded'});
      }
     } catch (error) {

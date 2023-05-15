@@ -1,14 +1,41 @@
 @import 'variables';
 @import 'mixins';
 
+.painterContainer {
+ margin: 0 auto;
+ height: auto;
+ min-height: 970px;
+ padding: 10px;
+ @include flex( flex-start, center, column);
+}
 .imagesStyle {
   margin-top: 30px;  
   width: 100%;
+  max-width: 900px;
   height: auto;
-  @include flex(space-around, center);
-  padding: 10px;
-  & img {
-    width: 300px;
-    height: 200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  & .ImageLayout {
+    width: 220px;
+    height: 250px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+    padding: 10px;
   }
+  & img {
+    width: 220px;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.userName {
+  width: 100px;
+  height: 30px;
+  text-transform: uppercase;
+}
+.uploads {
+  width: 100%;
+  max-width: 900px;
+  @include flex (space-around, center)
 }

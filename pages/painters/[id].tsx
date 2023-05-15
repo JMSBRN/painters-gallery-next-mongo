@@ -7,41 +7,60 @@ import { ImageFromMongo } from '@/lib/interfacesforMongo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './painter.module.scss';
+import { Button } from '@mui/material';
 
 const Painter = () => {
-  const { imagesStyle } = styles;
+  const {painterContainer, imagesStyle, uploads, userName, ImageLayout } = styles;
   const dispatch = useAppDispatch();
   const [images, setImages] = useState<ImageFromMongo[]>([]);
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
 
+  const getImagesFromMongo = async () => {
+    const res = await fetch('/api/images/');   
+    const images = await res.json();
+    const parsedImages: ImageFromMongo[] = JSON.parse(images || '[]');
+    return parsedImages;
+  };
+
  useEffect(() => {
-   const f = async () => {
-     const res = await fetch(`/api/users/${id}`);
-     const data: User = await res.json();
-     dispatch(setUser(data));
-   };
-   f();
+  if (id) {
+    const f = async () => {
+      const res = await fetch(`/api/users/${id}`);
+      const data: User = await res.json();
+      dispatch(setUser(data));
+    };
+    f();
+  }
  }, [dispatch, id]);
  
   useEffect(() => {
-    const f =async () => {
-      const res = await fetch('/api/images');
-      const images = await res.json();
-      const parsedImages: ImageFromMongo[] = JSON.parse(images || '[]');
+    const f = async () => {
+      const parsedImages  =  await getImagesFromMongo();
      setImages(parsedImages);
     };
     f();
-  }, [images]);
+  }, []);
   
+  const handlUpdateImages = async () => {
+    const parsedImages  =  await getImagesFromMongo();
+    setImages(parsedImages);
+  };
   const userImages = images.filter(el => el.filename.split('/')[1] === id);
   return (
-    <div>
+    <div className={painterContainer}>
+      <div className={userName}>
+      {user.name}
+      </div>
+      <div className={uploads}>
        <UploadForm />
+        <Button onClick={handlUpdateImages}>update images</Button>
+
+      </div>
        <div className={imagesStyle}>
        {
         userImages.map((el, idx) => 
-          <div key={idx.toString()}>
+          <div className={ImageLayout} key={idx.toString()}>
              <Image
               width={20}
               height={20}
@@ -57,3 +76,4 @@ const Painter = () => {
   };
   
   export default Painter;
+  
