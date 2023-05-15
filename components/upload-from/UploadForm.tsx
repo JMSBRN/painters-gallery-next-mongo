@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './uploadForm.module.scss';
 
   const  UploadForm = () => {
@@ -50,13 +51,18 @@ import styles from './uploadForm.module.scss';
         <input hidden  accept="image/*" multiple type="file" onChange={handleFileChange} />
       </Button>
       {error && <p>{error}</p>}
-      <Button
+      <LoadingButton
       className={submitBtn}
       type='submit'
+      variant="outlined"
+      loading={uploading}
+      loadingPosition="start"
       >
         {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}
-      </Button >
+      </LoadingButton>
+      
     </form>
+    
   );
 };
 

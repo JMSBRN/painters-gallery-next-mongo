@@ -7,12 +7,13 @@ import { ImageFromMongo } from '@/lib/interfacesforMongo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './painter.module.scss';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 const Painter = () => {
-  const {painterContainer, imagesStyle, uploads, userName, ImageLayout } = styles;
+  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
   const dispatch = useAppDispatch();
   const [images, setImages] = useState<ImageFromMongo[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
 
@@ -35,15 +36,19 @@ const Painter = () => {
  }, [dispatch, id]);
  
   useEffect(() => {
+    setLoading(true);
     const f = async () => {
       const parsedImages  =  await getImagesFromMongo();
+      parsedImages && setLoading(false);
      setImages(parsedImages);
     };
     f();
   }, []);
   
   const handlUpdateImages = async () => {
+    setLoading(true);
     const parsedImages  =  await getImagesFromMongo();
+    parsedImages && setLoading(false);
     setImages(parsedImages);
   };
   const userImages = images.filter(el => el.filename.split('/')[1] === id);
@@ -54,7 +59,15 @@ const Painter = () => {
       </div>
       <div className={uploads}>
        <UploadForm />
-        <Button onClick={handlUpdateImages}>update images</Button>
+        <LoadingButton
+        className={updateImagesBtn}
+        onClick={handlUpdateImages}
+        loading={loading}
+        loadingPosition='start'
+        variant='outlined'
+        >
+         {loading ? 'loading Images':'Update Images'}
+        </LoadingButton>
 
       </div>
        <div className={imagesStyle}>
