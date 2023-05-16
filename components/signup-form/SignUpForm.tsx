@@ -5,6 +5,7 @@ import { SignUpErrors, User } from '@/features/users/interfaces';
 import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
 import Loader from '../loader/Loader';
+import bcrypt from 'bcryptjs';
 
 const SignUpForm = ({ users }: { users: string}) => {
   const { formContainer, loaderContainer } = styles;
@@ -25,7 +26,8 @@ const SignUpForm = ({ users }: { users: string}) => {
   const [usersDb, setUsersDb] = useState<User[]>(JSON.parse(users));
   const { name, email, password, confirmPassword } = formData;
   const router = useRouter();
-
+  const nakedPassword = password;
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -42,6 +44,8 @@ const SignUpForm = ({ users }: { users: string}) => {
         } else {
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
+          const salt = await bcrypt.genSalt(10);
+          const password = await  bcrypt.hash(nakedPassword, salt);
           const result = await fetch('/api/adduser', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
