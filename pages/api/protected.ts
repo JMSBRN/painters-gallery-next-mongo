@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
