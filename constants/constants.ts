@@ -11,7 +11,7 @@ export enum FormErrorMessages {
   NAME_ERROR='User with this name already exist',
   EMAIL_ERROR='User with this email already exist',
   USER_ERROR='User not Found',
-  USER_AUTH_ERROR='User not Unauthorized',
+  USER_AUTH_ERROR='User Unauthorized',
   PASSWORD_VALID_ERROR='Password not valid',
   PASSWORD_CONFIRM_ERROR='Passwords not match'
 }

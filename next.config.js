@@ -6,6 +6,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  env: {
+    JWT_SECRET: process.env.JWT_SECRET,
+  }
 };
 
 module.exports = nextConfig;

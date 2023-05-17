@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './painter.module.scss';
 import { LoadingButton } from '@mui/lab';
+import { SvgIcon } from '@mui/material';
+import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
 
 const Painter = () => {
   const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
@@ -63,6 +65,11 @@ const Painter = () => {
         className={updateImagesBtn}
         onClick={handlUpdateImages}
         loading={loading}
+        startIcon={ 
+          <SvgIcon>
+           < DownloadSharpIcon />;
+          </SvgIcon>
+        }
         loadingPosition='start'
         variant='outlined'
         >

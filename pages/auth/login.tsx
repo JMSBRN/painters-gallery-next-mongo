@@ -10,6 +10,7 @@ import bcrypt from 'bcryptjs';
 
 const Login = () => {
   const {formContainer, loaderContainer} = styles;
+
   const initFormData = {
     name: '',
     email: '',
@@ -40,24 +41,22 @@ const Login = () => {
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
     const user = usersDb.find(el => el.name === name);
-    const secret = 'secret';
-     const token = jwt.sign({username: user?.name, userId: user?._id }, secret);
-     const res = await fetch('/api/protected', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer${token}`
-      }
-     });
-     const json  =  await res.json();
-     if (json.message === 'Accept') {      
-       if(user?._id) {
-        const matchedPsw = await bcrypt.compare(password, user.password);
-         if(matchedPsw) {
-           router.push(`/painters/${user._id}`);
-           } else {
-             setLoading(false);
-             setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
+      const res = await fetch('/api/protected', {
+       method: 'GET',
+       headers: {
+         Authorization: `Bearer${user?.token}`
        }
+      });
+      const json  =  await res.json();
+      if (json.message === 'Accept') {      
+        if(user?._id) {
+          const matchedPsw = await bcrypt.compare(password, user.password);
+          if(matchedPsw) {
+            router.push(`/painters/${user._id}`);
+          } else {
+            setLoading(false);
+            setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
+          }
      } else {
         setLoading(false);
         setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR});

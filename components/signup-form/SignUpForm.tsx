@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
 import Loader from '../loader/Loader';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 
 const SignUpForm = ({ users }: { users: string}) => {
   const { formContainer, loaderContainer } = styles;
@@ -44,12 +46,14 @@ const SignUpForm = ({ users }: { users: string}) => {
         } else {
           setSignUpErrors(initSignUpErrors);
           setFormData(initFormData);
+          const id = uuidv4();
           const salt = await bcrypt.genSalt(10);
           const password = await  bcrypt.hash(nakedPassword, salt);
+          const refreshToken = jwt.sign({ userName: name, userId: id }, process.env.JWT_SECRET!, { expiresIn: '30d'});
           const result = await fetch('/api/adduser', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify({ id, name, email, password, token: refreshToken }),
           });
           if (result) {
              router.push('/auth/login');
