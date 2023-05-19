@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
@@ -17,10 +17,10 @@ const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUsers);
   const router = useRouter();
-  
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
     router.push('/');
+    localStorage.clear();
   };
 
   return (

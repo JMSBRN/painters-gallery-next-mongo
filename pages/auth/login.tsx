@@ -6,6 +6,7 @@ import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const Login = () => {
   const {formContainer, loaderContainer} = styles;
@@ -39,18 +40,19 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
-    const user = usersDb.find(el => el.name === name);
-    // authorise logic 
-      const  authorized = true;
-      if (authorized) {      
-        if(user?._id) {
-          const matchedPsw = await bcrypt.compare(password, user.password);
-          if(matchedPsw) {
-            router.push(`/painters/${user._id}`);
-          } else {
-            setLoading(false);
-            setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
-          }
+    const user: User | undefined = usersDb.find(el => el.name === name);
+    const authorized = true;
+    if (authorized) {      
+      if(user?._id) {
+        const matchedPsw = await bcrypt.compare(password, user.password);
+        if(matchedPsw) {
+          const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min'});
+          localStorage.setItem('token', JSON.stringify(accessToken));
+          router.push(`/painters/${user._id}`);
+        } else {
+          setLoading(false);
+          setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });
+        }
      } else {
         setLoading(false);
         setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR});

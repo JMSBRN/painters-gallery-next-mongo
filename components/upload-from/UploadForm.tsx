@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button } from '@mui/material';
+import { Button, SvgIcon } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './uploadForm.module.scss';
+import PublishIcon from '@mui/icons-material/Publish';
 
   const  UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -56,6 +57,11 @@ import styles from './uploadForm.module.scss';
       type='submit'
       variant="outlined"
       loading={uploading}
+      startIcon={ 
+        <SvgIcon>
+            < PublishIcon />;
+        </SvgIcon>
+      }
       loadingPosition="start"
       >
         {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}

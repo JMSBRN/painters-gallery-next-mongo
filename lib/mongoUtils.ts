@@ -104,7 +104,7 @@ export const getCollectionData = async (collectionName: string, id?: string) => 
   if(id) {
     const user = (await db
     .collection(collectionName)
-    .findOne({ _id: new ObjectId(id) }));
+    .findOne({ id: id }));
   if (user) {
     return JSON.stringify(user);
   } else {
