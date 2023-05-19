@@ -5,7 +5,6 @@ import styles from './login.module.scss';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 const Login = () => {
@@ -41,14 +40,9 @@ const Login = () => {
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
     const user = usersDb.find(el => el.name === name);
-      const res = await fetch('/api/protected', {
-       method: 'GET',
-       headers: {
-         Authorization: `Bearer${user?.token}`
-       }
-      });
-      const json  =  await res.json();
-      if (json.message === 'Accept') {      
+    // authorise logic 
+      const  authorized = true;
+      if (authorized) {      
         if(user?._id) {
           const matchedPsw = await bcrypt.compare(password, user.password);
           if(matchedPsw) {

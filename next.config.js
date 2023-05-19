@@ -7,7 +7,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   env: {
-    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_ACCES_SECRET: process.env.JWT_ACCES_SECRET,
   }
 };
 

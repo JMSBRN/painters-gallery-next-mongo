@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(401).json({ message: 'Unauthorized' });
           } else {
             try {
-                const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+                const decoded = jwt.verify(token, process.env.JWT_ACCES_SECRET!);
                 return res.status(200).json({ message: 'Accept', user: decoded });
     
             } catch (error) {

@@ -49,13 +49,17 @@ const SignUpForm = ({ users }: { users: string}) => {
           const id = uuidv4();
           const salt = await bcrypt.genSalt(10);
           const password = await  bcrypt.hash(nakedPassword, salt);
-          const refreshToken = jwt.sign({ userName: name, userId: id }, process.env.JWT_SECRET!, { expiresIn: '30d'});
           const result = await fetch('/api/adduser', {
             method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ id, name, email, password, token: refreshToken }),
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify({ id, name, email, password }),
           });
           if (result) {
+            await fetch('/api/auth/', {
+              method: 'POST',
+              headers: { 'Content-Type' : 'application/json' },
+              body: JSON.stringify({ id, name })
+            });
              router.push('/auth/login');
            }
         }
