@@ -27,7 +27,7 @@ const Painter = () => {
     const parsedImages: ImageFromMongo[] = JSON.parse(images || '[]');
     return parsedImages;
   };
-
+ 
  useEffect(() => {
   if (id && !user.name) {
     const f = async () => {
@@ -39,7 +39,7 @@ const Painter = () => {
   }
  }, [dispatch, id, user.name]);
  
-  useEffect(() => {
+  useEffect(() => {   
     setLoading(true);
     const f = async () => {
       const parsedImages  =  await getImagesFromMongo();
@@ -47,18 +47,30 @@ const Painter = () => {
      setImages(parsedImages);
     };
     f();
+  
      const token = localStorage.getItem('token') as string;
      jwt.verify(JSON.parse(token), process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
-        if(err) {
-           console.log(err);
-           
+       if(err) {
+           if (err.message === 'jwt expired') {
+             const res = await fetch('/api/refresh-token',{
+               method: 'POST',
+               headers: { 'Content-type': 'application/json' },
+               body: JSON.stringify(id)
+           });
+           const data = await res.json();
+           if(data.accessToken) {
+             localStorage.setItem('token', JSON.stringify(data.accessToken));
+             setAuthorized(true);
+           }
         }
+      }
+
       if (data) {
         setAuthorized(true);
        }
      });
      
-  }, []);
+  }, [id]);
   
   const handlUpdateImages = async () => {
     setLoading(true);
@@ -69,7 +81,7 @@ const Painter = () => {
   const userImages = images.filter(el => el.filename.split('/')[1] === id);
   return (
     <div className={painterContainer}>
-      { authorized ? ( 
+      { authorized &&
       <><div className={userName}>
           {user.name}
         </div><div className={uploads}>
@@ -97,7 +109,7 @@ const Painter = () => {
             </div>
             )}
           </div></>
-      ) : <div className="">Token expired. Please login </div> }
+       }
     </div>
     );
   };

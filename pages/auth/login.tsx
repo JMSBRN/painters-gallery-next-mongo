@@ -50,7 +50,7 @@ const Login = () => {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
           dispatch(setUser(user));
-          const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min'});
+          const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '30min'});
           localStorage.setItem('token', JSON.stringify(accessToken));
           router.push(`/painters/${user.id}`);
         } else {

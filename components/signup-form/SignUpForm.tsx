@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
 import Loader from '../loader/Loader';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
 const SignUpForm = ({ users }: { users: string}) => {
