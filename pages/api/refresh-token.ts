@@ -8,10 +8,9 @@ dotenv.config();
 const handler =async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         const id = req.body;
-        if(!id) res.status(204);
-        const data = await getCollectionData('tokens', '962a2d60-88a2-4bc5-acf7-52fd481179cd');
-           const parsedData = JSON.parse(data);
-           const { token } = parsedData;
+        if(!id) res.status(204).json({ message: 'no data'});
+        const data = await getCollectionData('tokens', id);
+          const { token } = JSON.parse(data);
         if (token) {
            jwt.verify(token, process.env.JWT_REFRESH_SECRET!, (err: any, user: any) => {
             if(err) return  res.status(401);

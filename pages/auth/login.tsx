@@ -7,6 +7,8 @@ import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setUser } from '@/features/users/usersSlice';
 
 const Login = () => {
   const {formContainer, loaderContainer} = styles;
@@ -27,6 +29,7 @@ const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [usersDb, setUsersDb] = useState<User[]>([]);
   const {name, password} = formData;
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const f = async () => {
       const res = await fetch('/api/users/');
@@ -43,12 +46,13 @@ const Login = () => {
     const user: User | undefined = usersDb.find(el => el.name === name);
     const authorized = true;
     if (authorized) {      
-      if(user?._id) {
+      if(user?.id) {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
+          dispatch(setUser(user));
           const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min'});
           localStorage.setItem('token', JSON.stringify(accessToken));
-          router.push(`/painters/${user._id}`);
+          router.push(`/painters/${user.id}`);
         } else {
           setLoading(false);
           setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR });

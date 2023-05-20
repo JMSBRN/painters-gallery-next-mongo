@@ -10,7 +10,7 @@ import styles from './painter.module.scss';
 import { LoadingButton } from '@mui/lab';
 import { SvgIcon } from '@mui/material';
 import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 const Painter = () => {
   const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
@@ -29,7 +29,7 @@ const Painter = () => {
   };
 
  useEffect(() => {
-  if (id) {
+  if (id && !user.name) {
     const f = async () => {
       const res = await fetch(`/api/users/${id}`);
       const data: User = await res.json();
@@ -37,7 +37,7 @@ const Painter = () => {
     };
     f();
   }
- }, [dispatch, id]);
+ }, [dispatch, id, user.name]);
  
   useEffect(() => {
     setLoading(true);
@@ -48,15 +48,17 @@ const Painter = () => {
     };
     f();
      const token = localStorage.getItem('token') as string;
-     jwt.verify(JSON.parse(token), process.env.JWT_ACCES_SECRET!, (err: any, data: any) => {
-        if(err) setAuthorized(false); 
-        // refresh token 
+     jwt.verify(JSON.parse(token), process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
+        if(err) {
+           console.log(err);
+           
+        }
       if (data) {
         setAuthorized(true);
        }
      });
      
-  }, [authorized]);
+  }, []);
   
   const handlUpdateImages = async () => {
     setLoading(true);

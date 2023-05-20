@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           result && res.status(200).json(JSON.parse(result));
         } catch (error) {
             console.error(error);
-            res.status(500).send('Server error');
+            res.status(500).send({ message: 'Server error' });
         }
     } else {
         res.status(405).send('Method not allowed');
