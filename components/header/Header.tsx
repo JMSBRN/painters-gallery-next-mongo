@@ -4,7 +4,7 @@ import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
 import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { selectUsers, setUser } from '@/features/users/usersSlice';
+import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
 
 interface HeaderProps {
@@ -15,12 +15,11 @@ const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
   const { header, headerContainer, authLink, userNameStyle, logedUserContainer } = styles;
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(selectUsers);
+  const { user, logged } = useAppSelector(selectUsers);
   const router = useRouter();
-  const [logged, setLogged] = useState(true);
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
-    setLogged(false);
+    dispatch(setLogged(false));
     router.push('/');
     localStorage.clear();
   };
@@ -33,7 +32,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
-          {(user.name && logged) &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
+          {logged &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
         </nav>
         <>
           <Link className={authLink} href={'/auth/login'}>Log In</Link>
@@ -41,7 +40,7 @@ const Header = (props: HeaderProps) => {
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </>
         <div className={logedUserContainer}>
-          {(user.name && logged) && 
+          {logged && 
           <>
            <div className={userNameStyle}>{user.name}</div>
            <button onClick={handlClickLogOut}>log out</button>

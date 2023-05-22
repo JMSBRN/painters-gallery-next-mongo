@@ -8,7 +8,7 @@ import router from 'next/router';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { setUser } from '@/features/users/usersSlice';
+import { setLogged, setUser } from '@/features/users/usersSlice';
 
 const Login = () => {
   const {formContainer, loaderContainer} = styles;
@@ -50,6 +50,7 @@ const Login = () => {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
           dispatch(setUser(user));
+          dispatch(setLogged(true));
           const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '30min'});
           localStorage.setItem('token', JSON.stringify(accessToken));
           router.push(`/painters/${user.id}`);

@@ -4,10 +4,12 @@ import { RootState } from '@/srore/store';
 
 interface InitialState {
     user: User;
+    logged: boolean;
 }
 
 const initialState: InitialState = {
     user: {} as User,
+    logged: false,
 };
 
 const usersSlice = createSlice({
@@ -16,10 +18,13 @@ const usersSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
          state.user = action.payload;
+        },
+        setLogged: (state, action) => {
+         state.logged = action.payload;
         }
     }
 });
 
-export const { setUser } = usersSlice.actions;
+export const { setUser, setLogged } = usersSlice.actions;
 export const selectUsers = (state: RootState) => state.users;
 export default usersSlice.reducer;
