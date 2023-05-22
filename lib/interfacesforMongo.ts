@@ -8,4 +8,7 @@ export interface ImageFromMongo {
     uploadDate: Date;
     filename: string;
     contentType: string;
+    metadata?: {
+      fileName: string,
+    }
   }

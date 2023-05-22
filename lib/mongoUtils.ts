@@ -30,12 +30,15 @@ export const uploadGridFSFile = async (
   filePath: string,
   db: Db,
   bucketName: string,
+  userId: string,
   fileName: string,
   contentType: string
 ) => {
   const bucket = new GridFSBucket(db, { bucketName: bucketName });
-  
-  const uploadStream = bucket.openUploadStream(fileName, {
+  const uploadStream = bucket.openUploadStream(userId, {
+    metadata: {
+      fileName,
+    },
     contentType: contentType,
   });
   
@@ -49,7 +52,7 @@ export const uploadGridFSFile = async (
 };
 
 export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, fileNameforFind?: string) => {
-  if(!!fileNameforFind) {
+  if(fileNameforFind) {
     const files = await db.collection(`${bucketName}.files`).find({ filename: fileNameforFind }).toArray(); 
     const images = await Promise.all(
       files.map(async (file) => {

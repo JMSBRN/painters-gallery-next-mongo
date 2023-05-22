@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { User } from '@/features/users/interfaces';
 import UploadForm from '@/components/upload-from/UploadForm';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
@@ -21,12 +21,12 @@ const Painter = () => {
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
 
-  const getImagesFromMongo = async () => {
-    const res = await fetch('/api/images/');   
+  const getImagesFromMongo = useCallback(async () => {
+    const res = await fetch(`/api/images/${id}`);   
     const images = await res.json();
     const parsedImages: ImageFromMongo[] = JSON.parse(images || '[]');
     return parsedImages;
-  };
+  }, [id]);
  
  useEffect(() => {
   if (id && !user.name) {
@@ -70,7 +70,7 @@ const Painter = () => {
        }
      });
      
-  }, [id]);
+  }, [getImagesFromMongo, id]);
   
   const handlUpdateImages = async () => {
     setLoading(true);
@@ -78,7 +78,7 @@ const Painter = () => {
     parsedImages && setLoading(false);
     setImages(parsedImages);
   };
-  const userImages = images.filter(el => el.filename.split('/')[1] === id);
+
   return (
     <div className={painterContainer}>
       { authorized &&
@@ -100,11 +100,11 @@ const Painter = () => {
             </LoadingButton>
 
           </div><div className={imagesStyle}>
-            {userImages.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
+            {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
               <Image
                 width={20}
                 height={20}
-                alt={el.filename.split('/')[0]}
+                alt={el.metadata?.fileName as string}
                 src={el.data} />
             </div>
             )}
