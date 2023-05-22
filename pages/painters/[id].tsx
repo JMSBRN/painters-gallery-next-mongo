@@ -79,6 +79,12 @@ const Painter = () => {
     setImages(parsedImages);
   };
 
+  const handleDeleteImage = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+   const id = e.currentTarget.id;
+   const newArr = images.filter(el => el._id.toString() !== id);
+    setImages(newArr);
+  };
+
   return (
     <div className={painterContainer}>
       { authorized &&
@@ -102,6 +108,8 @@ const Painter = () => {
           </div><div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
               <Image
+                id={el._id.toString()}
+                onClick={(e)=> handleDeleteImage(e)}
                 width={20}
                 height={20}
                 alt={el.metadata?.fileName as string}

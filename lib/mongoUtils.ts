@@ -124,6 +124,28 @@ export const getCollectionData = async (collectionName: string, id?: string) => 
     }
   }
 };
+export const deleteCollectionData = async (collectionName: string, id?: string) => {
+  const { db } = await connectToDatabase();
+  if(id) {
+    const user = (await db
+    .collection(collectionName)
+    .deleteOne({ id: id }));
+  if (user) {
+    return JSON.stringify(user);
+  } else {
+    return 'data not found ';
+  }
+  } else {
+    const users = await db
+    .collection(collectionName)
+    .deleteMany();
+    if (users) {
+      return JSON.stringify(users);
+    } else {
+      return 'data not found ';
+    }
+  }
+};
 
 export const addDataToCollection = async (nameCollection: string, newData: any) => {
   const { db } = await connectToDatabase();
