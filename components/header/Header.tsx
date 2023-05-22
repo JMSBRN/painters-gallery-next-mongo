@@ -33,7 +33,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
-          { user.name &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
+          {(user.name && logged) &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
         </nav>
         <>
           <Link className={authLink} href={'/auth/login'}>Log In</Link>
