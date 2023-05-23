@@ -13,9 +13,10 @@ import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
 import jwt from 'jsonwebtoken';
 
 const Painter = () => {
-  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn, deleteImage } = styles;
+  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
   const dispatch = useAppDispatch();
   const [images, setImages] = useState<ImageFromMongo[]>([]);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [authorized, setAuthorized] = useState<boolean>(false);
   const { id } = useRouter().query;
@@ -79,19 +80,29 @@ const Painter = () => {
     setImages(parsedImages);
   };
 
-  const handleDeleteImage =  async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDeleteImage = async () => {
     setLoading(true);
-   const id = e.currentTarget.id;
-       const res = await fetch(`/api/images/${id}`, {
-       method: 'DELETE',
+    selectedImages.forEach(async (el) => {
+      const res = await fetch(`/api/images/${el}`, {
+      method: 'DELETE',
+      });
+       const result = await res.json();
+      if(result.message === 'file deleted') {
+        const newArr = images.filter(el => el._id.toString() !== id);
+        setImages(newArr);
+        setLoading(false);
+      } 
+      // logic if error
     });
-     const result = await res.json();
-    if(result.message === 'file deleted') {
-      const newArr = images.filter(el => el._id.toString() !== id);
-      setImages(newArr);
-      setLoading(false);
-    } 
-    // logic if error
+  };
+
+  const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>)=> {
+     const { value, checked } = e.target;
+     if(checked) {
+       setSelectedImages([...selectedImages, value]);
+     } else { 
+      setSelectedImages(selectedImages.filter(el => el !== value));
+     }
   };
 
   return (
@@ -113,16 +124,31 @@ const Painter = () => {
             >
               {loading ? 'loading Images' : 'Update Images'}
             </LoadingButton>
-
+            {!!selectedImages.length && 
+            <div className="">
+             <LoadingButton
+               loading={loading}
+               loadingPosition='start'
+               variant='outlined'
+               onClick={handleDeleteImage}
+             >
+              Delete selected images
+             </LoadingButton>
+            </div>
+            }
           </div><div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
-              <div  
-                id={el._id.toString()}
-                className={deleteImage}
-                onClick={(e)=> handleDeleteImage(e)}
-              >delete</div>
+                <div className="">
+                  <label>
+                    <input 
+                    type="checkbox"
+                    value={el._id.toString()}
+                    checked={selectedImages.includes(el._id.toString())}
+                    onChange={(e) => handleChangeCheckBox(e)}
+                       />
+                  </label>
+                </div>
               <Image
-                onClick={(e)=> handleDeleteImage(e)}
                 width={20}
                 height={20}
                 alt={el.metadata?.fileName as string}
