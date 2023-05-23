@@ -13,7 +13,7 @@ import DownloadSharpIcon from '@mui/icons-material/DownloadSharp';
 import jwt from 'jsonwebtoken';
 
 const Painter = () => {
-  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
+  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn, deleteImage } = styles;
   const dispatch = useAppDispatch();
   const [images, setImages] = useState<ImageFromMongo[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -79,10 +79,19 @@ const Painter = () => {
     setImages(parsedImages);
   };
 
-  const handleDeleteImage = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+  const handleDeleteImage =  async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setLoading(true);
    const id = e.currentTarget.id;
-   const newArr = images.filter(el => el._id.toString() !== id);
-    setImages(newArr);
+       const res = await fetch(`/api/images/${id}`, {
+       method: 'DELETE',
+    });
+     const result = await res.json();
+    if(result.message === 'file deleted') {
+      const newArr = images.filter(el => el._id.toString() !== id);
+      setImages(newArr);
+      setLoading(false);
+    } 
+    // logic if error
   };
 
   return (
@@ -107,8 +116,12 @@ const Painter = () => {
 
           </div><div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
-              <Image
+              <div  
                 id={el._id.toString()}
+                className={deleteImage}
+                onClick={(e)=> handleDeleteImage(e)}
+              >delete</div>
+              <Image
                 onClick={(e)=> handleDeleteImage(e)}
                 width={20}
                 height={20}

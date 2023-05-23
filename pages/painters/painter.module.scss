@@ -8,6 +8,21 @@
  padding: 10px;
  @include flex( flex-start, center, column);
 }
+.deleteImage {
+  width: 80px;
+  height: 20px;
+  text-align: center;
+  color:gray;
+  border: 1px solid transparent;
+  cursor: pointer;
+  &:hover {
+    border-color: grey;
+  }
+  &:active {
+    color: red;
+    border-color: red;
+  }
+}
 .imagesStyle {
   margin-top: 30px;  
   width: 100%;

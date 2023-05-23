@@ -1,4 +1,3 @@
-
 import { User } from '@/features/users/interfaces';
 import { ObjectId } from 'mongodb';
 import { createReadStream, unlink } from 'fs';
@@ -20,7 +19,10 @@ if (!dbName) {
   );
 }
 
-export const connectToDatabase = async (): Promise<{ client: MongoClient; db: Db }> => {
+export const connectToDatabase = async (): Promise<{
+  client: MongoClient;
+  db: Db;
+}> => {
   const client = await MongoClient.connect(uri);
   const db = client.db(dbName);
   return { client, db };
@@ -41,49 +43,91 @@ export const uploadGridFSFile = async (
     },
     contentType: contentType,
   });
-  
+
   const readStream = createReadStream(filePath);
   readStream.pipe(uploadStream);
-  
+
   return new Promise((resolve, reject) => {
     uploadStream.on('finish', resolve);
     uploadStream.on('error', reject);
   });
 };
 
-export const downLoadFilesFromMongoBucket = async (db: Db, bucketName: string, fileNameforFind?: string) => {
-  if(fileNameforFind) {
-    const files = await db.collection(`${bucketName}.files`).find({ filename: fileNameforFind }).toArray(); 
+export const downLoadFilesFromMongoBucket = async (
+  db: Db,
+  bucketName: string,
+  fileNameforFind?: string
+) => {
+  if (fileNameforFind) {
+    const files = await db
+      .collection(`${bucketName}.files`)
+      .find({ filename: fileNameforFind })
+      .toArray();
     const images = await Promise.all(
       files.map(async (file) => {
-        const data = await db.collection(`${bucketName}.chunks`).findOne({ files_id: file._id });
-        return {...file, data: `data:${file.contentType};base64,${data?.data.toString('base64')}`};
+        const data = await db
+          .collection(`${bucketName}.chunks`)
+          .findOne({ files_id: file._id });
+        return {
+          ...file,
+          data: `data:${file.contentType};base64,${data?.data.toString(
+            'base64'
+          )}`,
+        };
       })
-      );
-      const filesInString = JSON.stringify(images);
-    
+    );
+    const filesInString = JSON.stringify(images);
+
     return filesInString;
   } else {
-    const files = await db.collection(`${bucketName}.files`).find().toArray(); 
+    const files = await db.collection(`${bucketName}.files`).find().toArray();
     const images = await Promise.all(
       files.map(async (file) => {
-        const data = await db.collection(`${bucketName}.chunks`).findOne({ files_id: file._id });
-        return {...file, data: `data:${file.contentType};base64,${data?.data.toString('base64')}`};
+        const data = await db
+          .collection(`${bucketName}.chunks`)
+          .findOne({ files_id: file._id });
+        return {
+          ...file,
+          data: `data:${file.contentType};base64,${data?.data.toString(
+            'base64'
+          )}`,
+        };
       })
-      );
-      const filesInString = JSON.stringify(images);
-    
+    );
+    const filesInString = JSON.stringify(images);
+
     return filesInString;
   }
 };
 
+export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
+  const { db, client } = await connectToDatabase();
+  const file = await db.collection(`${bucketName}.files`).findOne({ _id: new ObjectId(fileId) });
+   if(file) {
+  try {
+  const result =  await db
+      .collection(`${bucketName}.files`)
+      .deleteOne({ _id: new ObjectId(fileId) });
+    await db
+      .collection(`${bucketName}.chunks`)
+      .deleteMany({ files_id: new ObjectId(fileId) });
+      if(result) return { message: 'file deleted' };
+      client.close();
+  } catch (error) {
+    console.error('Error deleting the file:', error);
+  }
+} else {
+  return null;
+}
+};
+
 export const getfileNamesFromDir = async (folderPath: string) => {
-    const files = await readdir(folderPath);
-     if(files.length) {
-         return files;
-     } else {
-        return;
-     }
+  const files = await readdir(folderPath);
+  if (files.length) {
+    return files;
+  } else {
+    return;
+  }
 };
 export const writeFileAsync = async (filePath: string, fileContent: string) => {
   try {
@@ -102,21 +146,20 @@ export const clearAllFilesInFolder = async (folderPath: string) => {
   }
 };
 
-export const getCollectionData = async (collectionName: string, id?: string) => {
+export const getCollectionData = async (
+  collectionName: string,
+  id?: string
+) => {
   const { db } = await connectToDatabase();
-  if(id) {
-    const user = (await db
-    .collection(collectionName)
-    .findOne({ id: id }));
-  if (user) {
-    return JSON.stringify(user);
+  if (id) {
+    const user = await db.collection(collectionName).findOne({ id: id });
+    if (user) {
+      return JSON.stringify(user);
+    } else {
+      return 'data not found ';
+    }
   } else {
-    return 'data not found ';
-  }
-  } else {
-    const users = await db
-    .collection(collectionName)
-    .find().toArray();
+    const users = await db.collection(collectionName).find().toArray();
     if (users) {
       return JSON.stringify(users);
     } else {
@@ -124,21 +167,20 @@ export const getCollectionData = async (collectionName: string, id?: string) => 
     }
   }
 };
-export const deleteCollectionData = async (collectionName: string, id?: string) => {
+export const deleteCollectionData = async (
+  collectionName: string,
+  id?: string
+) => {
   const { db } = await connectToDatabase();
-  if(id) {
-    const user = (await db
-    .collection(collectionName)
-    .deleteOne({ id: id }));
-  if (user) {
-    return JSON.stringify(user);
+  if (id) {
+    const user = await db.collection(collectionName).deleteOne({ id: id });
+    if (user) {
+      return JSON.stringify(user);
+    } else {
+      return 'data not found ';
+    }
   } else {
-    return 'data not found ';
-  }
-  } else {
-    const users = await db
-    .collection(collectionName)
-    .deleteMany();
+    const users = await db.collection(collectionName).deleteMany();
     if (users) {
       return JSON.stringify(users);
     } else {
@@ -147,36 +189,45 @@ export const deleteCollectionData = async (collectionName: string, id?: string) 
   }
 };
 
-export const addDataToCollection = async (nameCollection: string, newData: any) => {
+export const addDataToCollection = async (
+  nameCollection: string,
+  newData: any
+) => {
   const { db } = await connectToDatabase();
   await db.collection(nameCollection).insertOne(newData as any);
 };
-export const updateUser = async (nameCollection: string, id: string, updatedUser: User) => {
+export const updateUser = async (
+  nameCollection: string,
+  id: string,
+  updatedUser: User
+) => {
   const { db } = await connectToDatabase();
   await db
-  .collection(nameCollection)
-  .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+    .collection(nameCollection)
+    .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
 };
 export const deleteUser = async (nameCollection: string, id: string) => {
   const { db } = await connectToDatabase();
-  await db
-  .collection(nameCollection)
-  .deleteOne({ _id: new ObjectId(id) });
+  await db.collection(nameCollection).deleteOne({ _id: new ObjectId(id) });
 };
 
 export const findUserByName = async (name: string) => {
-  const users: User[] = JSON.parse(await getCollectionData('users') as string);
-  const findedUser = users.find( el => el.name === name);
+  const users: User[] = JSON.parse(
+    (await getCollectionData('users')) as string
+  );
+  const findedUser = users.find((el) => el.name === name);
   return findedUser;
 };
 export const findUserByEmail = async (email: string) => {
-  const users: User[] = JSON.parse(await getCollectionData('users') as string);
-  const findedUser = users.find( el => el.email === email);
+  const users: User[] = JSON.parse(
+    (await getCollectionData('users')) as string
+  );
+  const findedUser = users.find((el) => el.email === email);
   return findedUser;
 };
 
 export const findUser = async (name: string, email: string) => {
   const userByName = await findUserByName(name);
   const userByEmail = await findUserByEmail(email);
-   return {userByName, userByEmail};
+  return { userByName, userByEmail };
 };

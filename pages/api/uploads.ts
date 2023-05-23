@@ -46,7 +46,7 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
       const resultUploader = await uploadGridFSFile(
       filePath,
       db,
-      'testo',
+      'images',
       idUser,
       bucketFileName,
       initUploadData.mimetype
