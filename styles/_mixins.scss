@@ -30,11 +30,25 @@
       background-color: black;
       color: white
     }
-    form label, input {
-      color: $text;
-    }
     form button {
-      background-color: $primary;
+      color: $text;
+      &:hover {
+        color: $text-clr-dark;
+        background-color: $primary;
+      }
     }
-
+    button {
+      color: $text;
+      &:hover {
+        color: $text-clr-dark;
+        background-color: $primary;
+      }
+    }
+    label {
+      color: $text;
+      &:hover {
+        color: $text-clr-dark;
+        background-color: $primary;
+      }
+    }
   }

@@ -96,13 +96,13 @@ const Form = (props: FormProps) => {
         </Grid>
         }
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="outlined" >
           {!loginForm ? 'Sign Up' : 'Sign In'}  
           </Button>
         </Grid>
       </Grid>
     </form>
-    <button 
+    <button
      className={showPswBtn}
      onClick={() => setShowPassword(!showPassword)}
      >

@@ -47,7 +47,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 
   return (
     <form className={uploadForm} onSubmit={handleSubmit}>
-      <Button className={selectBtn} variant="contained" component="label">
+      <Button className={selectBtn} variant="outlined" component="label">
         Select file
         <input hidden  accept="image/*" multiple type="file" onChange={handleFileChange} />
       </Button>
@@ -55,8 +55,8 @@ import PublishIcon from '@mui/icons-material/Publish';
       <LoadingButton
       className={submitBtn}
       type='submit'
-      variant="outlined"
       loading={uploading}
+      variant="outlined"
       startIcon={ 
         <SvgIcon>
             < PublishIcon />;
@@ -66,7 +66,6 @@ import PublishIcon from '@mui/icons-material/Publish';
       >
         {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}
       </LoadingButton>
-      
     </form>
     
   );
