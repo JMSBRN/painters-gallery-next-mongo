@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Button, SvgIcon } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -6,7 +6,7 @@ import styles from './uploadForm.module.scss';
 import PublishIcon from '@mui/icons-material/Publish';
 
   interface UploadFormProps {
-     setUploaded: React.Dispatch<React.SetStateAction<boolean>>;
+    setUploaded: React.Dispatch<React.SetStateAction<boolean>>;
   };
 
   const  UploadForm = (props: UploadFormProps) => {
@@ -15,6 +15,7 @@ import PublishIcon from '@mui/icons-material/Publish';
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { id } = useRouter().query; 
+  const fileInputRef = useRef(null);
   const { uploadForm, selectBtn, submitBtn } = styles;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,27 +55,30 @@ import PublishIcon from '@mui/icons-material/Publish';
 
   return (
     <form className={uploadForm} onSubmit={handleSubmit}>
-      <Button className={selectBtn} variant="outlined" component="label">
-        Select file
-        <input hidden  accept="image/*" multiple type="file" onChange={handleFileChange} />
-      </Button>
       {error && <p>{error}</p>}
-      <LoadingButton
-      className={submitBtn}
-      type='submit'
-      loading={uploading}
-      variant="outlined"
-      startIcon={ 
-        <SvgIcon>
-            < PublishIcon />;
-        </SvgIcon>
+      {
+        file ?
+        <LoadingButton
+          className={submitBtn}
+          type='submit'
+          loading={uploading}
+          variant="outlined"
+          startIcon={ 
+            <SvgIcon>
+                < PublishIcon />;
+            </SvgIcon>
+          }
+          loadingPosition="start"
+          >
+            {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}
+        </LoadingButton>
+         : 
+         <Button className={selectBtn} variant="outlined" component="label">
+         Select file
+         <input hidden ref={fileInputRef} accept="image/*" multiple type="file" onChange={handleFileChange} />
+       </Button>
       }
-      loadingPosition="start"
-      >
-        {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}
-      </LoadingButton>
     </form>
-    
   );
 };
 
