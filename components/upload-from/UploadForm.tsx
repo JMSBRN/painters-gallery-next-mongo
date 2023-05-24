@@ -5,7 +5,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './uploadForm.module.scss';
 import PublishIcon from '@mui/icons-material/Publish';
 
-  const  UploadForm = () => {
+  interface UploadFormProps {
+     setUploaded: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+
+  const  UploadForm = (props: UploadFormProps) => {
+  const { setUploaded } = props;
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -34,6 +39,8 @@ import PublishIcon from '@mui/icons-material/Publish';
         });
         if (!response.ok) {
           throw new Error('Failed to upload image');
+        } else {
+          setUploaded(true);
         }
       } catch (error) {
         console.error(error);
