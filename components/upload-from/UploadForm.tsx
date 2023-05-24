@@ -4,19 +4,17 @@ import { Button, SvgIcon } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './uploadForm.module.scss';
 import PublishIcon from '@mui/icons-material/Publish';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setImages } from '@/features/images/imagesSlice';
 
-  interface UploadFormProps {
-    setUploaded: React.Dispatch<React.SetStateAction<boolean>>;
-  };
-
-  const  UploadForm = (props: UploadFormProps) => {
-  const { setUploaded } = props;
+  const  UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { id } = useRouter().query; 
   const fileInputRef = useRef(null);
   const { uploadForm, selectBtn, submitBtn } = styles;
+  const dispatch = useAppDispatch();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -41,7 +39,9 @@ import PublishIcon from '@mui/icons-material/Publish';
         if (!response.ok) {
           throw new Error('Failed to upload image');
         } else {
-          setUploaded(true);
+          const res = await fetch(`/api/images/${id}`);   
+          const data = await res.json();
+          dispatch(setImages(JSON.parse(data)));
         }
       } catch (error) {
         console.error(error);

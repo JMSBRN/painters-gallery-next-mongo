@@ -14,7 +14,7 @@ import { SvgIcon } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 
 const Painter = () => {
-  const {painterContainer, imagesStyle, uploads, userName, ImageLayout, updateImagesBtn } = styles;
+  const {painterContainer, imagesStyle, uploads, userName, ImageLayout } = styles;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,11 +23,11 @@ const Painter = () => {
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
   const { images } = useAppSelector(selectImages);
-
+  
   const getImagesFromMongo = useCallback(async () => {
     const res = await fetch(`/api/images/${id}`);   
-    const images = await res.json();
-    const parsedImages: ImageFromMongo[] = JSON.parse(images || '[]');
+    const data = await res.json();
+    const parsedImages: ImageFromMongo[] = JSON.parse(data || '[]');
     return parsedImages;
   }, [id]);
  
@@ -51,14 +51,6 @@ const Painter = () => {
  }, [dispatch, getImagesFromMongo, uploaded]);
 
   useEffect(() => {   
-    setLoading(true);
-    const f = async () => {
-      const parsedImages  =  await getImagesFromMongo();
-      parsedImages && setLoading(false);
-      dispatch(setImages(parsedImages));
-    };
-    f();
-  
      const token = localStorage.getItem('token') as string;
      jwt.verify(JSON.parse(token), process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
        if(err) {
@@ -81,23 +73,28 @@ const Painter = () => {
        }
      });
      
-  }, [dispatch, getImagesFromMongo, id]);
+  }, [id]);
   
   const handleDeleteSelectedImages = async () => {
     setLoading(true);
-    selectedImages.forEach(async (el) => {
-      const res = await fetch(`/api/images/${el}`, {
-      method: 'DELETE',
-      });
-       const result = await res.json();
-      if(result.message === 'file deleted') {
-        const parsedImages  =  await getImagesFromMongo();
-        dispatch(setImages(parsedImages));
-        setLoading(false);
-        setSelectedImages([]);
-      } 
-      // logic if error
-    });
+   const result = await Promise.all(
+      selectedImages.map( async (el) => {
+        const res = await fetch(`/api/images/${el}`, {
+          method: 'DELETE',
+        });
+        const result = await res.json();
+        if (result.message === 'file deleted') {
+          // ??? logic
+        }
+        // logic if error
+      })
+    );
+    if(result) {
+      const parsedImages = await getImagesFromMongo();
+      dispatch(setImages(parsedImages));
+      setLoading(false);
+      setSelectedImages([]);
+    }
   };
 
   const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>)=> {
@@ -115,7 +112,7 @@ const Painter = () => {
       <><div className={userName}>
           {user.name}
         </div><div className={uploads}>
-            <UploadForm setUploaded={ setUploaded } />
+            <UploadForm />
             {!!selectedImages.length && 
             <div className="">
              <LoadingButton
