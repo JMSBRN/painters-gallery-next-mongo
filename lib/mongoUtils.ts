@@ -23,19 +23,19 @@ export const connectToDatabase = async (): Promise<{
   client: MongoClient;
   db: Db;
 }> => {
-  const client = await MongoClient.connect(uri);
+  const client = new MongoClient(uri);
   const db = client.db(dbName);
   return { client, db };
 };
 
 export const uploadGridFSFile = async (
   filePath: string,
-  db: Db,
   bucketName: string,
   userId: string,
   fileName: string,
   contentType: string
 ) => {
+  const { db, client } = await connectToDatabase();
   const bucket = new GridFSBucket(db, { bucketName: bucketName });
   const uploadStream = bucket.openUploadStream(userId, {
     metadata: {
