@@ -2,6 +2,7 @@
 @import 'mixins';
 
 .painterContainer {
+ position: relative;
  margin: 0 auto;
  height: auto;
  min-height: 970px;
@@ -29,16 +30,9 @@
     object-fit: contain;
   }
 }
-.userName {
-  width: 100px;
-  height: 30px;
-  text-transform: uppercase;
-}
 .uploads {
-  width: 100%;
-  max-width: 900px;
-  @include flex (space-around, center)
+  position: absolute;
+  top: 20px;
+  right: 30px;
 }
-.updateImagesBtn {
-  width: 200px;
-}
+

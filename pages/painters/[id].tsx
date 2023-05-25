@@ -11,10 +11,10 @@ import { LoadingButton } from '@mui/lab';
 import jwt from 'jsonwebtoken';
 import { selectImages, setImages } from '@/features/images/imagesSlice';
 import { SvgIcon } from '@mui/material';
-import PublishIcon from '@mui/icons-material/Publish';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Painter = () => {
-  const {painterContainer, imagesStyle, uploads, userName, ImageLayout } = styles;
+  const { painterContainer, imagesStyle, uploads, ImageLayout } = styles;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -109,26 +109,24 @@ const Painter = () => {
   return (
     <div className={painterContainer}>
       { authorized &&
-      <><div className={userName}>
-          {user.name}
-        </div><div className={uploads}>
-            <UploadForm />
-            {!!selectedImages.length && 
-            <div className="">
+      <>
+        <div className={uploads}>
+            {selectedImages.length ?
              <LoadingButton
                loading={loading}
                startIcon={ 
                 <SvgIcon>
-                    < PublishIcon />;
+                    < DeleteForeverIcon />;
                 </SvgIcon>
               }
                loadingPosition='start'
                variant='outlined'
                onClick={handleDeleteSelectedImages}
-             >
-              Delete selected images
+               >
+              Delete selected file
              </LoadingButton>
-            </div>
+             :
+             <UploadForm />
             }
           </div><div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>

@@ -38,17 +38,16 @@ import { setImages } from '@/features/images/imagesSlice';
         });
         if (!response.ok) {
           throw new Error('Failed to upload image');
-        } else {
-          const res = await fetch(`/api/images/${id}`);   
-          const data = await res.json();
-          dispatch(setImages(JSON.parse(data)));
         }
       } catch (error) {
         console.error(error);
-        setError('An error occurred while uploading the image');
+        setError(`${error}`);
       } finally {
         setUploading(false);
         setFile(null);
+        const res = await fetch(`/api/images/${id}`);   
+        const data = await res.json();
+        dispatch(setImages(JSON.parse(data)));
       }
     }
   };
@@ -70,11 +69,11 @@ import { setImages } from '@/features/images/imagesSlice';
           }
           loadingPosition="start"
           >
-            {file ? (!uploading ? 'Upload' : 'Uploading') : 'No File Chosen'}
+            {file ? (!uploading ? 'Upload file' : 'Uploading file') : 'No File Chosen'}
         </LoadingButton>
          : 
          <Button className={selectBtn} variant="outlined" component="label">
-         Select file
+         Select file to Upload
          <input hidden ref={fileInputRef} accept="image/*" multiple type="file" onChange={handleFileChange} />
        </Button>
       }
