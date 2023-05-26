@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Form from '@/components/form/Form';
-import Loader from '@/components/loader/Loader';
 import styles from './login.module.scss';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
@@ -9,9 +8,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLogged, setUser } from '@/features/users/usersSlice';
+import Link from 'next/link';
 
 const Login = () => {
-  const {formContainer, loaderContainer} = styles;
+  const { formContainer } = styles;
 
   const initFormData = {
     name: '',
@@ -27,6 +27,7 @@ const Login = () => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
+  const [connected, setConnected] = useState<boolean>(false);
   const [usersDb, setUsersDb] = useState<User[]>([]);
   const {name, password} = formData;
   const dispatch = useAppDispatch();
@@ -43,8 +44,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
-    const user: User | undefined = usersDb.find(el => el.name === name);
-    const authorized = true;
+    if(usersDb) {
+
+      const user: User | undefined = usersDb.find(el => el.name === name);
+      const authorized = true;
     if (authorized) {      
       if(user?.id) {
         const matchedPsw = await bcrypt.compare(password, user.password);
@@ -66,6 +69,9 @@ const Login = () => {
       setLoading(false);
       setSignUpErrors({ nameError: FormErrorMessages.USER_AUTH_ERROR});
     }
+  } else {
+    router.push('/');
+  }
   };
 
   const handleChange = (
@@ -77,19 +83,36 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  setTimeout(() => {
+    setConnected(true);
+  }, 5000);
   return (
     <div className={formContainer}>
-      <div className={loaderContainer}>
-      {loading && <Loader /> }
-      </div>
+      { !!usersDb.length ? 
       <Form 
+       loading={loading}
        loginForm={true}
        signUpErrors={signUpErrors}
        formData={formData}
        handleChange={handleChange}
        handleSubmit={handleSubmit}
       />
+      : 
+      <>
+        {
+          connected && 
+          <>
+            <div>
+              Oops! Something went wrong:(... Please check enternet connection or reload application
+            </div>
+            <div>
+              <Link style={{ textDecoration: 'none' }} href={'/login'} onClick={() => { window.location.reload(); } }
+              >Reload</Link>
+            </div>
+          </>
+        }
+        </>
+    }
     </div>
   );
 };

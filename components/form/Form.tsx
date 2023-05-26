@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styles from './form.module.scss';
 import { Regex, RegexHelperMessages } from '@/constants/constants';
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField, Button, SvgIcon } from '@mui/material';
 import { SignUpErrors, User } from '@/features/users/interfaces';
+import { LoadingButton } from '@mui/lab';
 
 interface FormProps {
     formData: User;
     signUpErrors: Partial<SignUpErrors>;
     loginForm: boolean;
+    loading: boolean;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     handleChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 const Form = (props: FormProps) => {
     const { signupForm, formInput, showPswBtn } = styles;
-    const { loginForm, formData, signUpErrors, handleChange, handleSubmit } = props;
+    const { loginForm, formData, loading, signUpErrors, handleChange, handleSubmit } = props;
     const[showPassword, setShowPassword] = useState<boolean>(false);
     useEffect(() => {
       setShowPassword(false);
@@ -96,9 +98,17 @@ const Form = (props: FormProps) => {
         </Grid>
         }
         <Grid item xs={12}>
-          <Button type="submit" variant="outlined" >
+          <LoadingButton
+           type="submit"
+           variant="outlined"
+           loading={loading}
+           startIcon= {
+            <SvgIcon/>
+           }
+           loadingPosition='start'
+           >
           {!loginForm ? 'Sign Up' : 'Sign In'}  
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </form>

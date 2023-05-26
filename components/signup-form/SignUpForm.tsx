@@ -4,12 +4,11 @@ import Form from '../form/Form';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { useRouter } from 'next/router';
 import { FormErrorMessages } from '@/constants/constants';
-import Loader from '../loader/Loader';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
 const SignUpForm = ({ users }: { users: string}) => {
-  const { formContainer, loaderContainer } = styles;
+  const { formContainer } = styles;
   const initFormData = {
     name: '',
     email: '',
@@ -80,18 +79,14 @@ const SignUpForm = ({ users }: { users: string}) => {
 
   return (
     <div className={formContainer}>
-      <div className={loaderContainer}>
-      {loading && <Loader /> }
-      </div>
-      { !loading && 
       <Form 
+       loading={loading}
        loginForm={false}
        signUpErrors={signUpErrors}
        formData={formData}
        handleChange={handleChange}
        handleSubmit={handleSubmit}
       />
-      }
     </div>
   );
 };

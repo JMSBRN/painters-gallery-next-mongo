@@ -19,7 +19,6 @@ const Painter = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [authorized, setAuthorized] = useState<boolean>(false);
-  const [uploaded, setUploaded] = useState<boolean>(false);
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
   const { images } = useAppSelector(selectImages);
@@ -48,7 +47,7 @@ const Painter = () => {
     parsedImages && dispatch(setImages(parsedImages));
   };
   f();
- }, [dispatch, getImagesFromMongo, uploaded]);
+ }, [dispatch, getImagesFromMongo]);
 
   useEffect(() => {   
      const token = localStorage.getItem('token') as string;
