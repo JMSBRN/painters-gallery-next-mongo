@@ -3,6 +3,7 @@
 
 .header {
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     right: 0;
@@ -12,9 +13,20 @@
   }
   
   .headerContainer {
-    @include flex(space-between, center);
-    & nav  {
-      min-width: 550px;
+   @include flex(space-arround, space-arround);
+   @include respond-to($breakpoint-small){
+     @include flex(space-arround, space-arround, column);
+  
+   }
+   & nav  {
+     min-width: 550px;
+     @include respond-to($breakpoint-small){
+       width: 375px;
+       height: 40px;
+       @include flex(space-arround, center);
+       padding-left: 20px;
+       
+      };
       @include flex(space-arround, center);
       & a {
         text-decoration: none;
@@ -23,10 +35,18 @@
       }
     }
   }
+  .authLinkContainer {
+    @include respond-to($breakpoint-small){
+      width: 400px;
+      @include flex(space-arround, center);
+      padding-left: 15px;
+    }
+  }
   .authLink {
     margin-right: 20px;
     text-decoration: none;
     color: $light;
+  
   }
   .userNameStyle {
     padding: 5px 0;
@@ -40,6 +60,12 @@
   .logedUserContainer {
     width: 150px;
     @include flex(flex-end, center);
+    @include respond-to($breakpoint-small){
+      width: 130px;
+      top: 40px;
+      right: 10px;
+      position: absolute;
+    }
     & button {
       margin-left: 15px;
       padding: 3px 5px;

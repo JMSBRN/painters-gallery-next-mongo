@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
@@ -13,7 +13,13 @@ interface HeaderProps {
 }
 const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
-  const { header, headerContainer, authLink, userNameStyle, logedUserContainer } = styles;
+  const { header,
+     headerContainer,
+      authLink,
+      userNameStyle,
+      logedUserContainer,
+      authLinkContainer
+     } = styles;
   const dispatch = useAppDispatch();
   const { user, logged } = useAppSelector(selectUsers);
   const router = useRouter();
@@ -34,11 +40,11 @@ const Header = (props: HeaderProps) => {
           <Link href="/help">help</Link>
           {logged &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
         </nav>
-        <>
+        <div className={authLinkContainer}>
           <Link className={authLink} href={'/auth/login'}>Log In</Link>
           <Link className={authLink} href={'/auth'}>Sign Up</Link>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
-        </>
+        </div>
         <div className={logedUserContainer}>
           {logged && 
           <>

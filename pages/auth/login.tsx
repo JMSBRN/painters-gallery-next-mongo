@@ -106,7 +106,7 @@ const Login = () => {
               Oops! Something went wrong:(... Please check enternet connection or reload application
             </div>
             <div>
-              <Link style={{ textDecoration: 'none' }} href={'/login'} onClick={() => { window.location.reload(); } }
+              <Link style={{ textDecoration: 'none' }} href={'/auth/login'} onClick={() => { window.location.reload(); } }
               >Reload</Link>
             </div>
           </>

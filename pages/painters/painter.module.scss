@@ -17,9 +17,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
+  @include respond-to ($breakpoint-small) {
+    margin-top: 80px;
+    @include flex(center, center, column);
+  }
   & .ImageLayout {
     width: 220px;
-    height: 250px;
+    height: auto;
     border-radius: 5px;
     background-color: rgb(233, 233, 233);
     padding: 10px;
@@ -34,6 +38,11 @@
   position: absolute;
   top: 20px;
   right: 30px;
+  @include respond-to ($breakpoint-small) {
+    top: 0;
+    left: 0px;
+    padding-left: 60px;
+  }
   & .deleteImagesBtn {
     margin-top: 13px;
   }
