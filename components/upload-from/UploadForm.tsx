@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, SvgIcon } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -7,13 +7,12 @@ import PublishIcon from '@mui/icons-material/Publish';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setImages } from '@/features/images/imagesSlice';
 
-  const  UploadForm = () => {
+const UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { id } = useRouter().query; 
-  const fileInputRef = useRef(null);
-  const { uploadForm, selectBtn, submitBtn } = styles;
+  const [fetchMessage, setFetchMessage] = useState<string>('');
+  const { id } = useRouter().query;
+  const { uploadForm, selectBtn, submitBtn, fetchMessageStyle } = styles;
   const dispatch = useAppDispatch();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,58 +24,84 @@ import { setImages } from '@/features/images/imagesSlice';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let formData = new FormData();
+  const timeOutClearFetchMessage = (timeout: number) => {
+    setTimeout(() => {
+      setFetchMessage('');
+    }, timeout);
+  };
+
+    if (file?.type === 'video/mp4') {
+      setFile(null);
+      setFetchMessage('media type not allowed');
+      timeOutClearFetchMessage(3000);
+      return;
+    }
+
     if (file) {
       setUploading(true);
-      setError(null);
-      const formData = new FormData();
       formData.append('image', file);
       formData.append('user_id', `${id}`);
       try {
-        const response = await fetch('/api/uploads/', {
+        const res = await fetch('/api/uploads/', {
           method: 'POST',
           body: formData,
         });
-        if (!response.ok) {
-          throw new Error('Failed to upload image');
+        const data = await res.json();
+        if (data.message) {
+          setFetchMessage(data.message);
+          timeOutClearFetchMessage(3000);
         }
       } catch (error) {
-        console.error(error);
-        setError(`${error}`);
+        console.error('Error from UploadForm :', error);
       } finally {
         setUploading(false);
         setFile(null);
-        const res = await fetch(`/api/images/${id}`);   
+        const res = await fetch(`/api/images/${id}`);
         const data = await res.json();
         dispatch(setImages(JSON.parse(data)));
       }
+    } else {
+      formData = {} as FormData;
     }
   };
 
   return (
     <form className={uploadForm} onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
-      {
-        file ?
+      <div className={fetchMessageStyle}>
+        {fetchMessage}
+      </div>
+      {file ? (
         <LoadingButton
           className={submitBtn}
-          type='submit'
+          type="submit"
           loading={uploading}
           variant="outlined"
-          startIcon={ 
+          startIcon={
             <SvgIcon>
-                < PublishIcon />;
+              <PublishIcon />;
             </SvgIcon>
           }
           loadingPosition="start"
-          >
-            {file ? (!uploading ? 'Upload file' : 'Uploading file') : 'No File Chosen'}
+        >
+          {file
+            ? !uploading
+              ? 'Upload file'
+              : 'Uploading file'
+            : 'No File Chosen'}
         </LoadingButton>
-         : 
-         <Button className={selectBtn} variant="outlined" component="label">
-         Select file to Upload
-         <input hidden ref={fileInputRef} accept="image/*" multiple type="file" onChange={handleFileChange} />
-       </Button>
-      }
+      ) : (
+        <Button className={selectBtn} variant="outlined" component="label">
+          Select file to Upload
+          <input
+            hidden
+            accept="image/*"
+            multiple
+            type="file"
+            onChange={handleFileChange}
+          />
+        </Button>
+      )}
     </form>
   );
 };

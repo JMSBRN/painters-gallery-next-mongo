@@ -13,6 +13,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) =>  {
   }
 };
 
+interface InitUploadData {
+  name: any;
+  newName: any;
+  size: any;
+  mimetype: any;
+}
+
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     
     const form = new formidable.IncomingForm({ keepExtensions: true });
@@ -22,8 +29,8 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
       const idUser = fields.user_id as string;
-      const { client, db } = await connectToDatabase();
-      const initUploadData = {
+      const { client } = await connectToDatabase();
+      let initUploadData: InitUploadData = {
         name: (files.image as any).originalFilename,
         newName: (files.image as any).newFilename,
         size: (files.image as any).size,
@@ -42,6 +49,9 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         );
        if(resultUploader) {
         res.status(201).json({ message: 'file uploaded'});
+       } else {
+        res.status(415).json({ message: 'Unsupported Media Type' });
+        initUploadData = {} as InitUploadData;
        }
       } catch (error) {
         console.error('error from mongo ', error);

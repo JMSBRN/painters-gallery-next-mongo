@@ -10,11 +10,13 @@
   @mixin theme ($mode: null) {
     $bg: $bg-clr;
     $text: $text-clr;
+    $textError: $text-error-clr;
     $primary: $primary-clr;
     $secondary: $secondary-clr;
     @if ($mode == 'dark') {
       $bg: $bg-clr-dark;
       $text: $text-clr-dark;
+      $textError: $text-error-clr-dark;
       $primary: $primary-clr-dark;
       $secondary: $secondary-clr-dark;
     }
@@ -29,6 +31,9 @@
     footer {
       background-color: black;
       color: white
+    }
+    form div {
+     color: $textError;
     }
     form button {
       color: $text;

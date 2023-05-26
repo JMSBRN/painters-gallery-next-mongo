@@ -4,5 +4,11 @@
 .uploadForm {
   width: 100%;
   max-width: 400px;
-  @include flex(space-around, center);
+}
+.fetchMessageStyle {
+  margin: 0 auto;
+  width: 200px;
+  height: 20px;
+  font-size: 14px;
+  text-align: center;
 }
