@@ -14,7 +14,7 @@ import { SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Painter = () => {
-  const { painterContainer, imagesStyle, uploads, ImageLayout } = styles;
+  const { painterContainer, imagesStyle, uploads, ImageLayout, deleteImagesBtn } = styles;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -113,6 +113,7 @@ const Painter = () => {
         <div className={uploads}>
             {selectedImages.length ?
              <LoadingButton
+               className={deleteImagesBtn}
                loading={loading}
                startIcon={ 
                 <SvgIcon>
