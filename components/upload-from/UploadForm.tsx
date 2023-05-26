@@ -33,7 +33,9 @@ const UploadForm = () => {
 
     if (file?.type === 'video/mp4') {
       setFile(null);
-      setFetchMessage('media type not allowed');
+      setTimeout(() => {
+        setFetchMessage('media type not allowed');
+      }, 500);
       timeOutClearFetchMessage(3000);
       return;
     }
@@ -49,7 +51,9 @@ const UploadForm = () => {
         });
         const data = await res.json();
         if (data.message) {
-          setFetchMessage(data.message);
+          setTimeout(() => {
+            setFetchMessage(data.message);
+          }, 500);
           timeOutClearFetchMessage(3000);
         }
       } catch (error) {
