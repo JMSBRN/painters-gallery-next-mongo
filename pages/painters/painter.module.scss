@@ -24,23 +24,20 @@
   height: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
-  gap: 10px;
+  gap: 30px;
   justify-content: center;
-  @include respond-to ($breakpoint-small) {
-    margin-top: 80px;
-    @include flex(center, center, column);
-  }
   & .ImageLayout {
     width: 220px;
-    height: auto;
+    height: 100%;
+    border: 0.2px solid rgb(196, 196, 196);
     border-radius: 5px;
-    background-color: rgb(233, 233, 233);
     padding: 10px;
   }
   & img {
     width: 220px;
     height: 100%;
     object-fit: contain;
+    margin-bottom: 10px;
   }
 }
 

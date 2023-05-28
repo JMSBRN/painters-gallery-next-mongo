@@ -5,4 +5,13 @@
     margin: 0 auto;
     max-width: 500px;
 }
+.failedConnecionMsg {
+    & a {
+        color: $primary-clr;
+        &:hover {
+            font-weight: 550;
+            color: $primary-clr;
+        }
+    }
+}
 

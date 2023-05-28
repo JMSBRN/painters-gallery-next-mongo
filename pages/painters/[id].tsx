@@ -10,7 +10,7 @@ import styles from './painter.module.scss';
 import { LoadingButton } from '@mui/lab';
 import jwt from 'jsonwebtoken';
 import { selectImages, setImages } from '@/features/images/imagesSlice';
-import { SvgIcon } from '@mui/material';
+import { Checkbox, SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Painter = () => {
@@ -131,16 +131,18 @@ const Painter = () => {
           </div>
           <div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
-                <div className="">
-                  <label>
-                    <input 
-                    type="checkbox"
-                    value={el._id.toString()}
-                    checked={selectedImages.includes(el._id.toString())}
-                    onChange={(e) => handleChangeCheckBox(e)}
-                       />
-                  </label>
-                </div>
+                  <Checkbox
+                   value={el._id.toString()}
+                   checked={selectedImages.includes(el._id.toString())}
+                   onChange={(e) => handleChangeCheckBox(e)}
+                   size='small'
+                   sx={{
+                    color: 'lightgrey',
+                    '&.Mui-checked': {
+                      color: 'blue',
+                    }
+                  }}
+                  />
               <Image
                 width={20}
                 height={20}

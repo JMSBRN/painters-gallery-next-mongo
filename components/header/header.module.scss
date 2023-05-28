@@ -65,19 +65,19 @@
     color: $light;
   }
   .logedUserContainer {
-    min-width: 150px;
+    min-width: 160px;
     @include flex(flex-end, center);
     & button {
+      width: 60px;
       margin-left: 15px;
       padding: 3px 5px;
       border: none;
-      border-radius: 3px;
       background-color: transparent;
       color: $light;
       cursor: pointer;
-       &:hover {
-         background-color: $bg-clr;
-         color: $text-clr;
+      &:hover {
+         border: 1px solid $light;
+         border-radius: 3px;
       }
      }
   }

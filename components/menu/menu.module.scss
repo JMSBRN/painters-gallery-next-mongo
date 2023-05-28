@@ -4,11 +4,10 @@
 .menuContainer button {
   border: none;
   background-color: transparent;
-
+  cursor: pointer;
   & img {
     filter: invert(95%) sepia(95%) saturate(0%) hue-rotate(74deg) brightness(103%) contrast(106%);
   }
-
   &:active {
     border: 1px solid $light;
     border-radius: 3px;
@@ -25,10 +24,12 @@
   & nav {
     @include flex (center, flex-start, column);
     margin-bottom: 10px;
-
     & a {
       margin-bottom: 10px;
       text-decoration: none;
+      &:active {
+        color: $light;
+      }
     }
   }
 }
@@ -38,9 +39,11 @@
   min-width: 100px;
   max-width: 300px;
   @include flex (flex-start, center);
-
   & a {
     margin-right: 10px;
     text-decoration: none;
+    &:active {
+      color: $light;
+    }
   }
 }

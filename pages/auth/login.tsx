@@ -11,7 +11,7 @@ import { setLogged, setUser } from '@/features/users/usersSlice';
 import Link from 'next/link';
 
 const Login = () => {
-  const { formContainer } = styles;
+  const { formContainer, failedConnecionMsg } = styles;
 
   const initFormData = {
     name: '',
@@ -27,7 +27,7 @@ const Login = () => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
-  const [connected, setConnected] = useState<boolean>(false);
+  const [connectedFailed, setConnectedFailed] = useState<boolean>(false);
   const [usersDb, setUsersDb] = useState<User[]>([]);
   const {name, password} = formData;
   const dispatch = useAppDispatch();
@@ -45,7 +45,6 @@ const Login = () => {
     setLoading(true);
     setSignUpErrors(initSignUpErrors);
     if(usersDb) {
-
       const user: User | undefined = usersDb.find(el => el.name === name);
       const authorized = true;
     if (authorized) {      
@@ -84,8 +83,8 @@ const Login = () => {
     });
   };
   setTimeout(() => {
-    setConnected(true);
-  }, 5000);
+    setConnectedFailed(true);
+  }, 7000);
   return (
     <div className={formContainer}>
       { !!usersDb.length ? 
@@ -100,8 +99,8 @@ const Login = () => {
       : 
       <>
         {
-          connected && 
-          <>
+          connectedFailed && 
+          <div className={failedConnecionMsg}>
             <div>
               Oops! Something went wrong:(... Please check enternet connection or reload application
             </div>
@@ -109,7 +108,7 @@ const Login = () => {
               <Link style={{ textDecoration: 'none' }} href={'/auth/login'} onClick={() => { window.location.reload(); } }
               >Reload</Link>
             </div>
-          </>
+          </div>
         }
         </>
     }

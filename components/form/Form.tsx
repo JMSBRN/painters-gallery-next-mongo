@@ -17,9 +17,6 @@ const Form = (props: FormProps) => {
     const { signupForm, formInput, showPswBtn } = styles;
     const { loginForm, formData, loading, signUpErrors, handleChange, handleSubmit } = props;
     const[showPassword, setShowPassword] = useState<boolean>(false);
-    useEffect(() => {
-      setShowPassword(false);
-    }, [loginForm, formData]);
     const { nameError, emailError, passwordError } = signUpErrors;
 
   return (   
@@ -106,6 +103,7 @@ const Form = (props: FormProps) => {
             <SvgIcon/>
            }
            loadingPosition='start'
+           onClick={() => setShowPassword(false)}
            >
           {!loginForm ? 'Sign Up' : 'Sign In'}  
           </LoadingButton>
