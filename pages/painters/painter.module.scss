@@ -4,10 +4,18 @@
 .painterContainer {
  position: relative;
  margin: 0 auto;
+ width: 100%;
  height: auto;
  min-height: 970px;
- padding: 10px;
- @include flex( flex-start, center, column);
+ padding: 10px; 
+ @include flex(flex-start, center, column);
+}
+.uploadsStyle {
+  width: 100%;
+  @include flex(center, center);
+  & .deleteImagesBtn {
+    margin-top: 13px;
+  }
 }
 .imagesStyle {
   margin-top: 30px;  
@@ -15,8 +23,9 @@
   max-width: 900px;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
   gap: 10px;
+  justify-content: center;
   @include respond-to ($breakpoint-small) {
     margin-top: 80px;
     @include flex(center, center, column);
@@ -32,19 +41,6 @@
     width: 220px;
     height: 100%;
     object-fit: contain;
-  }
-}
-.uploads {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  @include respond-to ($breakpoint-small) {
-    top: 0;
-    left: 0px;
-    padding-left: 60px;
-  }
-  & .deleteImagesBtn {
-    margin-top: 13px;
   }
 }
 

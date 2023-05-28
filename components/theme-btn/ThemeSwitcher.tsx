@@ -8,7 +8,7 @@ interface ThemBtnProps {
 const ThemeSwitcher = (props: ThemBtnProps) => {
   const { isDark, setIsDark } = props;
   return (
-    <div className='theme-btn' style={{ opacity: '0.4' }}>
+    <div className='theme-btn' style={{ opacity: '0.7' }}>
       {isDark && '☀️'}
       <Switch checked={isDark} onChange={() => setIsDark(!isDark)} />
       {!isDark && '🌙'}

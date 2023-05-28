@@ -2,8 +2,10 @@
 @import 'variables';
 
 .uploadForm {
-  width: 100%;
-  max-width: 400px;
+  min-width: 220px;
+  & label, button {
+    min-width: 220px;
+  }
 }
 .fetchMessageStyle {
   margin: 0 auto;
@@ -11,5 +13,5 @@
   height: 13px;
   font-size: 11px;
   text-align: start;
-  color: $text-error-clr;
+  color: $text-clr;
 }

@@ -14,7 +14,7 @@ import { SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Painter = () => {
-  const { painterContainer, imagesStyle, uploads, ImageLayout, deleteImagesBtn } = styles;
+  const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn } = styles;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -106,10 +106,10 @@ const Painter = () => {
   };
 
   return (
+    <>
+    { authorized &&
     <div className={painterContainer}>
-      { authorized &&
-      <>
-        <div className={uploads}>
+        <div className={uploadsStyle}>
             {selectedImages.length ?
              <LoadingButton
                className={deleteImagesBtn}
@@ -128,7 +128,8 @@ const Painter = () => {
              :
              <UploadForm />
             }
-          </div><div className={imagesStyle}>
+          </div>
+          <div className={imagesStyle}>
             {images.map((el, idx) => <div className={ImageLayout} key={idx.toString()}>
                 <div className="">
                   <label>
@@ -147,9 +148,10 @@ const Painter = () => {
                 src={el.data} />
             </div>
             )}
-          </div></>
+          </div>
+       </div>
        }
-    </div>
+        </>
     );
   };
   
