@@ -6,6 +6,7 @@ import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
+import Menu from '../menu/Menu';
 
 interface HeaderProps {
   isDark: boolean;
@@ -13,12 +14,14 @@ interface HeaderProps {
 }
 const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
-  const { header,
-     headerContainer,
+  const { 
+      header,
+      headerContainer,
       authLink,
       userNameStyle,
       logedUserContainer,
-      authLinkContainer
+      authLinkContainer,
+      menu
      } = styles;
   const dispatch = useAppDispatch();
   const { user, logged } = useAppSelector(selectUsers);
@@ -32,6 +35,9 @@ const Header = (props: HeaderProps) => {
 
   return (
     <header className={header}>
+      <div className={menu}>
+       <Menu isDark={isDark} setIsDark={setIsDark} />
+      </div>
       <div className={headerContainer}>
         <nav>
           <Link href="/">home</Link>
@@ -39,7 +45,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
           {logged &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
-        </nav>
+          </nav>
         <div className={authLinkContainer}>
           <Link className={authLink} href={'/auth/login'}>Log In</Link>
           <Link className={authLink} href={'/auth'}>Sign Up</Link>

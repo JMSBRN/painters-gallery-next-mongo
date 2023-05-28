@@ -23,9 +23,9 @@
 
     header{
       background-color: $primary;
-      @include respond-to($breakpoint-small){
-        display: block;
-      }
+    }
+    menu {
+      background-color: $primary;
     }
     main {
       background-color: $bg;

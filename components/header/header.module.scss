@@ -7,25 +7,31 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 80px;
+    height: auto;
     z-index: 9;
     @include flex(center, center);
+    @include respond-to($breakpoint-medium){
+      @include flex(space-between, center);
+    }
+    & .menu {
+      display: none;
+      @include respond-to($breakpoint-medium){
+        margin-left: 20px;
+        display: block;
+      }
+    } 
   }
   
   .headerContainer {
-   @include flex(space-arround, space-arround);
-   @include respond-to($breakpoint-small){
-     @include flex(space-arround, space-arround, column);
-  
-   }
+    max-width: 1000px;
+    height: 80px;
+    @include flex(space-arround, center);
+    @include respond-to($breakpoint-medium){
+      padding: 0 20px;
+      };
    & nav  {
-     min-width: 550px;
-     @include respond-to($breakpoint-small){
-       width: 375px;
-       height: 40px;
-       @include flex(space-arround, center);
-       padding-left: 10px;
-       
+     @include respond-to($breakpoint-medium){
+      display: none;
       };
       @include flex(space-arround, center);
       & a {
@@ -36,21 +42,18 @@
     }
   }
   .authLinkContainer {
-    @include respond-to($breakpoint-small){
-      width: 375px;
-      @include flex(space-arround, center);
-      padding-left: 10px;
-
+    width: 100%;
+    min-width: 180px;
+    margin-left: 20px;
+    @include flex(center, center);
+    @include respond-to($breakpoint-medium){
+      display: none;
     }
   }
   .authLink {
     text-decoration: none;
     color: $light;
-    @include respond-to($breakpoint-small){
-      margin-right: 10px;
-    }
-
-  
+    margin-right: 10px;
   }
   .userNameStyle {
     padding: 5px 0;
@@ -62,22 +65,16 @@
     color: $light;
   }
   .logedUserContainer {
-    width: 150px;
+    min-width: 150px;
     @include flex(flex-end, center);
-    @include respond-to($breakpoint-small){
-      width: 130px;
-      position: absolute;
-      top: 40px;
-      right: 5px;
-    }
     & button {
       margin-left: 15px;
       padding: 3px 5px;
-       border: none;
-       border-radius: 3px;
-       background-color: transparent;
-       color: $light;
-       cursor: pointer;
+      border: none;
+      border-radius: 3px;
+      background-color: transparent;
+      color: $light;
+      cursor: pointer;
        &:hover {
          background-color: $bg-clr;
          color: $text-clr;

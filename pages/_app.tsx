@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '@/srore/store';
-import Loader from '@/components/progress-line/ProgressLine';
+import LoaderInProgress from '@/components/progress-line/ProgressLine';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers } from '@/features/users/usersSlice';
 
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className={isDark ? 'theme-dark' : 'theme'}>
           <Header isDark={isDark} setIsDark={setIsDark} />
           <Layout>
-            <Loader />
+            <LoaderInProgress />
             <Component {...pageProps} />
           </Layout>
           <Footer />
