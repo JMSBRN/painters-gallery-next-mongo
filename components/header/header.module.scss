@@ -24,7 +24,7 @@
        width: 375px;
        height: 40px;
        @include flex(space-arround, center);
-       padding-left: 20px;
+       padding-left: 10px;
        
       };
       @include flex(space-arround, center);
@@ -37,15 +37,19 @@
   }
   .authLinkContainer {
     @include respond-to($breakpoint-small){
-      width: 400px;
+      width: 375px;
       @include flex(space-arround, center);
-      padding-left: 15px;
+      padding-left: 10px;
+
     }
   }
   .authLink {
-    margin-right: 20px;
     text-decoration: none;
     color: $light;
+    @include respond-to($breakpoint-small){
+      margin-right: 10px;
+    }
+
   
   }
   .userNameStyle {
@@ -62,9 +66,9 @@
     @include flex(flex-end, center);
     @include respond-to($breakpoint-small){
       width: 130px;
-      top: 40px;
-      right: 10px;
       position: absolute;
+      top: 40px;
+      right: 5px;
     }
     & button {
       margin-left: 15px;
