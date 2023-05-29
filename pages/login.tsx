@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Form from '@/components/form/Form';
-import styles from './login.module.scss';
+import styles from '../styles/login.module.scss';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
@@ -9,11 +9,11 @@ import jwt from 'jsonwebtoken';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLogged, setUser } from '@/features/users/usersSlice';
 import Link from 'next/link';
-import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import secureLocalUtils from '../utils/secureLocalStorageUtils';
 
 const Login = () => {
   const { formContainer, failedConnecionMsg } = styles;
-  const { getDecryptedDataFromLocalStorage, setEncryptedDataToLocalStorage } = secureLocalUtils;
+  const { setEncryptedDataToLocalStorage } = secureLocalUtils;
 
   const initFormData = {
     name: '',
@@ -108,7 +108,7 @@ const Login = () => {
               Oops! Something went wrong:(... Please check enternet connection or reload application
             </div>
             <div>
-              <Link style={{ textDecoration: 'none' }} href={'/auth/login'} onClick={() => { window.location.reload(); } }
+              <Link style={{ textDecoration: 'none' }} href={'/login'} onClick={() => { window.location.reload(); } }
               >Reload</Link>
             </div>
           </div>

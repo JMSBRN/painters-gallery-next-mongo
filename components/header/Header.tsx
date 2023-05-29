@@ -29,6 +29,7 @@ const Header = (props: HeaderProps) => {
   const { user, logged } = useAppSelector(selectUsers);
   const router = useRouter();
   const [userFromLocal, setUserFromLocal] = useState({} as User);
+  
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
     dispatch(setLogged(false));
@@ -56,8 +57,8 @@ const Header = (props: HeaderProps) => {
           {userFromLocal.name &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
           </nav>
         <div className={authLinkContainer}>
-            <Link className={authLink} href={'/auth/login'}>Log In</Link>
-          <Link className={authLink} href={'/auth'}>Sign Up</Link>
+            <Link className={authLink} href={'/login'}>Log In</Link>
+          <Link className={authLink} href={'/signup/'}>Sign Up</Link>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
         <div className={logedUserContainer}>
