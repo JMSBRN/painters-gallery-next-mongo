@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './header.module.scss';
 import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
 import Menu from '../menu/Menu';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 
 interface HeaderProps {
   isDark: boolean;
@@ -14,6 +15,7 @@ interface HeaderProps {
 }
 const Header = (props: HeaderProps) => {
   const { isDark, setIsDark } = props;
+  const { getDecryptedDataFromLocalStorage } = secureLocalUtils;
   const { 
       header,
       headerContainer,
@@ -26,13 +28,20 @@ const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
   const { user, logged } = useAppSelector(selectUsers);
   const router = useRouter();
+  const [userFromLocal, setUserFromLocal] = useState({} as User);
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
     dispatch(setLogged(false));
+    setUserFromLocal({} as User);
     router.push('/');
     localStorage.clear();
   };
 
+  useEffect(() => {
+    const data = getDecryptedDataFromLocalStorage('user');
+     data && setUserFromLocal(data);
+  }, [getDecryptedDataFromLocalStorage, logged]);
+  
   return (
     <header className={header}>
       <div className={menu}>
@@ -44,17 +53,17 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
-          {logged &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
+          {userFromLocal.name &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
           </nav>
         <div className={authLinkContainer}>
-          <Link className={authLink} href={'/auth/login'}>Log In</Link>
+            <Link className={authLink} href={'/auth/login'}>Log In</Link>
           <Link className={authLink} href={'/auth'}>Sign Up</Link>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
         <div className={logedUserContainer}>
-          {logged && 
+          {userFromLocal.name && 
           <>
-           <div className={userNameStyle}>{user.name}</div>
+           <div className={userNameStyle}>{userFromLocal.name}</div>
            <button onClick={handlClickLogOut}>log out</button>
           </>
           }

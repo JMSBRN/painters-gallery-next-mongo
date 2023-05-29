@@ -9,9 +9,11 @@ import jwt from 'jsonwebtoken';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLogged, setUser } from '@/features/users/usersSlice';
 import Link from 'next/link';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 
 const Login = () => {
   const { formContainer, failedConnecionMsg } = styles;
+  const { getDecryptedDataFromLocalStorage, setEncryptedDataToLocalStorage } = secureLocalUtils;
 
   const initFormData = {
     name: '',
@@ -51,10 +53,11 @@ const Login = () => {
       if(user?.id) {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
+          setEncryptedDataToLocalStorage('user', user);
           dispatch(setUser(user));
           dispatch(setLogged(true));
           const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '30min'});
-          localStorage.setItem('token', JSON.stringify(accessToken));
+          setEncryptedDataToLocalStorage('token', accessToken);
           router.push(`/painters/${user.id}`);
         } else {
           setLoading(false);

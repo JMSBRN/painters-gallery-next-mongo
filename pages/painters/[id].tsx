@@ -12,9 +12,11 @@ import jwt from 'jsonwebtoken';
 import { selectImages, setImages } from '@/features/images/imagesSlice';
 import { Checkbox, SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 
 const Painter = () => {
   const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn } = styles;
+  const { getDecryptedDataFromLocalStorage, setEncryptedDataToLocalStorage } = secureLocalUtils;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,8 +52,8 @@ const Painter = () => {
  }, [dispatch, getImagesFromMongo]);
 
   useEffect(() => {   
-     const token = localStorage.getItem('token') as string;
-     jwt.verify(JSON.parse(token), process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
+    const token = getDecryptedDataFromLocalStorage('token');
+     jwt.verify(token, process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
        if(err) {
            if (err.message === 'jwt expired') {
              const res = await fetch('/api/refresh-token',{
@@ -61,7 +63,7 @@ const Painter = () => {
            });
            const data = await res.json();
            if(data.accessToken) {
-             localStorage.setItem('token', JSON.stringify(data.accessToken));
+            setEncryptedDataToLocalStorage('token', JSON.stringify(data.accessToken));
              setAuthorized(true);
            }
         }
@@ -72,7 +74,7 @@ const Painter = () => {
        }
      });
      
-  }, [id]);
+  }, [getDecryptedDataFromLocalStorage, id, setEncryptedDataToLocalStorage]);
   
   const handleDeleteSelectedImages = async () => {
     setLoading(true);
