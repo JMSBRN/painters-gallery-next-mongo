@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from '@/components/form/Form';
 import styles from '../styles/login.module.scss';
-import { SignUpErrors, User } from '@/features/users/interfaces';
+import { InitFormData, SignUpErrors, User } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
 import bcrypt from 'bcryptjs';
@@ -15,7 +15,7 @@ const Login = () => {
   const { formContainer, failedConnecionMsg } = styles;
   const { setEncryptedDataToLocalStorage } = secureLocalUtils;
 
-  const initFormData = {
+  const initFormData: InitFormData = {
     name: '',
     email: '',
     password: '',
@@ -47,7 +47,7 @@ const Login = () => {
     const res = await fetch('/api/users/',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(formData.name)
+      body: JSON.stringify(formData)
     });
     const user = await res.json();
     if (!user.message) {     

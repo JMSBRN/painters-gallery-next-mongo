@@ -12,3 +12,10 @@ export interface SignUpErrors {
     emailError: string,
     passwordError: string,
 }
+
+export interface InitFormData {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}

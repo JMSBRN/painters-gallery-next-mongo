@@ -1,15 +1,19 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import crypto, {  } from 'crypto-js';
  
 export const middleware = (req: NextRequest) => {
-   const role = req.headers.get('authorization');
-   //const { pathname } = req.nextUrl;
-  // if(role === 'as') {
-  
-     return NextResponse.next();
-    // } else {
-    //   return NextResponse.redirect(new URL('/api/auth/unauthorized', req.url));
-    // }
+
+  //  const response = new NextResponse();
+  //  const obj = { name: 'name', email: 'email' };
+  //  const encrypted = crypto.AES.encrypt(JSON.stringify(obj), '123').toString();
+  //  response.cookies.set('cookieName', encrypted, {
+  //    maxAge: 60 * 60 * 24 * 7,
+  //    httpOnly: true,
+  //    secure: true,
+  //    path: '/',
+  //  });
+   return NextResponse.next();
 };
  
 export const config = {

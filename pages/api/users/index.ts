@@ -1,3 +1,4 @@
+import { InitFormData } from '@/features/users/interfaces';
 import { getCollectionData } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -10,12 +11,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(200).json(data);
           }
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Server error' });
+          console.error(error);
+          res.status(500).json({ message: 'Server error' });
         }
 
       } else if (req.method === 'POST') {
-        const name = req.body;
+        const formData: InitFormData = req.body;
+        const { name } = formData;
         if (name) {
           try {
             const result = await getCollectionData('users', undefined, name);    
