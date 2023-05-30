@@ -35,7 +35,7 @@ export const uploadGridFSFile = async (
   fileName: string,
   contentType: string
 ) => {
-  const { db, client } = await connectToDatabase();
+  const { db } = await connectToDatabase();
   const bucket = new GridFSBucket(db, { bucketName: bucketName });
   const uploadStream = bucket.openUploadStream(userId, {
     metadata: {
@@ -148,7 +148,8 @@ export const clearAllFilesInFolder = async (folderPath: string) => {
 
 export const getCollectionData = async (
   collectionName: string,
-  id?: string
+  id?: string,
+  name?: string
 ) => {
   const { db } = await connectToDatabase();
   if (id) {
@@ -157,6 +158,13 @@ export const getCollectionData = async (
       return JSON.stringify(user);
     } else {
       return 'data not found ';
+    }
+  } else if (name) {
+    const user = await db.collection(collectionName).findOne({ name: name });
+    if (user) {
+      return JSON.stringify(user);
+    } else {
+      return JSON.stringify('data not found');
     }
   } else {
     const users = await db.collection(collectionName).find().toArray();

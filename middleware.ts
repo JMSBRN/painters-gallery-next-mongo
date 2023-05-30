@@ -5,6 +5,7 @@ export const middleware = (req: NextRequest) => {
    const role = req.headers.get('authorization');
    //const { pathname } = req.nextUrl;
   // if(role === 'as') {
+  
      return NextResponse.next();
     // } else {
     //   return NextResponse.redirect(new URL('/api/auth/unauthorized', req.url));

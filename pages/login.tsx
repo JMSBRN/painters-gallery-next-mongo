@@ -30,26 +30,27 @@ const Login = () => {
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
   const [connectedFailed, setConnectedFailed] = useState<boolean>(false);
-  const [usersDb, setUsersDb] = useState<User[]>([]);
   const {name, password} = formData;
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    const f = async () => {
-      const res = await fetch('/api/users/');
-      const data: User[] = await res.json();
-      setUsersDb(data);
-    };
-    f();
-  }, []);
   
+  const setConnectionErrorMessage = () => {
+    setTimeout(() => {
+      setConnectedFailed(true);
+      setLoading(false);
+    }, 10000);
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setConnectedFailed(false);
     setSignUpErrors(initSignUpErrors);
-    if(usersDb) {
-      const user: User | undefined = usersDb.find(el => el.name === name);
-      const authorized = true;
-    if (authorized) {      
+    const res = await fetch('/api/users/',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(formData.name)
+    });
+    const user = await res.json();
+    if (!user.message) {     
       if(user?.id) {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
@@ -65,14 +66,10 @@ const Login = () => {
         }
      } else {
         setLoading(false);
-        setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR});
+        setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR });
       }
-    } else {
-      setLoading(false);
-      setSignUpErrors({ nameError: FormErrorMessages.USER_AUTH_ERROR});
-    }
   } else {
-    router.push('/');
+    setConnectionErrorMessage();
   }
   };
 
@@ -85,12 +82,9 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-  setTimeout(() => {
-    setConnectedFailed(true);
-  }, 7000);
+  
   return (
-    <div className={formContainer}>
-      { !!usersDb.length ? 
+    <div className={formContainer}> 
       <Form 
        loading={loading}
        loginForm={true}
@@ -99,7 +93,6 @@ const Login = () => {
        handleChange={handleChange}
        handleSubmit={handleSubmit}
       />
-      : 
       <>
         {
           connectedFailed && 
@@ -114,7 +107,6 @@ const Login = () => {
           </div>
         }
         </>
-    }
     </div>
   );
 };

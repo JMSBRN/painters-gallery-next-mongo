@@ -8,7 +8,7 @@ dotenv.config();
 const handler =async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         const id = req.body;
-        if(!id) res.status(204).json({ message: 'no data'});
+        if(!id) res.status(204).send({ message: 'no data' });
         const data = await getCollectionData('tokens', id);
           const { token } = JSON.parse(data);
         if (token) {

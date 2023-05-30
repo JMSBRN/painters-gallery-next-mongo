@@ -8,7 +8,7 @@ async function handler(req:NextApiRequest, res:NextApiResponse){
             await addDataToCollection('users', req.body);
             res.status(201).json({ message: 'data sent'});
           } else {
-            res.status(204).json({ message: 'data not found'});
+            res.status(204).send({ message: 'data not found'});
           }
           } catch (e) {
             console.error(e);

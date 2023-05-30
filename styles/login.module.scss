@@ -2,16 +2,18 @@
 @import 'mixins';
 
 .formContainer {
-    margin: 0 auto;
-    max-width: 500px;
-}
-.failedConnecionMsg {
-    & a {
-        color: $primary-clr;
-        &:hover {
-            font-weight: 550;
-            color: $primary-clr;
-        }
-    }
+   margin: 0 auto;
+   max-width: 500px;
 }
 
+.failedConnecionMsg {
+  margin-top: 20px;
+  max-width: 500px;
+  & a {
+    color: $primary-clr;
+      &:hover {
+       font-weight: 550;
+       color: $primary-clr;
+      }
+  }
+}

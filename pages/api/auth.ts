@@ -7,7 +7,7 @@ dotenv.config();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'POST') {
-        if(!req.body) res.status(204);
+        if(!req.body) res.status(204).send({ message: 'no data' });;
         const user = req.body;
         const accessToken = jwt.sign(user, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min' });
         const refreshToken = jwt.sign(user, process.env.JWT_REFRESH_SECRET!, { expiresIn: '30d' });
