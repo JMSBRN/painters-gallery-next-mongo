@@ -46,7 +46,10 @@ const Login = () => {
     setSignUpErrors(initSignUpErrors);
     const res = await fetch('/api/users/',{
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': JSON.stringify(formData),
+        },
       body: JSON.stringify(formData)
     });
     const user = await res.json();

@@ -15,7 +15,7 @@ const handler =async (req: NextApiRequest, res: NextApiResponse) => {
            jwt.verify(token, process.env.JWT_REFRESH_SECRET!, (err: any, user: any) => {
             if(err) return  res.status(401);
             if(user) {
-                const accessToken = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min' });
+                const accessToken = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '15min' });
               res.status(201).json({ accessToken });
             }
            });

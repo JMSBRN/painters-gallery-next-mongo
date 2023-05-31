@@ -58,7 +58,7 @@ const SignUpForm = ({ users }: { users: string}) => {
               headers: { 'Content-Type' : 'application/json' },
               body: JSON.stringify({ id, name })
             });
-             router.push('/auth/login');
+             router.push('/login');
            }
         }
     } else {

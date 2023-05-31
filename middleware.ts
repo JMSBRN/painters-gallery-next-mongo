@@ -1,21 +1,17 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import crypto, {  } from 'crypto-js';
- 
-export const middleware = (req: NextRequest) => {
+import crypto from 'crypto-js';
 
-  //  const response = new NextResponse();
-  //  const obj = { name: 'name', email: 'email' };
-  //  const encrypted = crypto.AES.encrypt(JSON.stringify(obj), '123').toString();
-  //  response.cookies.set('cookieName', encrypted, {
-  //    maxAge: 60 * 60 * 24 * 7,
-  //    httpOnly: true,
-  //    secure: true,
-  //    path: '/',
-  //  });
-   return NextResponse.next();
+export const middleware = async (req: NextRequest) => {
+  const data = req.headers.get('Authorization');
+  const user = data && JSON.parse(data);
+   const { name, password } = user;
+   const res = NextResponse.next();
+   const encrypted = crypto.AES.encrypt(JSON.stringify({ name, password }), '123').toString();
+   res.cookies.set('user', encrypted);
+   return res;
 };
  
 export const config = {
-  matcher: '/api/:path*',
+  matcher: '/api/users/',
 };
