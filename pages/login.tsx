@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Form from '@/components/form/Form';
 import styles from '../styles/login.module.scss';
-import { InitFormData, SignUpErrors, User } from '@/features/users/interfaces';
+import { InitFormData, SignUpErrors } from '@/features/users/interfaces';
 import { FormErrorMessages } from '@/constants/constants';
 import router from 'next/router';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLogged, setUser } from '@/features/users/usersSlice';
 import Link from 'next/link';
@@ -58,10 +57,9 @@ const Login = () => {
         const matchedPsw = await bcrypt.compare(password, user.password);
         if(matchedPsw) {
           setEncryptedDataToLocalStorage('user', user);
+          /// token ?
           dispatch(setUser(user));
           dispatch(setLogged(true));
-          const accessToken = jwt.sign({ id: user?.id, name: user?.name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '30min'});
-          setEncryptedDataToLocalStorage('token', accessToken);
           router.push(`/painters/${user.id}`);
         } else {
           setLoading(false);

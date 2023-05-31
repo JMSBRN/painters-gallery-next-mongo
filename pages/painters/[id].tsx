@@ -12,11 +12,11 @@ import jwt from 'jsonwebtoken';
 import { selectImages, setImages } from '@/features/images/imagesSlice';
 import { Checkbox, SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import secureCookieUtils from '../../utils/secureCookiesUtils';
 
 const Painter = () => {
   const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn } = styles;
-  const { getDecryptedDataFromLocalStorage, setEncryptedDataToLocalStorage } = secureLocalUtils;
+  const { setEncryptedDataToCookie,  getEncryptedDataFromCookie } = secureCookieUtils;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,8 +52,8 @@ const Painter = () => {
  }, [dispatch, getImagesFromMongo]);
 
   useEffect(() => {   
-    const token = getDecryptedDataFromLocalStorage('token');
-     jwt.verify(token, process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
+    const token = getEncryptedDataFromCookie('token');
+    jwt.verify(token, process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
        if(err) {
            if (err.message === 'jwt expired') {
              const res = await fetch('/api/refresh-token',{
@@ -61,20 +61,18 @@ const Painter = () => {
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify(id)
            });
-           const data = await res.json();
+           const data = await res.json();         
            if(data.accessToken) {
-            setEncryptedDataToLocalStorage('token', JSON.stringify(data.accessToken));
+            setEncryptedDataToCookie('token', JSON.stringify(data.accessToken));
              setAuthorized(true);
            }
+        } else {
+          setAuthorized(true);
         }
       }
-
-      if (data) {
-        setAuthorized(true);
-       }
      });
      
-  }, [getDecryptedDataFromLocalStorage, id, setEncryptedDataToLocalStorage]);
+  }, [getEncryptedDataFromCookie, id, setEncryptedDataToCookie]);
   
   const handleDeleteSelectedImages = async () => {
     setLoading(true);

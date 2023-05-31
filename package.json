@@ -28,6 +28,7 @@
     "@types/sass": "^1.45.0",
     "@types/uuid": "^9.0.1",
     "bcryptjs": "^2.4.3",
+    "cookies-next": "^2.1.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "eslint": "8.38.0",
