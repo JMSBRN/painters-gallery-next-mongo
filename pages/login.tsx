@@ -30,7 +30,7 @@ const Login = () => {
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
   const [connectedFailed, setConnectedFailed] = useState<boolean>(false);
-  const {name, password} = formData;
+  const { password } = formData;
   const dispatch = useAppDispatch();
   
   const setConnectionErrorMessage = () => {
