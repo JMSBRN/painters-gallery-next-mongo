@@ -16,7 +16,7 @@ import secureCookieUtils from '../../utils/secureCookiesUtils';
 
 const Painter = () => {
   const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn } = styles;
-  const { setEncryptedDataToCookie,  getEncryptedDataFromCookie } = secureCookieUtils;
+  const { setEncryptedDataToCookie,  getDecryptedDataFromCookie } = secureCookieUtils;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,27 +52,32 @@ const Painter = () => {
  }, [dispatch, getImagesFromMongo]);
 
   useEffect(() => {   
-    const token = getEncryptedDataFromCookie('token');
-    jwt.verify(token, process.env.JWT_ACCES_SECRET!, async (err: any, data: any) => {
+    const token = getDecryptedDataFromCookie('token');  
+    if(token) {
+    jwt.verify(token.slice(1, -1), process.env.JWT_ACCES_SECRET!, async (err: any) => {
        if(err) {
+        console.error('error from verify token in painer', err);
            if (err.message === 'jwt expired') {
-             const res = await fetch('/api/refresh-token',{
+             const res = await fetch('/api/refresh-token/',{
                method: 'POST',
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify(id)
            });
-           const data = await res.json();         
+           const data = await res.json();
            if(data.accessToken) {
-            setEncryptedDataToCookie('token', JSON.stringify(data.accessToken));
+            setEncryptedDataToCookie('token', data.accessToken);
              setAuthorized(true);
-           }
+            }
+          }
         } else {
           setAuthorized(true);
         }
-      }
-     });
-     
-  }, [getEncryptedDataFromCookie, id, setEncryptedDataToCookie]);
+      });
+    } else {
+      return;
+    }
+      
+  }, [getDecryptedDataFromCookie, id, setEncryptedDataToCookie]);
   
   const handleDeleteSelectedImages = async () => {
     setLoading(true);

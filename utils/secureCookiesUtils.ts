@@ -10,11 +10,11 @@ const setEncryptedDataToCookie = (key: string, data: User | string, req?: any, r
      setCookie(key, encryptedData, { req, res });
 };
 
-const getEncryptedDataFromCookie = (key: string) => {
+const getDecryptedDataFromCookie = (key: string) => {
     const encryptedData = getCookie(key) as string;
     if(encryptedData) {
         const decryptedData = crypto.AES.decrypt(encryptedData!, secretKey).toString(CryptoJS.enc.Utf8);
-        return JSON.parse(decryptedData);
+        return decryptedData;
     } else {
      return null;
     }
@@ -22,7 +22,7 @@ const getEncryptedDataFromCookie = (key: string) => {
 
 const  secureLocalUtils = {
     setEncryptedDataToCookie,
-    getEncryptedDataFromCookie
+    getDecryptedDataFromCookie
 };
 
 export default secureLocalUtils;

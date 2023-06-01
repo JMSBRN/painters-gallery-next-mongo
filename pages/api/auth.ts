@@ -11,12 +11,12 @@ const { setEncryptedDataToCookie } = secureCookiesUtils;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'POST') {
-        if(!req.body) res.status(204).send({ message: 'no data' });;
+        if(!req.body) res.status(204).end();
         const user: User = req.body;
         if(user) {
             await addDataToCollection('users', user);
             const { id, name } = user;
-            const accessToken = jwt.sign({ id, name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '1min' });
+            const accessToken = jwt.sign({ id, name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '15m' });
             const refreshToken = jwt.sign({ id, name }, process.env.JWT_REFRESH_SECRET!, { expiresIn: '30d' });
             const result = await addDataToCollection('tokens', { id: user.id, token : refreshToken });
             setEncryptedDataToCookie('token', accessToken, req, res);

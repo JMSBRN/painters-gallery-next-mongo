@@ -8,6 +8,7 @@ import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
 import { useRouter } from 'next/router';
 import Menu from '../menu/Menu';
 import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import { deleteCookie } from 'cookies-next';
 
 interface HeaderProps {
   isDark: boolean;
@@ -36,6 +37,7 @@ const Header = (props: HeaderProps) => {
     setUserFromLocal({} as User);
     router.push('/');
     localStorage.clear();
+    deleteCookie('token');
   };
 
   useEffect(() => {

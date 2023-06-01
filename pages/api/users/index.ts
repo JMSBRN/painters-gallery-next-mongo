@@ -28,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(500).send({ message: 'Server error' });
         }
       } else {
-        res.status(204).send({ message: 'no data' });
+        res.status(204).end();
       }
     } else {
         res.status(405).json({ message: 'Method not allowed' });
