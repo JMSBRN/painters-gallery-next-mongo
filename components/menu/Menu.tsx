@@ -36,7 +36,7 @@ const Menu = (props: MenuProps) => {
           </nav>
           <div className={authContainer}>
             <Link href={'/login'}>Log In</Link>
-            <Link href={'/auth'}>Sign Up</Link>
+            <Link href={'/signup'}>Sign Up</Link>
           </div>
             <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </menu>
