@@ -202,7 +202,12 @@ export const addDataToCollection = async (
   newData: any
 ) => {
   const { db } = await connectToDatabase();
-  await db.collection(nameCollection).insertOne(newData as any);
+  const result = await db.collection(nameCollection).insertOne(newData as any);
+   if(result) {
+    return result;
+   } else {
+    return null;
+   }
 };
 export const updateUser = async (
   nameCollection: string,

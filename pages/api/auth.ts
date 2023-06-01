@@ -14,15 +14,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if(!req.body) res.status(204).end();
         const user: User = req.body;
         if(user) {
-            await addDataToCollection('users', user);
-            const { id, name } = user;
-            const accessToken = jwt.sign({ id, name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '15m' });
-            const refreshToken = jwt.sign({ id, name }, process.env.JWT_REFRESH_SECRET!, { expiresIn: '30d' });
-            const result = await addDataToCollection('tokens', { id: user.id, token : refreshToken });
-            setEncryptedDataToCookie('token', accessToken, req, res);
-            res.status(201).json({ accessToken, result });
+            const resultFromUsers =  await addDataToCollection('users', user);
+            if(resultFromUsers) {
+                const { id, name } = user;
+                const refreshToken = jwt.sign({ id, name }, process.env.JWT_REFRESH_SECRET!, { expiresIn: '30d' });
+                const result = await addDataToCollection('tokens', { id: user.id, token : refreshToken });
+                if(result) {
+                    res.status(201).json({ message: 'User created' });
+                } else {
+                    res.status(400).json({ message: 'error from tokens in mongo' });
+                }
+            } else {
+                res.status(400).json({ message: 'error from users in mongo' });
+            }
         }
-
     } else {
         res.status(405).json('Method not allowed');  
     }
