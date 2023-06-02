@@ -152,7 +152,10 @@ const Painter = () => {
                 width={20}
                 height={20}
                 alt={el.metadata?.fileName as string}
-                src={el.data} />
+                src={el.data}
+                priority={true}
+                />
+                
             </div>
             )}
           </div>

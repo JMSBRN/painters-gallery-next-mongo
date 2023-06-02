@@ -102,23 +102,25 @@ export const downLoadFilesFromMongoBucket = async (
 
 export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
   const { db, client } = await connectToDatabase();
-  const file = await db.collection(`${bucketName}.files`).findOne({ _id: new ObjectId(fileId) });
-   if(file) {
-  try {
-  const result =  await db
-      .collection(`${bucketName}.files`)
-      .deleteOne({ _id: new ObjectId(fileId) });
-    await db
-      .collection(`${bucketName}.chunks`)
-      .deleteMany({ files_id: new ObjectId(fileId) });
-      if(result) return { message: 'file deleted' };
+  const file = await db
+    .collection(`${bucketName}.files`)
+    .findOne({ _id: new ObjectId(fileId) });
+  if (file) {
+    try {
+      const result = await db
+        .collection(`${bucketName}.files`)
+        .deleteOne({ _id: new ObjectId(fileId) });
+      await db
+        .collection(`${bucketName}.chunks`)
+        .deleteMany({ files_id: new ObjectId(fileId) });
+      if (result) return { message: 'file deleted' };
       client.close();
-  } catch (error) {
-    console.error('Error deleting the file:', error);
+    } catch (error) {
+      console.error('Error deleting the file:', error);
+    }
+  } else {
+    return null;
   }
-} else {
-  return null;
-}
 };
 
 export const getfileNamesFromDir = async (folderPath: string) => {
@@ -203,21 +205,26 @@ export const addDataToCollection = async (
 ) => {
   const { db } = await connectToDatabase();
   const result = await db.collection(nameCollection).insertOne(newData as any);
-   if(result) {
+  if (result) {
     return result;
-   } else {
+  } else {
     return null;
-   }
+  }
 };
-export const updateUser = async (
+export const updateDataCollection = async (
   nameCollection: string,
   id: string,
-  updatedUser: User
+  newData: User
 ) => {
   const { db } = await connectToDatabase();
-  await db
+  const result = await db
     .collection(nameCollection)
-    .updateOne({ _id: new ObjectId(id) }, { $set: updatedUser });
+    .updateOne({ _id: new ObjectId(id) }, { $set: newData });
+    if (result) {
+      return result;
+    } else {
+      return null;
+    }
 };
 export const deleteUser = async (nameCollection: string, id: string) => {
   const { db } = await connectToDatabase();

@@ -1,6 +1,9 @@
 import { InitFormData } from '@/features/users/interfaces';
-import { getCollectionData } from '@/lib/mongoUtils';
+import { getCollectionData, updateDataCollection } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
+import BcryptedUtils from '../../../utils/bcryptUtils';
+
+const { encryptPassowrd } = BcryptedUtils;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {    
     if (req.method === 'GET') {
@@ -30,6 +33,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         res.status(204).end();
       }
+    } else if (req.method === 'PUT') {
+       if(!req.body) {
+        res.status(204).end();
+       }  else {
+        try {
+          const { id, newUser } = req.body;
+          const encryptedPassowrd = await encryptPassowrd(newUser.password);
+          const newDataToMongo = {...newUser, password: encryptedPassowrd };
+          const result = await updateDataCollection('users', id, newDataToMongo );
+          res.status(200).json(result);
+        } catch (error) {
+          console.error(error);
+        }
+       }
+
     } else {
         res.status(405).json({ message: 'Method not allowed' });
     }
