@@ -44,16 +44,24 @@
   .authLinkContainer {
     width: 100%;
     min-width: 180px;
-    margin-left: 20px;
+    margin-left: 30px;
     @include flex(center, center);
     @include respond-to($breakpoint-medium){
       display: none;
     }
   }
+
   .authLink {
     text-decoration: none;
     color: $light;
     margin-right: 10px;
+  }
+  .themeContainer {
+    width: 50px;
+    @include flex(center, center);
+    @include respond-to($breakpoint-medium){
+      display: none;
+    }
   }
   .userNameStyle {
     padding: 5px 0;

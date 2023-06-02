@@ -24,7 +24,8 @@ const Header = (props: HeaderProps) => {
       userNameStyle,
       logedUserContainer,
       authLinkContainer,
-      menu
+      menu,
+      themeContainer
      } = styles;
   const dispatch = useAppDispatch();
   const { user, logged } = useAppSelector(selectUsers);
@@ -61,6 +62,8 @@ const Header = (props: HeaderProps) => {
         <div className={authLinkContainer}>
             <Link className={authLink} href={'/login'}>Log In</Link>
           <Link className={authLink} href={'/signup/'}>Sign Up</Link>
+        </div>
+        <div className={themeContainer}>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
         <div className={logedUserContainer}>
