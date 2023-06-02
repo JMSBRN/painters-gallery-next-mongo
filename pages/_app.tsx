@@ -8,12 +8,14 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '@/srore/store';
 import LoaderInProgress from '@/components/progress-line/ProgressLine';
-import { useAppSelector } from '@/hooks/reduxHooks';
-import { selectUsers } from '@/features/users/usersSlice';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isDark, setIsDark] = useState<boolean>(false);
-  
+  useEffect(() => {
+    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDark(darkThemeMq.matches);
+  }, []);
+
   return (
     <>
       <Head>

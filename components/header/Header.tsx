@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './header.module.scss';
-import ThemeSwitcher from '../theme-btn/ThemeSwitcher';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 import Link from 'next/link';
 import { User } from '@/features/users/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
@@ -39,7 +39,7 @@ const Header = (props: HeaderProps) => {
     localStorage.clear();
     deleteCookie('token');
   };
-
+  
   useEffect(() => {
     const data = getDecryptedDataFromLocalStorage('user');
      data && setUserFromLocal(data);
