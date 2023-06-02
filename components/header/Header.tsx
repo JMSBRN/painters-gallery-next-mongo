@@ -40,6 +40,9 @@ const Header = (props: HeaderProps) => {
     localStorage.clear();
     deleteCookie('token');
   };
+  const handlClickEditProfile = () => {
+    router.push('/edit');
+  };
   
   useEffect(() => {
     const data = getDecryptedDataFromLocalStorage('user');
@@ -70,7 +73,8 @@ const Header = (props: HeaderProps) => {
           {userFromLocal.name && 
           <>
            <div className={userNameStyle}>{userFromLocal.name}</div>
-           <button onClick={handlClickLogOut}>log out</button>
+           <button onClick={handlClickLogOut}>Log Out</button>
+           <button onClick={handlClickEditProfile}>Edit Profile</button>
           </>
           }
         </div>

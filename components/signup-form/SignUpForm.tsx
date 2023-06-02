@@ -79,8 +79,9 @@ const SignUpForm = ({ users }: { users: string}) => {
        loginForm={false}
        signUpErrors={signUpErrors}
        formData={formData}
-       handleChange={handleChange}
+       handleChangeValues={handleChange}
        handleSubmit={handleSubmit}
+       textSubmitBtn='Sign Up'
       />
     </div>
   );

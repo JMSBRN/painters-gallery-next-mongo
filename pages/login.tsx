@@ -96,8 +96,9 @@ const Login = () => {
        loginForm={true}
        signUpErrors={signUpErrors}
        formData={formData}
-       handleChange={handleChange}
+       handleChangeValues={handleChange}
        handleSubmit={handleSubmit}
+       textSubmitBtn='Sign In'
       />
       <>
         {

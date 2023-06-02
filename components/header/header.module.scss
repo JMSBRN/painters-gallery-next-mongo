@@ -73,10 +73,10 @@
     color: $light;
   }
   .logedUserContainer {
-    min-width: 160px;
-    @include flex(flex-end, center);
+    min-width: 220px;
+    @include flex(space-arround, center);
     & button {
-      width: 60px;
+      width: 80px;
       margin-left: 15px;
       padding: 3px 5px;
       border: none;

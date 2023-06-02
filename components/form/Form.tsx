@@ -10,13 +10,14 @@ interface FormProps {
     signUpErrors: Partial<SignUpErrors>;
     loginForm: boolean;
     loading: boolean;
+    textSubmitBtn: string;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-    handleChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+    handleChangeValues: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 const Form = (props: FormProps) => {
     const { signupForm, formInput, showPswBtn } = styles;
-    const { loginForm, formData, loading, signUpErrors, handleChange, handleSubmit } = props;
-    const[showPassword, setShowPassword] = useState<boolean>(false);
+    const { loginForm, formData, loading, signUpErrors, handleChangeValues, handleSubmit, textSubmitBtn } = props;
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const { nameError, emailError, passwordError } = signUpErrors;
 
   return (   
@@ -29,8 +30,9 @@ const Form = (props: FormProps) => {
             fullWidth
             label="Name"
             name="name"
+            type="text"
             value={formData.name}
-            onChange={handleChange}
+            onChange={handleChangeValues}
             required={true}
             inputProps={{
               pattern: Regex.FIRST_NAME,
@@ -49,7 +51,7 @@ const Form = (props: FormProps) => {
             name="email"
             type="email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={handleChangeValues}
             required={true}
             helperText={emailError}
             error={!!emailError}
@@ -64,7 +66,7 @@ const Form = (props: FormProps) => {
             name="password"
             type={showPassword ? 'text': 'password'}
             value={formData.password}
-            onChange={handleChange}
+            onChange={handleChangeValues}
             required={true}
             inputProps={{
               pattern: Regex.PASSWORD,
@@ -83,7 +85,7 @@ const Form = (props: FormProps) => {
             name="confirmPassword"
             type={showPassword ? 'text': 'password'}
             value={formData.confirmPassword}
-            onChange={handleChange}
+            onChange={handleChangeValues}
             required={true}
             inputProps={{
               pattern: Regex.PASSWORD,
@@ -105,7 +107,7 @@ const Form = (props: FormProps) => {
            loadingPosition='start'
            onClick={() => setShowPassword(false)}
            >
-          {!loginForm ? 'Sign Up' : 'Sign In'}  
+          {textSubmitBtn}  
           </LoadingButton>
         </Grid>
       </Grid>
