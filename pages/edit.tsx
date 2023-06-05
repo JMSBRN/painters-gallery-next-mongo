@@ -80,12 +80,12 @@ const Edit = () => {
     };
    const handleDeleteUser = async () => {
     setDeleting(true);
-    const { id, _id } = userFromLocal;
+    const { id } = userFromLocal;
     const res = await fetch('/api/users/', {
       method: 'DELETE',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': JSON.stringify({ id, _id }),
+        'Authorization': JSON.stringify({ id }),
     } 
    });
    const data: DeleteResultsFromMongo = await res.json();
