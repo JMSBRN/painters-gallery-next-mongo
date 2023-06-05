@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import burgerIcon from '../../public/images/burger_icon.svg..png';
 import Image from 'next/image';
 import styles from './menu.module.scss';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
-import { selectUsers } from '@/features/users/usersSlice';
-import { useAppSelector } from '@/hooks/reduxHooks';
+import { selectUsers, setLogged } from '@/features/users/usersSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import { User } from '@/features/users/interfaces';
+import { useDispatch } from 'react-redux';
 
 interface MenuProps {
   isDark: boolean;
@@ -16,14 +19,25 @@ const Menu = (props: MenuProps) => {
   const { isDark, setIsDark } = props;
   const [menu, setMenu] = useState<boolean>(false);
   const { user, logged } = useAppSelector(selectUsers);
+  const [userFromLocal, setUserFromLocal] = useState({} as User);
+  const { getDecryptedDataFromLocalStorage } = secureLocalUtils;
+  const dispatch = useAppDispatch();
   const handleClick = () => {
     setMenu(!menu);
   };
 
+  useEffect(() => {
+    const data = getDecryptedDataFromLocalStorage('user');
+     if (data) {
+      setUserFromLocal(data);
+      dispatch(setLogged(true));
+     }
+  }, [dispatch, getDecryptedDataFromLocalStorage, logged]);
+
   return (
     <div className={menuContainer}>
       <button onClick={handleClick}>
-        <Image width={20} src={burgerIcon} alt="burger menu icon" />
+        <Image priority={true} width={20} src={burgerIcon} alt="burger menu icon" />
       </button>
       {menu && (
         <menu className={menuStyle}>
@@ -33,7 +47,7 @@ const Menu = (props: MenuProps) => {
               <Link href="/about">about</Link>
               <Link href="/galleries">galleries</Link>
               <Link href="/help">help</Link>
-              {logged && <Link href={`/painters/${user.id}`}>gallery</Link>}
+              {(userFromLocal.name && logged) && <Link href={`/painters/${user.id}`}>gallery</Link>}
             </nav>
             <div className={authContainer}>
               <Link href={'/login'}>Log In</Link>

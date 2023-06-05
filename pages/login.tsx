@@ -32,7 +32,6 @@ const Login = () => {
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
   const [connectedFailed, setConnectedFailed] = useState<boolean>(false);
-  const { password } = formData;
   const dispatch = useAppDispatch();
   
   const setConnectionErrorMessage = () => {
@@ -57,7 +56,7 @@ const Login = () => {
     const user = await res.json();
     if (!user.message) {     
       if(user?.id) {
-        const matchedPsw = await bcrypt.compare(password, user.password);
+        const matchedPsw = await bcrypt.compare(formData.password, user.password);
         if(matchedPsw) {
           setEncryptedDataToLocalStorage('user', user);
           const { id, name } = user; 

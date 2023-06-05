@@ -31,6 +31,7 @@ const Header = (props: HeaderProps) => {
   const { user, logged } = useAppSelector(selectUsers);
   const router = useRouter();
   const [userFromLocal, setUserFromLocal] = useState({} as User);
+  const [name, setName] = useState<String>(' lkjlkjl');
   
   const handlClickLogOut = () => {
     dispatch(setUser({} as User));
@@ -48,6 +49,10 @@ const Header = (props: HeaderProps) => {
     const data = getDecryptedDataFromLocalStorage('user');
      data && setUserFromLocal(data);
   }, [getDecryptedDataFromLocalStorage, logged]);
+
+  useEffect(() => {
+      setName(user.name);
+  }, [user]);
   
   return (
     <header className={header}>
@@ -60,7 +65,7 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
-          {userFromLocal.name &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
+          {(userFromLocal.name && logged) &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
           </nav>
         <div className={authLinkContainer}>
             <Link className={authLink} href={'/login'}>Log In</Link>
@@ -72,7 +77,7 @@ const Header = (props: HeaderProps) => {
         <div className={logedUserContainer}>
           {userFromLocal.name && 
           <>
-           <div className={userNameStyle}>{userFromLocal.name}</div>
+           <div className={userNameStyle}>{ name ? name : userFromLocal.name }</div>
            <button onClick={handlClickLogOut}>Log Out</button>
            <button onClick={handlClickEditProfile}>Edit Profile</button>
           </>

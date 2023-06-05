@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const Edit = () => {
     const { ediFormContainer } = styles;
-    const { checkBcryptedPassword } = BcryptUtils;
+    const { checkBcryptedPassword, encryptPassowrd } = BcryptUtils;
     const { setEncryptedDataToLocalStorage, getDecryptedDataFromLocalStorage } = secureLocalUtils;
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -33,7 +33,7 @@ const Edit = () => {
       useEffect(() => {
         const dataFromLocal: User = getDecryptedDataFromLocalStorage('user');
         dataFromLocal && setUserFromLocal(dataFromLocal);
-      }, [getDecryptedDataFromLocalStorage, ]);
+      }, [getDecryptedDataFromLocalStorage]);
 
     const handlleChangeValues = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
          setFormData({...formData, [e.target.name]: e.target.value });
@@ -42,8 +42,8 @@ const Edit = () => {
         e.preventDefault();
         setLoading(true);
         setFormData({...formData, id: userFromLocal.id });
-       const matchedPassowrd = await checkBcryptedPassword(formData.password, userFromLocal.password );
-       if(!matchedPassowrd) {
+       const matchedPassword = await checkBcryptedPassword(formData.password, userFromLocal.password);
+       if (!matchedPassword) {
         setSignUpErrors({ passwordError: FormErrorMessages.PASSWORD_VALID_ERROR});
         setLoading(false);
        } else {
@@ -56,12 +56,14 @@ const Edit = () => {
          });
          const data = await res.json();
          if(data.acknowledged) {
+          
             try {
                 const { name, email, password } = formData;
                 const { id } = userFromLocal;
                 setLoading(false);
-                dispatch(setUser({ name, email, password, id, }));
-                setEncryptedDataToLocalStorage('user', { name, email, password, id });
+                dispatch(setUser({ name, email, password, id }));
+                const securePassword = await encryptPassowrd(password) as string;
+                setEncryptedDataToLocalStorage('user', { name, email, password: securePassword, id });
             } catch (error) {
                 console.error(error);
             } finally {
