@@ -122,6 +122,29 @@ export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
     return null;
   }
 };
+export const deleteBucketFileByFileNameField= async (bucketName: string, fileFieldValue?: string) => {
+  const { db, client } = await connectToDatabase();
+  const file = await db
+    .collection(`${bucketName}.files`)
+    .findOne({ filename: fileFieldValue });
+  if (file) {
+    const { _id } = file;
+    try {
+      const result = await db
+        .collection(`${bucketName}.files`)
+        .deleteOne({ _id: new ObjectId(_id) });
+      await db
+        .collection(`${bucketName}.chunks`)
+        .deleteMany({ files_id: new ObjectId(_id) });
+      if (result) return { message: 'file deleted' };
+      client.close();
+    } catch (error) {
+      console.error('Error deleting the file:', error);
+    }
+  } else {
+    return null;
+  }
+};
 
 export const getfileNamesFromDir = async (folderPath: string) => {
   const files = await readdir(folderPath);
@@ -226,9 +249,14 @@ export const updateDataCollection = async (
       return null;
     }
 };
-export const deleteUser = async (nameCollection: string, id: string) => {
-  const { db } = await connectToDatabase();
-  await db.collection(nameCollection).deleteOne({ _id: new ObjectId(id) });
+export const deleteDataFromCollection = async (nameCollection: string, id: string) => {
+  const { db } = await connectToDatabase();  
+  const result = await db.collection(nameCollection).deleteOne({ id });
+  if (result) {
+    return result;
+  } else {
+    return null;
+  }
 };
 
 export const findUserByName = async (name: string) => {

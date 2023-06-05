@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import { DeleteResult, ObjectId } from 'mongodb';
 
 export interface ImageFromMongo {
     data: string;
@@ -11,4 +11,10 @@ export interface ImageFromMongo {
     metadata?: {
       fileName: string,
     }
+  }
+
+  export interface DeleteResultsFromMongo {
+    resultFromDeleteUser: DeleteResult;
+    resultFromDeleteToken: DeleteResult;
+    resultFromDeleteImages: { message: string };
   }

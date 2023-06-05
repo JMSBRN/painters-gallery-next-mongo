@@ -5,12 +5,17 @@ import { SignUpErrors, User } from '@/features/users/interfaces';
 import secureLocalUtils from '../utils/secureLocalStorageUtils';
 import { FormErrorMessages } from '@/constants/constants';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { setUser } from '@/features/users/usersSlice';
+import { setLogged, setUser } from '@/features/users/usersSlice';
 import BcryptUtils from '@/utils/bcryptUtils';
 import { useRouter } from 'next/router';
+import { LoadingButton } from '@mui/lab';
+import { SvgIcon } from '@mui/material';
+import { DeleteResult } from 'mongodb';
+import { deleteCookie } from 'cookies-next';
+import { DeleteResultsFromMongo } from '@/lib/interfacesforMongo';
 
 const Edit = () => {
-    const { ediFormContainer } = styles;
+    const { ediFormContainer, deleteUserBtn } = styles;
     const { checkBcryptedPassword, encryptPassowrd } = BcryptUtils;
     const { setEncryptedDataToLocalStorage, getDecryptedDataFromLocalStorage } = secureLocalUtils;
     const dispatch = useAppDispatch();
@@ -30,6 +35,7 @@ const Edit = () => {
     const [userFromLocal, setUserFromLocal] = useState({} as User);
     const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
     const [loading, setLoading] = useState<boolean>(false);
+    const [deleting, setDeleting] = useState<boolean>(false);
       useEffect(() => {
         const dataFromLocal: User = getDecryptedDataFromLocalStorage('user');
         dataFromLocal && setUserFromLocal(dataFromLocal);
@@ -72,6 +78,37 @@ const Edit = () => {
          }
        }
     };
+   const handleDeleteUser = async () => {
+    setDeleting(true);
+    const { id, _id } = userFromLocal;
+    const res = await fetch('/api/users/', {
+      method: 'DELETE',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': JSON.stringify({ id, _id }),
+    } 
+   });
+   const data: DeleteResultsFromMongo = await res.json();
+   if(data) {
+    const { resultFromDeleteUser, resultFromDeleteToken, resultFromDeleteImages } = data;
+    const imagesDeleted: boolean = resultFromDeleteImages.message === 'file deleted';
+    const userDeleted: boolean = resultFromDeleteUser.deletedCount > 0 ;
+    const tokenDeleted: boolean = resultFromDeleteToken.deletedCount > 0;
+
+    if(userDeleted && tokenDeleted && imagesDeleted) {
+      dispatch(setUser({} as User));
+      dispatch(setLogged(false));
+      localStorage.clear();
+      setUserFromLocal({} as User);
+      deleteCookie('token');
+      router.push('/');
+      setDeleting(false);
+    }
+    } else {
+      
+   }
+   
+   };
 
   return (
     <div className={ediFormContainer}>
@@ -84,6 +121,20 @@ const Edit = () => {
       signUpErrors={signUpErrors}
       textSubmitBtn="Update Profile"
      />
+     <div className="">
+      <LoadingButton
+       loading={deleting}
+       type="button"
+       variant="outlined"
+       startIcon= {
+        <SvgIcon/>
+       }
+       loadingPosition='start'
+       onClick={handleDeleteUser}
+       className={deleteUserBtn}
+
+        >Delete Profile</LoadingButton>
+     </div>
     </div>
   );
 };

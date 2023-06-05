@@ -1,5 +1,5 @@
 import { InitFormData } from '@/features/users/interfaces';
-import { getCollectionData, updateDataCollection } from '@/lib/mongoUtils';
+import { deleteBucketFileByFileNameField, deleteDataFromCollection, getCollectionData, updateDataCollection } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import BcryptedUtils from '../../../utils/bcryptUtils';
 
@@ -48,6 +48,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
        }
 
+    } else if (req.method === 'DELETE') {
+      const { id } = JSON.parse(req.headers['authorization'] || '');      
+      if(!id){
+        res.status(204).end();
+       } else { 
+         try {
+         const resultFromDeleteUser = await  deleteDataFromCollection('users', id);
+         const  resultFromDeleteToken =  await deleteDataFromCollection('tokens', id);
+         const  resultFromDeleteImages = await deleteBucketFileByFileNameField('images', id);
+         if(resultFromDeleteUser && resultFromDeleteToken && resultFromDeleteImages ) {
+          res.status(200).json({ resultFromDeleteUser, resultFromDeleteToken, resultFromDeleteImages });
+        } else {
+          res.status(202).json({ message: 'user was not deleted'});
+         }
+         } catch (error) {
+          console.error(error);
+         }
+       }
+
+      res.status(200).json(id);
     } else {
         res.status(405).json({ message: 'Method not allowed' });
     }

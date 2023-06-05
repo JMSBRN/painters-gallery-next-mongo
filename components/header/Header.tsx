@@ -75,7 +75,7 @@ const Header = (props: HeaderProps) => {
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
         <div className={logedUserContainer}>
-          {userFromLocal.name && 
+          {(userFromLocal.name && logged) && 
           <>
            <div className={userNameStyle}>{ name ? name : userFromLocal.name }</div>
            <button onClick={handlClickLogOut}>Log Out</button>
