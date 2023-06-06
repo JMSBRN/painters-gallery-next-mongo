@@ -25,6 +25,7 @@ const Edit = () => {
     secureLocalUtils;
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const secret = process.env.CALL_SECRET;
   const initSignUpErrors: SignUpErrors = {
     nameError: '',
     emailError: '',
@@ -69,10 +70,17 @@ const Edit = () => {
     } else {
       const { name, email, password } = formData;
       const { _id } = userFromLocal;
+      const credential = {
+        newUser: { name, email, password },
+        id: _id,
+      };
       const res = await fetch('/api/users/', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newUser: { name, email, password }, id: _id }),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': JSON.stringify({ secret }),
+      },
+        body: JSON.stringify(credential),
       });
       const data = await res.json();
       if (data.acknowledged) {
@@ -106,7 +114,7 @@ const Edit = () => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: JSON.stringify({ id }),
+        'Authorization': JSON.stringify({ id, secret }),
       },
     });
     const data: DeleteResultsFromMongo = await res.json();
@@ -116,7 +124,7 @@ const Edit = () => {
       setDeleteMessage('User was not found');
     } else if (data.message === 'Connection Failed') {
       setDeleting(false);
-      setDeleteMessage('Connection Failed ');
+      setDeleteMessage('Connection Failed');
     } else {
       const {
         resultFromDeleteUser,

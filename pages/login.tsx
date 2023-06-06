@@ -39,11 +39,12 @@ const Login = () => {
     setLoading(true);
     setConnectedFailed(false);
     setSignUpErrors(initSignUpErrors);
+    const secret = process.env.CALL_SECRET;
     const res = await fetch('/api/users/',{
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': JSON.stringify(formData),
+        'Authorization': JSON.stringify({ formData, secret }),
         },
       body: JSON.stringify(formData)
     });

@@ -35,7 +35,11 @@ const Painter = () => {
  useEffect(() => {
   if (id && !user.name) {
     const f = async () => {
-      const res = await fetch(`/api/users/${id}`);
+      const secret = process.env.CALL_SECRET;
+      const res = await fetch(`/api/users/${id}`, {
+        method: 'GET',
+        headers: { 'Authorization': JSON.stringify({ secret })}
+      });
       const data: User = await res.json();
       dispatch(setUser(data));
     };
