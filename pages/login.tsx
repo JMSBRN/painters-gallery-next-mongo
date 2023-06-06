@@ -34,12 +34,6 @@ const Login = () => {
   const [connectedFailed, setConnectedFailed] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   
-  const setConnectionErrorMessage = () => {
-    setTimeout(() => {
-      setConnectedFailed(true);
-      setLoading(false);
-    }, 10000);
-  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -74,7 +68,8 @@ const Login = () => {
         setSignUpErrors({ nameError: FormErrorMessages.USER_ERROR });
       }
   } else {
-    setConnectionErrorMessage();
+    setConnectedFailed(true);
+    setLoading(false);
   }
   };
 

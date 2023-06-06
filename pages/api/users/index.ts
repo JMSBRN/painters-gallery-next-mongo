@@ -10,29 +10,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           const result =  await getCollectionData('users');
           const data = JSON.parse(result);
-          if (data) {
           res.status(200).json(data);
-          }
         } catch (error) {
           console.error(error);
-          res.status(500).json({ message: 'Server error' });
+          res.status(408).json({ message: 'Connection Failed' });  
         }
 
       } else if (req.method === 'POST') {
         const formData: InitFormData = req.body;
         const { name } = formData;
-        if (name) {
-          try {
+        try {
+            if (name) {
             const result = await getCollectionData('users', undefined, name);    
             const parsedResult = JSON.parse(result);
               res.status(201).json(parsedResult);
+            } else {
+              res.status(204).end();
+            }
         } catch (error) {
-          console.error(error);
-          res.status(500).send({ message: 'Server error' });
+          console.error('error from getCollectionData', error);
+          res.status(408).json({ message: 'Connection Failed' });
         }
-      } else {
-        res.status(204).end();
-      }
     } else if (req.method === 'PUT') {
        if(!req.body) {
         res.status(204).end();
@@ -44,7 +42,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           const result = await updateDataCollection('users', id, newDataToMongo );
           res.status(200).json(result);
         } catch (error) {
-          console.error(error);
+          console.error('error from updateDataCollection', error);
+          res.status(408).json({ message: 'Connection Failed' });
         }
        }
     } else if (req.method === 'DELETE') {
@@ -62,7 +61,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(202).json({ message: 'User was not deleted'});
          }
          } catch (error) {
-          console.error(error);
+          console.error('error from deleteUser functional', error);
+          res.status(408).json({ message: 'Connection Failed' });
          }
        }
     } else {

@@ -1,15 +1,22 @@
+@import 'mixins';
+
 .ediFormContainer {
     margin: 0 auto;
     width: 95%;
     max-width: 500px;
     padding-top: 20px;
 }
-.deleteUserBtn {
-   position: relative;
-   top: 0;
-   left: 75%;
+.deleteBtnContainer {
+    position: relative;
+    width: 100%;
+    height: auto;
+    @include flex (flex-start, center, column);
 }
-
+.deleteUserBtn {
+   margin-top: 10px;
+}
 .deleteMessageStyle {
+    width: 80%;
     color: red;
+    height: 30px;
 }

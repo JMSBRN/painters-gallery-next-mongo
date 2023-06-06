@@ -176,28 +176,34 @@ export const getCollectionData = async (
   id?: string,
   name?: string
 ) => {
-  const { db } = await connectToDatabase();
-  if (id) {
-    const user = await db.collection(collectionName).findOne({ id: id });
-    if (user) {
-      return JSON.stringify(user);
+  try {
+    
+    const { db } = await connectToDatabase();
+    if (id) {
+      const user = await db.collection(collectionName).findOne({ id: id });
+      if (user) {
+        return JSON.stringify(user);
+      } else {
+        return 'data not found ';
+      }
+    } else if (name) {
+      const user = await db.collection(collectionName).findOne({ name: name });
+      if (user) {
+        return JSON.stringify(user);
+      } else {
+        return JSON.stringify('data not found');
+      }
     } else {
-      return 'data not found ';
+      const users = await db.collection(collectionName).find().toArray();
+      if (users) {
+        return JSON.stringify(users);
+      } else {
+        return JSON.stringify({ message: 'data not found'});
+      }
     }
-  } else if (name) {
-    const user = await db.collection(collectionName).findOne({ name: name });
-    if (user) {
-      return JSON.stringify(user);
-    } else {
-      return JSON.stringify('data not found');
-    }
-  } else {
-    const users = await db.collection(collectionName).find().toArray();
-    if (users) {
-      return JSON.stringify(users);
-    } else {
-      return 'data not found ';
-    }
+  } catch (error) {
+    console.error('error from getCollectionData', error);
+    return JSON.stringify({ message: 'Connection Failed' });
   }
 };
 export const deleteCollectionData = async (
