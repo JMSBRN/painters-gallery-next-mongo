@@ -14,6 +14,7 @@ export interface ImageFromMongo {
   }
 
   export interface DeleteResultsFromMongo {
+    message?: string;
     resultFromDeleteUser: DeleteResult;
     resultFromDeleteToken: DeleteResult;
     resultFromDeleteImages: { message: string };

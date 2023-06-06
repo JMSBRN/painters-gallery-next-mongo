@@ -47,7 +47,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           console.error(error);
         }
        }
-
     } else if (req.method === 'DELETE') {
       const { id } = JSON.parse(req.headers['authorization'] || '');      
       if(!id){
@@ -60,14 +59,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
          if(resultFromDeleteUser && resultFromDeleteToken && resultFromDeleteImages ) {
           res.status(200).json({ resultFromDeleteUser, resultFromDeleteToken, resultFromDeleteImages });
         } else {
-          res.status(202).json({ message: 'user was not deleted'});
+          res.status(202).json({ message: 'User was not deleted'});
          }
          } catch (error) {
           console.error(error);
          }
        }
-
-      res.status(200).json(id);
     } else {
         res.status(405).json({ message: 'Method not allowed' });
     }

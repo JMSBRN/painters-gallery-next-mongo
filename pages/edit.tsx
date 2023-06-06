@@ -10,12 +10,11 @@ import BcryptUtils from '@/utils/bcryptUtils';
 import { useRouter } from 'next/router';
 import { LoadingButton } from '@mui/lab';
 import { SvgIcon } from '@mui/material';
-import { DeleteResult } from 'mongodb';
 import { deleteCookie } from 'cookies-next';
 import { DeleteResultsFromMongo } from '@/lib/interfacesforMongo';
 
 const Edit = () => {
-    const { ediFormContainer, deleteUserBtn } = styles;
+    const { ediFormContainer, deleteUserBtn, deleteMessageStyle } = styles;
     const { checkBcryptedPassword, encryptPassowrd } = BcryptUtils;
     const { setEncryptedDataToLocalStorage, getDecryptedDataFromLocalStorage } = secureLocalUtils;
     const dispatch = useAppDispatch();
@@ -36,6 +35,7 @@ const Edit = () => {
     const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
     const [loading, setLoading] = useState<boolean>(false);
     const [deleting, setDeleting] = useState<boolean>(false);
+    const [deleteMessage, setDeleteMessage] = useState<string>('');
       useEffect(() => {
         const dataFromLocal: User = getDecryptedDataFromLocalStorage('user');
         dataFromLocal && setUserFromLocal(dataFromLocal);
@@ -80,21 +80,20 @@ const Edit = () => {
     };
    const handleDeleteUser = async () => {
     setDeleting(true);
-    const { id, _id } = userFromLocal;
+    const { id } = userFromLocal;
     const res = await fetch('/api/users/', {
       method: 'DELETE',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': JSON.stringify({ id, _id }),
+        'Authorization': JSON.stringify({ id }),
     } 
    });
    const data: DeleteResultsFromMongo = await res.json();
-   if(data) {
+   if(data.message !== 'User was not deleted') {
     const { resultFromDeleteUser, resultFromDeleteToken, resultFromDeleteImages } = data;
-    const imagesDeleted: boolean = resultFromDeleteImages.message === 'file deleted';
+    const imagesDeleted: boolean = !!resultFromDeleteImages.message;
     const userDeleted: boolean = resultFromDeleteUser.deletedCount > 0 ;
     const tokenDeleted: boolean = resultFromDeleteToken.deletedCount > 0;
-
     if(userDeleted && tokenDeleted && imagesDeleted) {
       dispatch(setUser({} as User));
       dispatch(setLogged(false));
@@ -104,8 +103,10 @@ const Edit = () => {
       router.push('/');
       setDeleting(false);
     }
-    } else {
-      
+  } else {
+      router.push('/edit');
+      setDeleting(false);
+      setDeleteMessage('User was not found');
    }
    
    };
@@ -122,6 +123,9 @@ const Edit = () => {
       textSubmitBtn="Update Profile"
      />
      <div className="">
+      <div className={deleteMessageStyle}>
+        {deleteMessage}
+      </div>
       <LoadingButton
        loading={deleting}
        type="button"
@@ -132,7 +136,6 @@ const Edit = () => {
        loadingPosition='start'
        onClick={handleDeleteUser}
        className={deleteUserBtn}
-
         >Delete Profile</LoadingButton>
      </div>
     </div>

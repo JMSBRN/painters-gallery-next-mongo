@@ -136,13 +136,13 @@ export const deleteBucketFileByFileNameField= async (bucketName: string, fileFie
       await db
         .collection(`${bucketName}.chunks`)
         .deleteMany({ files_id: new ObjectId(_id) });
-      if (result) return { message: 'file deleted' };
+      if (result) return result;
       client.close();
     } catch (error) {
       console.error('Error deleting the file:', error);
     }
   } else {
-    return null;
+    return { message: 'File not found' };
   }
 };
 
