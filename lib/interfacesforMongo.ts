@@ -1,0 +1,21 @@
+import { DeleteResult, ObjectId } from 'mongodb';
+
+export interface ImageFromMongo {
+    data: string;
+    _id: ObjectId;
+    length: number;
+    chunkSize: number;
+    uploadDate: Date;
+    filename: string;
+    contentType: string;
+    metadata?: {
+      fileName: string,
+    }
+  }
+
+  export interface DeleteResultsFromMongo {
+    message?: string;
+    resultFromDeleteUser: DeleteResult;
+    resultFromDeleteToken: DeleteResult;
+    resultFromDeleteImages: { message: string };
+  }

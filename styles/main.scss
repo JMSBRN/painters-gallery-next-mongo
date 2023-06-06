@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+@import 'variables';
+@import 'mixins';
+@import '../styles//login.module.scss';
+@import '../styles//edit.module.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.theme {
+  @include theme();
+}
+.theme-dark {
+  @include theme('dark');
+}

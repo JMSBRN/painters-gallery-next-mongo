@@ -1,0 +1,64 @@
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import burgerIcon from '../../public/images/burger_icon.svg..png';
+import Image from 'next/image';
+import styles from './menu.module.scss';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
+import { selectUsers, setLogged } from '@/features/users/usersSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import { User } from '@/features/users/interfaces';
+import { useDispatch } from 'react-redux';
+
+interface MenuProps {
+  isDark: boolean;
+  setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const Menu = (props: MenuProps) => {
+  const { menuContainer, menuStyle, authContainer } = styles;
+  const { isDark, setIsDark } = props;
+  const [menu, setMenu] = useState<boolean>(false);
+  const { user, logged } = useAppSelector(selectUsers);
+  const [userFromLocal, setUserFromLocal] = useState({} as User);
+  const { getDecryptedDataFromLocalStorage } = secureLocalUtils;
+  const dispatch = useAppDispatch();
+  const handleClick = () => {
+    setMenu(!menu);
+  };
+
+  useEffect(() => {
+    const data = getDecryptedDataFromLocalStorage('user');
+     if (data) {
+      setUserFromLocal(data);
+      dispatch(setLogged(true));
+     }
+  }, [dispatch, getDecryptedDataFromLocalStorage, logged]);
+
+  return (
+    <div className={menuContainer}>
+      <button onClick={handleClick}>
+        <Image priority={true} width={20} src={burgerIcon} alt="burger menu icon" />
+      </button>
+      {menu && (
+        <menu className={menuStyle}>
+          <div onClick={handleClick}>
+            <nav>
+              <Link href="/">home</Link>
+              <Link href="/about">about</Link>
+              <Link href="/galleries">galleries</Link>
+              <Link href="/help">help</Link>
+              {(userFromLocal.name && logged) && <Link href={`/painters/${user.id}`}>gallery</Link>}
+            </nav>
+            <div className={authContainer}>
+              <Link href={'/login'}>Log In</Link>
+              <Link href={'/signup'}>Sign Up</Link>
+            </div>
+          </div>
+          <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
+        </menu>
+      )}
+    </div>
+  );
+};
+
+export default Menu;

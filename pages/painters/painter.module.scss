@@ -1,0 +1,44 @@
+@import 'variables';
+@import 'mixins';
+
+.painterContainer {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 460px;
+}
+
+.uploadsStyle {
+  width: 100%;
+  @include flex(center, center);
+
+  & .deleteImagesBtn {
+    margin-top: 13px;
+  }
+}
+
+.imagesStyle {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
+  gap: 30px;
+  justify-content: center;
+
+  & .ImageLayout {
+    width: 220px;
+    height: 100%;
+    border: 0.2px solid rgb(196, 196, 196);
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  & img {
+    width: 220px;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+}

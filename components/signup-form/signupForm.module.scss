@@ -1,0 +1,9 @@
+@import 'variables';
+@import 'mixins';
+
+.formContainer {
+    margin: 0px auto;
+    width: 90%;
+    max-width: 500px;
+    padding-top: 30px;
+}
