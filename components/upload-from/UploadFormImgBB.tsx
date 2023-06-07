@@ -15,7 +15,8 @@ const UploadFormImgBB = () => {
   const { uploadForm, selectBtn, submitBtn, fetchMessageStyle } = styles;
   const dispatch = useAppDispatch();
   const secret = process.env.CALL_SECRET; 
-  const imgBBKey = process.env.IMGBB_KEY as string;
+  const imgBBKey = process.env.IMGBB_KEY;
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -43,32 +44,26 @@ const UploadFormImgBB = () => {
 
     if (file) {
       setUploading(true);
+      if(imgBBKey){
+
+      }
       formData.append('image', file);
       formData.append('user_id', `${id}`);
-      formData.append('key', imgBBKey);
+      formData.append('key', imgBBKey!);
       try {
-          const res = await fetch('https://api.imgbb.com/1/upload', {
-          method: 'POST',
-          body: formData,
-      });
-        const data = await res.json();
-        console.log(data);
-        //  if(data.success === true) {
-        //     const res = await fetch('/api/uploads-imgbb', {
-        //       method: 'POST',
-        //       headers:{'Authorization': JSON.stringify({ secret })},
-        //       body: JSON.stringify({ data , formData })
-        //     });
-        //     const resultUploads = await res.json();
-        //     console.log(resultUploads);
-        //  }
-
-        // if (data.message) {
-        //   setTimeout(() => {
-        //     setFetchMessage(data.message);
-        //   }, 500);
-        //   timeOutClearFetchMessage(3000);
-        // }
+           const res = await fetch('https://api.imgbb.com/1/upload', {
+           method: 'POST',
+           body: formData,
+       });
+      const data = await res.json();
+     ////////
+        if (data.success === true) {
+          setUploading(false);
+          setTimeout(() => {
+            setFetchMessage(data.message);
+          }, 500);
+          timeOutClearFetchMessage(3000);
+        }
       } catch (error) {
         console.error('Error from UploadForm :', error);
       } finally {
