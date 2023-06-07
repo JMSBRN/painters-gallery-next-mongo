@@ -5,10 +5,10 @@ import { connectToDatabase, uploadGridFSFile } from '@/lib/mongoUtils';
 const handler = async (req: NextApiRequest, res: NextApiResponse) =>  {
   switch (req.method) {
     case 'POST':
-      handlePost(req, res);
+     await handlePost(req, res);
       break;
     default:
-      res.status(405).send('Method not allowed');
+      res.status(405).send({ message: 'Method not allowed' });
       break;
   }
 };

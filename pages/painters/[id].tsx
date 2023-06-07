@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { User } from '@/features/users/interfaces';
-import UploadForm from '@/components/upload-from/UploadForm';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setUser } from '@/features/users/usersSlice';
 import { ImageFromMongo } from '@/lib/interfacesforMongo';
@@ -13,6 +12,7 @@ import { selectImages, setImages } from '@/features/images/imagesSlice';
 import { Checkbox, SvgIcon } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import secureCookieUtils from '../../utils/secureCookiesUtils';
+import UploadFormImgBB from '@/components/upload-from/UploadFormImgBB';
 
 const Painter = () => {
   const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn } = styles;
@@ -139,7 +139,7 @@ const Painter = () => {
               Delete selected file
              </LoadingButton>
              :
-             <UploadForm />
+             <UploadFormImgBB />
             }
           </div>
           <div className={imagesStyle}>

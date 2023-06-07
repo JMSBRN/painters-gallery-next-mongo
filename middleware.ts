@@ -18,5 +18,5 @@ export const middleware = (req: NextRequest) => {
 };
  
 export const config = {
-  matcher: ['/api/users/:path*', '/api/images/:path*', '/api/uploads'],
+  matcher: ['/api/users/:path*', '/api/images/:path*', '/api/uploads-mongo' ],
 };
