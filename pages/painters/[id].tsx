@@ -24,18 +24,21 @@ const Painter = () => {
   const { id } = useRouter().query;
   const { user } = useAppSelector(selectUsers);
   const { images } = useAppSelector(selectImages);
+  const secret = process.env.CALL_SECRET; 
   
   const getImagesFromMongo = useCallback(async () => {
-    const res = await fetch(`/api/images/${id}`);   
+    const res = await fetch(`/api/images/${id}`, {
+      method: 'GET',
+      headers: {'Authorization': JSON.stringify({ secret })}
+    });   
     const data = await res.json();
     const parsedImages: ImageFromMongo[] = JSON.parse(data || '[]');
     return parsedImages;
-  }, [id]);
+  }, [id, secret]);
  
  useEffect(() => {
   if (id && !user.name) {
     const f = async () => {
-      const secret = process.env.CALL_SECRET;
       const res = await fetch(`/api/users/${id}`, {
         method: 'GET',
         headers: { 'Authorization': JSON.stringify({ secret })}
@@ -45,7 +48,7 @@ const Painter = () => {
     };
     f();
   }
- }, [dispatch, id, user.name]);
+ }, [dispatch, id, secret, user.name]);
  
  useEffect(() => {
   const f = async () => {
@@ -89,6 +92,7 @@ const Painter = () => {
       selectedImages.map( async (el) => {
         const res = await fetch(`/api/images/${el}`, {
           method: 'DELETE',
+          headers: {'Authorization': JSON.stringify({ secret })}
         });
         const result = await res.json();
         if (result.message === 'file deleted') {
