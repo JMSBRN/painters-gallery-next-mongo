@@ -1,4 +1,4 @@
-import formidable from 'formidable';
+import { addDataToCollection } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req:NextApiRequest, res: NextApiResponse) => {
@@ -10,14 +10,22 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
 };
 
  const handlPost = async (req: NextApiRequest, res: NextApiResponse) => {
-    
+   const body = req.body;   
+  if(!body) {
+    return res.status(204).end();
+  } else {
+    const { resultImgBb, id } = body;
+    const { display_url, delete_url, title } = resultImgBb.data;
+    const newData = { id, display_url, delete_url, title };
+    const result = await addDataToCollection('imgBB', newData);
+    res.status(201).json(result);
+  }
 };
 
 export default handler;
 
 export const config = {
-    api: {
-      bodyParser: false,  
+    api: {  
       externalResolver: true,
     },
   };

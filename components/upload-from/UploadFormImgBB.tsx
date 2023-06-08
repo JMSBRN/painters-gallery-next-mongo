@@ -5,7 +5,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './uploadForm.module.scss';
 import PublishIcon from '@mui/icons-material/Publish';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { setImages } from '@/features/images/imagesSlice';
+import { setImagesImgBb } from '@/features/images/imagesSlice';
+import { ImageFromImgBb } from '@/interfaces/interfacesforImgBb';
 
 const UploadFormImgBB = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -55,26 +56,33 @@ const UploadFormImgBB = () => {
            method: 'POST',
            body: formData,
        });
-      const data = await res.json();
-     ////////
-        if (data.success === true) {
-          setUploading(false);
-          setTimeout(() => {
-            setFetchMessage(data.message);
-          }, 500);
-          timeOutClearFetchMessage(3000);
-        }
+      const resultImgBb = await res.json();
+       if(resultImgBb.status === 200) {
+         const res = await fetch('/api/uploads-imgbb/', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ resultImgBb, id })
+         });
+          const result = await res.json();
+          if(result.insertedId) {
+            setUploading(false);
+            setTimeout(() => {
+              setFetchMessage('uploaded');
+            }, 500);
+            timeOutClearFetchMessage(3000);
+          };
+       }
       } catch (error) {
         console.error('Error from UploadForm :', error);
       } finally {
         setUploading(false);
         setFile(null);
-        const res = await fetch(`/api/images/${id}`, {
+        const res = await fetch('/api/images-imgbb/', {
           method: 'GET',
-          headers: {'Authorization': JSON.stringify({ secret })}
+          headers: {'Authorization': JSON.stringify({ secret })},
         });
-        const data = await res.json();
-        dispatch(setImages(JSON.parse(data)));
+        const images: ImageFromImgBb[] = await res.json();                
+       dispatch(setImagesImgBb(images));
       }
     } else {
       formData = {} as FormData;

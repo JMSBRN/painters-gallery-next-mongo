@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { LoadingButton } from '@mui/lab';
 import { SvgIcon } from '@mui/material';
 import { deleteCookie } from 'cookies-next';
-import { DeleteResultsFromMongo } from '@/lib/interfacesforMongo';
+import { DeleteResultsFromMongo } from '@/interfaces/interfacesforMongo';
 
 const Edit = () => {
   const {

@@ -177,26 +177,25 @@ export const getCollectionData = async (
   name?: string
 ) => {
   try {
-    
     const { db } = await connectToDatabase();
     if (id) {
-      const user = await db.collection(collectionName).findOne({ id: id });
-      if (user) {
-        return JSON.stringify(user);
+      const idItem = await db.collection(collectionName).findOne({ id: id });
+      if (idItem) {
+        return JSON.stringify(idItem);
       } else {
         return 'data not found ';
       }
     } else if (name) {
-      const user = await db.collection(collectionName).findOne({ name: name });
-      if (user) {
-        return JSON.stringify(user);
+      const nameItem = await db.collection(collectionName).findOne({ name: name });
+      if (nameItem) {
+        return JSON.stringify(nameItem);
       } else {
         return JSON.stringify('data not found');
       }
     } else {
-      const users = await db.collection(collectionName).find().toArray();
-      if (users) {
-        return JSON.stringify(users);
+      const items = await db.collection(collectionName).find().toArray();
+      if (items) {
+        return JSON.stringify(items);
       } else {
         return JSON.stringify({ message: 'data not found'});
       }
@@ -212,16 +211,16 @@ export const deleteCollectionData = async (
 ) => {
   const { db } = await connectToDatabase();
   if (id) {
-    const user = await db.collection(collectionName).deleteOne({ id: id });
-    if (user) {
-      return JSON.stringify(user);
+    const itemId = await db.collection(collectionName).deleteOne({ id: id });
+    if (itemId) {
+      return JSON.stringify(itemId);
     } else {
       return 'data not found ';
     }
   } else {
-    const users = await db.collection(collectionName).deleteMany();
-    if (users) {
-      return JSON.stringify(users);
+    const items = await db.collection(collectionName).deleteMany();
+    if (items) {
+      return JSON.stringify(items);
     } else {
       return 'data not found ';
     }
