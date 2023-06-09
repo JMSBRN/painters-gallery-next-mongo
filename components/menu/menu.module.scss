@@ -27,9 +27,7 @@
     & a {
       margin-bottom: 10px;
       text-decoration: none;
-      &:active {
-        color: $light;
-      }
+      color: $light;
     }
   }
 }
@@ -39,11 +37,9 @@
   min-width: 100px;
   max-width: 300px;
   @include flex (flex-start, center);
-  & a {
+  & .authLink {
     margin-right: 10px;
     text-decoration: none;
-    &:active {
-      color: $light;
-    }
+    color: $light;
   }
 }

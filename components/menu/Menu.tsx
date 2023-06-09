@@ -14,7 +14,7 @@ interface MenuProps {
   setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Menu = (props: MenuProps) => {
-  const { menuContainer, menuStyle, authContainer } = styles;
+  const { menuContainer, menuStyle, authContainer, authLink } = styles;
   const { isDark, setIsDark } = props;
   const [menu, setMenu] = useState<boolean>(false);
   const { user, logged } = useAppSelector(selectUsers);
@@ -50,8 +50,8 @@ const Menu = (props: MenuProps) => {
               {(userFromLocal.name && logged) && <Link href={`/painters/${user.id}`}>gallery</Link>}
             </nav>
             <div className={authContainer}>
-              <Link href={'/login'}>Log In</Link>
-              <Link href={'/signup'}>Sign Up</Link>
+              <Link className={authLink} href={'/login'}>Log In</Link>
+              <Link className={authLink} href={'/signup'}>Sign Up</Link>
             </div>
           </div>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
