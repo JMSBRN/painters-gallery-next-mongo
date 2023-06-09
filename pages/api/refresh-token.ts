@@ -1,7 +1,7 @@
-import { getCollectionData } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { getCollectionData } from '@/lib/mongoUtils';
+import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -16,11 +16,18 @@ const handler =async (req: NextApiRequest, res: NextApiResponse) => {
           if(data) {
             const { token } = JSON.parse(data);
           if (token) {
-             jwt.verify(token, process.env.JWT_REFRESH_SECRET!, (err: any, user: any) => {              
+             jwt.verify(
+              token,
+              process.env.JWT_REFRESH_SECRET!,
+              (err: any, user: any) => {              
               if(err) return  res.status(401);
               if(user) {
                 const {id, name } = user;
-                  const accessToken = jwt.sign({ id, name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '15m' });
+                  const accessToken = jwt.sign(
+                    { id, name },
+                    process.env.JWT_ACCES_SECRET!,
+                    { expiresIn: '15m' }
+                    );
                 res.status(201).json({ accessToken });
               }
              });

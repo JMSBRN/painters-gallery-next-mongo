@@ -1,13 +1,13 @@
-import type { AppProps } from 'next/app';
 import '../styles/main.scss';
-import Layout from '@/components/layout/Layout';
-import Header from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
 import { useEffect, useState } from 'react';
+import type { AppProps } from 'next/app';
+import Footer from '@/components/footer/Footer';
 import Head from 'next/head';
+import Header from '@/components/header/Header';
+import Layout from '@/components/layout/Layout';
+import LoaderInProgress from '@/components/progress-line/ProgressLine';
 import { Provider } from 'react-redux';
 import store from '@/srore/store';
-import LoaderInProgress from '@/components/progress-line/ProgressLine';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isDark, setIsDark] = useState<boolean>(false);

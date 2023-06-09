@@ -1,7 +1,7 @@
-import React from 'react';
 import { Checkbox } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import React from 'react';
 import styles from './themeSwitcher.module.scss';
 
 interface ThemBtnProps {

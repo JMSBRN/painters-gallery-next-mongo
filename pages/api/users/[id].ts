@@ -1,5 +1,5 @@
-import { getCollectionData } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getCollectionData } from '@/lib/mongoUtils';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.url?.split('/')[3];    

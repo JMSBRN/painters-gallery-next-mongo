@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import styles from './header.module.scss';
-import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
-import Link from 'next/link';
-import { User } from '@/features/users/interfaces';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
-import { useRouter } from 'next/router';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import Link from 'next/link';
 import Menu from '../menu/Menu';
-import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
+import { User } from '@/features/users/interfaces';
 import { deleteCookie } from 'cookies-next';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import styles from './header.module.scss';
+import { useRouter } from 'next/router';
 
 interface HeaderProps {
   isDark: boolean;

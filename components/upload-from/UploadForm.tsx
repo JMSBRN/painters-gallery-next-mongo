@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import { Button, SvgIcon } from '@mui/material';
+import React, { useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
-import styles from './uploadForm.module.scss';
 import PublishIcon from '@mui/icons-material/Publish';
-import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setImages } from '@/features/images/imagesSlice';
+import styles from './uploadForm.module.scss';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { useRouter } from 'next/router';
 
 const UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);

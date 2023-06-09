@@ -1,7 +1,12 @@
-import { InitFormData } from '@/features/users/interfaces';
-import { deleteBucketFileByFileNameField, deleteDataFromCollection, getCollectionData, updateDataCollection } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { 
+  deleteBucketFileByFileNameField,
+  deleteDataFromCollection,
+  getCollectionData,
+  updateDataCollection
+} from '@/lib/mongoUtils';
 import BcryptedUtils from '../../../utils/bcryptUtils';
+import { InitFormData } from '@/features/users/interfaces';
 
 const { encryptPassowrd } = BcryptedUtils;
 
@@ -56,7 +61,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
          const  resultFromDeleteToken =  await deleteDataFromCollection('tokens', id);
          const  resultFromDeleteImages = await deleteBucketFileByFileNameField('images', id);
          if(resultFromDeleteUser && resultFromDeleteToken && resultFromDeleteImages ) {
-          res.status(200).json({ resultFromDeleteUser, resultFromDeleteToken, resultFromDeleteImages });
+          res.status(200).json(
+            { resultFromDeleteUser,
+              resultFromDeleteToken,
+              resultFromDeleteImages
+            });
         } else {
           res.status(202).json({ message: 'User was not deleted'});
          }

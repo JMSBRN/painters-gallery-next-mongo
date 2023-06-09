@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/edit.module.scss';
-import Form from '@/components/form/Form';
 import { SignUpErrors, User } from '@/features/users/interfaces';
-import secureLocalUtils from '../utils/secureLocalStorageUtils';
-import { FormErrorMessages } from '@/constants/constants';
-import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLogged, setUser } from '@/features/users/usersSlice';
 import BcryptUtils from '@/utils/bcryptUtils';
-import { useRouter } from 'next/router';
+import { DeleteResultsFromMongo } from '@/interfaces/interfacesforMongo';
+import Form from '@/components/form/Form';
+import { FormErrorMessages } from '@/constants/constants';
 import { LoadingButton } from '@mui/lab';
 import { SvgIcon } from '@mui/material';
 import { deleteCookie } from 'cookies-next';
-import { DeleteResultsFromMongo } from '@/interfaces/interfacesforMongo';
+import secureLocalUtils from '../utils/secureLocalStorageUtils';
+import styles from '../styles/edit.module.scss';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { useRouter } from 'next/router';
 
 const Edit = () => {
   const {

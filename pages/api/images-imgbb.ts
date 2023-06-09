@@ -1,7 +1,7 @@
-import { ImageFromImgBb } from '@/interfaces/interfacesforImgBb';
-import { connectToDatabase, getCollectionData } from '@/lib/mongoUtils';
-import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { connectToDatabase, getCollectionData } from '@/lib/mongoUtils';
+import { ImageFromImgBb } from '@/interfaces/interfacesforImgBb';
+import { ObjectId } from 'mongodb';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {    
     if(req.method === 'GET'){
@@ -30,8 +30,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         }
     } else if (req.method === 'DELETE') {
-        const authorization: { secret: string, id: string } = JSON.parse(req.headers['authorization'] || '');
-         const { id } = authorization;
+        const auth: { secret: string, id: string } = JSON.parse(req.headers['authorization'] || '');
+         const { id } = auth;
          const { db } = await connectToDatabase();  
          const result = await db.collection('imgBB').deleteOne({ _id: new ObjectId(id) });
          res.status(200).json(result);

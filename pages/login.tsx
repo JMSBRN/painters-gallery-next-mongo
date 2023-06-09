@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import Form from '@/components/form/Form';
-import styles from '../styles/login.module.scss';
 import { InitFormData, SignUpErrors } from '@/features/users/interfaces';
-import { FormErrorMessages } from '@/constants/constants';
-import router from 'next/router';
-import bcrypt from 'bcryptjs';
-import { useAppDispatch } from '@/hooks/reduxHooks';
+import React, { useState } from 'react';
 import { setLogged, setUser } from '@/features/users/usersSlice';
+import Form from '@/components/form/Form';
+import { FormErrorMessages } from '@/constants/constants';
 import Link from 'next/link';
-import secureLocalUtils from '../utils/secureLocalStorageUtils';
-import secureCokkiesUtils from '../utils/secureCookiesUtils';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import router from 'next/router';
+import secureCokkiesUtils from '../utils/secureCookiesUtils';
+import secureLocalUtils from '../utils/secureLocalStorageUtils';
+import styles from '../styles/login.module.scss';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 
 const Login = () => {
   const { formContainer, failedConnecionMsg } = styles;
@@ -103,7 +103,9 @@ const Login = () => {
               Oops! Something went wrong:(... Please check enternet connection or reload application
             </div>
             <div>
-              <Link style={{ textDecoration: 'none' }} href={'/login'} onClick={() => { window.location.reload(); } }
+              <Link style={
+                { textDecoration: 'none' }
+               } href={'/login'} onClick={() => { window.location.reload(); } }
               >Reload</Link>
             </div>
           </div>

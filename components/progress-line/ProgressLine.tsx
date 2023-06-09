@@ -1,7 +1,7 @@
+import NProgress from 'nprogress';
+import NextNProgress from 'nextjs-progressbar';
 import React from 'react';
 import Router from 'next/router';
-import NextNProgress from 'nextjs-progressbar';
-import NProgress from 'nprogress';
 
 const ProgressLine = () => {
   return (

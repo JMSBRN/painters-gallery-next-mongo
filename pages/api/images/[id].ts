@@ -1,9 +1,9 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import {
   connectToDatabase,
   deleteBucketFile,
   downLoadFilesFromMongoBucket,
 } from '@/lib/mongoUtils';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = req.url?.split('/')[3];

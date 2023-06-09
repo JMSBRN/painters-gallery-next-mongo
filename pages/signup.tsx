@@ -1,7 +1,7 @@
+import { GetServerSideProps } from 'next';
 import React from 'react';
 import SignUpForm from '@/components/signup-form/SignUpForm';
 import { getCollectionData } from '@/lib/mongoUtils';
-import { GetServerSideProps } from 'next';
 
 const auth = ({ users }: {users: string}) => {
   return (

@@ -1,8 +1,8 @@
-import { User } from '@/features/users/interfaces';
-import { ObjectId } from 'mongodb';
+import { Db, GridFSBucket, MongoClient } from 'mongodb';
 import { createReadStream, unlink } from 'fs';
 import { readdir, writeFile } from 'fs/promises';
-import { MongoClient, Db, GridFSBucket } from 'mongodb';
+import { ObjectId } from 'mongodb';
+import { User } from '@/features/users/interfaces';
 
 const uri = process.env.MONGODB_URI as string;
 const dbName = process.env.MONGODB_DB as string;
@@ -122,7 +122,10 @@ export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
     return null;
   }
 };
-export const deleteBucketFileByFileNameField= async (bucketName: string, fileFieldValue?: string) => {
+export const deleteBucketFileByFileNameField= async (
+  bucketName: string,
+  fileFieldValue?: string
+  ) => {
   const { db, client } = await connectToDatabase();
   const file = await db
     .collection(`${bucketName}.files`)

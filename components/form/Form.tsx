@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import styles from './form.module.scss';
+import { Grid, SvgIcon, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import { Regex, RegexHelperMessages } from '@/constants/constants';
-import { Grid, TextField, Button, SvgIcon } from '@mui/material';
 import { SignUpErrors, User } from '@/features/users/interfaces';
 import { LoadingButton } from '@mui/lab';
+import styles from './form.module.scss';
 
 interface FormProps {
     formData: User;
@@ -16,7 +16,15 @@ interface FormProps {
 }
 const Form = (props: FormProps) => {
     const { signupForm, formInput, showPswBtn } = styles;
-    const { loginForm, formData, loading, signUpErrors, handleChangeValues, handleSubmit, textSubmitBtn } = props;
+    const { 
+      loginForm,
+      formData,
+      loading,
+      signUpErrors,
+      handleChangeValues,
+      handleSubmit,
+      textSubmitBtn
+     } = props;
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const { nameError, emailError, passwordError } = signUpErrors;
 

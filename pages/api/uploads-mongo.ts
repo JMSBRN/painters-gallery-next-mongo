@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import formidable from 'formidable';
 import { connectToDatabase, uploadGridFSFile } from '@/lib/mongoUtils';
+import formidable from 'formidable';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) =>  {
   switch (req.method) {

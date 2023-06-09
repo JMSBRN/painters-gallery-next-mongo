@@ -1,5 +1,5 @@
-import { addDataToCollection } from '@/lib/mongoUtils';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { addDataToCollection } from '@/lib/mongoUtils';
 
 const handler = async (req:NextApiRequest, res: NextApiResponse) => {
      if(req.method === 'POST') {

@@ -1,13 +1,13 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import burgerIcon from '../../public/images/burger_icon.svg..png';
-import Image from 'next/image';
-import styles from './menu.module.scss';
-import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 import { selectUsers, setLogged } from '@/features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import Image from 'next/image';
+import Link from 'next/link';
+import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 import { User } from '@/features/users/interfaces';
+import burgerIcon from '../../public/images/burger_icon.svg..png';
+import secureLocalUtils from '../../utils/secureLocalStorageUtils';
+import styles from './menu.module.scss';
 import { useDispatch } from 'react-redux';
 
 interface MenuProps {

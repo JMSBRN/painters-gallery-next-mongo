@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import styles from './signupForm.module.scss';
-import Form from '../form/Form';
 import { SignUpErrors, User } from '@/features/users/interfaces';
-import { useRouter } from 'next/router';
+import Form from '../form/Form';
 import { FormErrorMessages } from '@/constants/constants';
 import bcrypt from 'bcryptjs';
+import styles from './signupForm.module.scss';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const SignUpForm = ({ users }: { users: string}) => {

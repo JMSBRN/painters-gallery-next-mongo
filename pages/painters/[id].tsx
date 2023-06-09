@@ -1,22 +1,29 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { User } from '@/features/users/interfaces';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { selectUsers, setUser } from '@/features/users/usersSlice';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import styles from './painter.module.scss';
-import { LoadingButton } from '@mui/lab';
-import jwt from 'jsonwebtoken';
-import { selectImages, setImagesImgBb } from '@/features/images/imagesSlice';
 import { Checkbox, SvgIcon } from '@mui/material';
+import React, { useCallback, useEffect, useState } from 'react';
+import { selectImages, setImagesImgBb } from '@/features/images/imagesSlice';
+import { selectUsers, setUser } from '@/features/users/usersSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import secureCookieUtils from '../../utils/secureCookiesUtils';
-import UploadFormImgBB from '@/components/upload-from/UploadFormImgBB';
 import { DeleteResult } from 'mongodb';
+import Image from 'next/image';
 import Link from 'next/link';
+import { LoadingButton } from '@mui/lab';
+import UploadFormImgBB from '@/components/upload-from/UploadFormImgBB';
+import { User } from '@/features/users/interfaces';
+import jwt from 'jsonwebtoken';
+import secureCookieUtils from '../../utils/secureCookiesUtils';
+import styles from './painter.module.scss';
+import { useRouter } from 'next/router';
 
 const Painter = () => {
-  const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn, painterImg } = styles;
+  const { 
+    painterContainer,
+    imagesStyle,
+    uploadsStyle,
+    ImageLayout,
+    deleteImagesBtn,
+    painterImg
+   } = styles;
   const { setEncryptedDataToCookie,  getDecryptedDataFromCookie } = secureCookieUtils;
   const dispatch = useAppDispatch();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
