@@ -15,7 +15,6 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
     return res.status(204).end();
   } else {
     const { resultImgBb, id } = body;
-    console.log(resultImgBb);
     const { display_url, url, title } = resultImgBb.data;
     const newData = { id, display_url, url, title };
     const result = await addDataToCollection('imgBB', newData);
