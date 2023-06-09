@@ -37,8 +37,10 @@
 
   & .painterImg {
     width: 220px;
-    height: 220px;
+    height: auto;
     object-fit: contain;
     margin-bottom: 10px;
+    z-index: 0;
+    background-color: green;
   }
 }

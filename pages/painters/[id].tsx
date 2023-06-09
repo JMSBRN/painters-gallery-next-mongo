@@ -13,6 +13,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import secureCookieUtils from '../../utils/secureCookiesUtils';
 import UploadFormImgBB from '@/components/upload-from/UploadFormImgBB';
 import { DeleteResult } from 'mongodb';
+import Link from 'next/link';
 
 const Painter = () => {
   const { painterContainer, imagesStyle, uploadsStyle, ImageLayout, deleteImagesBtn, painterImg } = styles;
@@ -25,6 +26,7 @@ const Painter = () => {
   const { user } = useAppSelector(selectUsers);
   const { imagesImgBB } = useAppSelector(selectImages);
   const secret = process.env.CALL_SECRET; 
+  const router = useRouter();
 
   const getImagesFromImgBB = useCallback(async () => {
     const res = await fetch('/api/images-imgbb/', {
@@ -163,15 +165,17 @@ const Painter = () => {
                     }
                   }}
                   />
-              <Image
-                width={220}
-                height={220}
-                className={painterImg}
-                alt={el.title as string}
-                src={el.display_url}
-                priority={true}
-                />
-            </div>
+                  <Link style={{ cursor: 'zoom-in'}} target='_blank' href={el.url}>
+                    <Image
+                      width={220}
+                      height={220}
+                      className={painterImg}
+                      alt={el.title as string}
+                      src={el.display_url}
+                      priority={true}
+                      />
+                  </Link>
+                 </div>
             )}
           </div>
        </div>
