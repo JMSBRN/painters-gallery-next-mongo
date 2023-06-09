@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase, uploadGridFSFile } from '@/lib/mongoUtils';
+import { ResponseMessages } from '@/constants/constants';
 import formidable from 'formidable';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) =>  {
@@ -8,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) =>  {
      await handlePost(req, res);
       break;
     default:
-      res.status(405).send({ message: 'Method not allowed' });
+      res.status(405).send({ message: ResponseMessages.METHOD_NOT_ALLOWED });
       break;
   }
 };
@@ -48,9 +49,9 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         initUploadData.mimetype
         );
        if(resultUploader) {
-        res.status(201).json({ message: 'file uploaded'});
+        res.status(201).json({ message: ResponseMessages.DATA_UPLOADED });
        } else {
-        res.status(415).json({ message: 'Unsupported Media Type' });
+        res.status(415).json({ message: ResponseMessages.UNSUPPORTED_MEDIA_TYPE });
         initUploadData = {} as InitUploadData;
        }
       } catch (error) {

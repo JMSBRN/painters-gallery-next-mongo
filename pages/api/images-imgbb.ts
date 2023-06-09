@@ -2,14 +2,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase, getCollectionData } from '@/lib/mongoUtils';
 import { ImageFromImgBb } from '@/interfaces/interfacesforImgBb';
 import { ObjectId } from 'mongodb';
+import { ResponseMessages } from '@/constants/constants';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {    
     if(req.method === 'GET'){
-      const images = await getCollectionData('imgBB');
+      const images = await getCollectionData('imgBB') as string;
       if (images) {
           res.status(200).json(JSON.parse(images));
       } else {
-        res.status(404).json({ message: 'data not found' });
+        res.status(404).json({ message: ResponseMessages.DATA_NOT_FOUND });
       }
     } else if (req.method === 'POST') {
         if(!req.body) {
@@ -17,13 +18,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         } else {
             const { id } = req.body;
             if(id) {
-                const images = await getCollectionData('imgBB');
+                const images = await getCollectionData('imgBB') as string;
                 const parsedImages: ImageFromImgBb[] = JSON.parse(images);
                 const filteredImages = parsedImages.filter(el => el.id === id);
                 if(images) {
                     res.status(200).json(filteredImages);
                 } else {
-                    res.status(404).json({ message: 'data not found' });
+                    res.status(404).json({ message: ResponseMessages.DATA_NOT_FOUND });
                 } 
             } else {
                 res.json([]);
@@ -36,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
          const result = await db.collection('imgBB').deleteOne({ _id: new ObjectId(id) });
          res.status(200).json(result);
     } else {
-        res.status(405).json('Method not allowed');   
+        res.status(405).json({ message: ResponseMessages.METHOD_NOT_ALLOWED });   
     }
 };
 

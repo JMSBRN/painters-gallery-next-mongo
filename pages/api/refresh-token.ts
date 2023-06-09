@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ResponseMessages } from '@/constants/constants';
 import dotenv from 'dotenv';
 import { getCollectionData } from '@/lib/mongoUtils';
 import jwt from 'jsonwebtoken';
@@ -12,7 +13,7 @@ const handler =async (req: NextApiRequest, res: NextApiResponse) => {
         if(!id) {
           res.status(204).end();
         } else {
-          const data = await getCollectionData('tokens', id);
+          const data = await getCollectionData('tokens', id) as string;
           if(data) {
             const { token } = JSON.parse(data);
           if (token) {
@@ -41,7 +42,7 @@ const handler =async (req: NextApiRequest, res: NextApiResponse) => {
               console.error('error from refresh-token', error);
         }
     } else {
-        res.status(405).json({ message: 'Method not valid' });
+        res.status(405).json({ message: ResponseMessages.METHOD_NOT_ALLOWED });
     }
 };
 

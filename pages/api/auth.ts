@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ResponseMessages } from '@/constants/constants';
 import { User } from '@/features/users/interfaces';
 import { addDataToCollection } from '@/lib/mongoUtils';
 import dotenv from 'dotenv';
@@ -27,12 +28,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     { id: user.id, token : refreshToken }
                     );
                 if(result) {
-                    res.status(201).json({ message: 'User created' });
+                    res.status(201).json({ message: ResponseMessages.DATA_CREATED });
                 } else {
-                    res.status(400).json({ message: 'error from tokens in mongo' });
+                    res.status(400).json({ message: ResponseMessages.MONGO_ERROR });
                 }
             } else {
-                res.status(400).json({ message: 'error from users in mongo' });
+                res.status(400).json({ message: ResponseMessages.MONGO_ERROR });
             }
         }
     } else {

@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ResponseMessages } from '@/constants/constants';
 import { addDataToCollection } from '@/lib/mongoUtils';
 
 const handler = async (req:NextApiRequest, res: NextApiResponse) => {
      if(req.method === 'POST') {
        await handlPost(req, res);
      } else {
-        res.status(405).send({ message: 'Method not allowed' });
+        res.status(405).send({ message: ResponseMessages.METHOD_NOT_ALLOWED });
      }
 };
 

@@ -2,6 +2,7 @@ import { Db, GridFSBucket, MongoClient } from 'mongodb';
 import { createReadStream, unlink } from 'fs';
 import { readdir, writeFile } from 'fs/promises';
 import { ObjectId } from 'mongodb';
+import { ResponseMessages } from '@/constants/constants';
 import { User } from '@/features/users/interfaces';
 
 const uri = process.env.MONGODB_URI as string;
@@ -113,7 +114,7 @@ export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
       await db
         .collection(`${bucketName}.chunks`)
         .deleteMany({ files_id: new ObjectId(fileId) });
-      if (result) return { message: 'file deleted' };
+      if (result) return { message: ResponseMessages.DATA_DELETED };
       client.close();
     } catch (error) {
       console.error('Error deleting the file:', error);
@@ -145,7 +146,7 @@ export const deleteBucketFileByFileNameField= async (
       console.error('Error deleting the file:', error);
     }
   } else {
-    return { message: 'File not found' };
+    return { message: ResponseMessages.DATA_NOT_FOUND };
   }
 };
 
@@ -186,26 +187,26 @@ export const getCollectionData = async (
       if (idItem) {
         return JSON.stringify(idItem);
       } else {
-        return 'data not found ';
+        return { message: ResponseMessages.DATA_NOT_FOUND };
       }
     } else if (name) {
       const nameItem = await db.collection(collectionName).findOne({ name: name });
       if (nameItem) {
         return JSON.stringify(nameItem);
       } else {
-        return JSON.stringify('data not found');
+        return JSON.stringify({ message: ResponseMessages.DATA_NOT_FOUND });
       }
     } else {
       const items = await db.collection(collectionName).find().toArray();
       if (items) {
         return JSON.stringify(items);
       } else {
-        return JSON.stringify({ message: 'data not found'});
+        return JSON.stringify({ message: ResponseMessages.DATA_NOT_FOUND});
       }
     }
   } catch (error) {
     console.error('error from getCollectionData', error);
-    return JSON.stringify({ message: 'Connection Failed' });
+    return JSON.stringify({ message: ResponseMessages.CONNECTION_FAILED });
   }
 };
 export const deleteCollectionData = async (

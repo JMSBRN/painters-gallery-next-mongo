@@ -4,6 +4,7 @@ import {
   deleteBucketFile,
   downLoadFilesFromMongoBucket,
 } from '@/lib/mongoUtils';
+import { ResponseMessages } from '@/constants/constants';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = req.url?.split('/')[3];
@@ -13,14 +14,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (images) {
       res.status(200).json(images);
     } else {
-      res.status(404).json({ message: 'data not found' });
+      res.status(404).json({ message: ResponseMessages.DATA_NOT_FOUND });
     }
   } else if (req.method === 'DELETE') {
     const result = await deleteBucketFile('images', id);
     if (result) {
-      res.status(200).json({ message: 'file deleted' });
+      res.status(200).json({ message: ResponseMessages.DATA_DELETED });
     } else {
-      res.status(404).json({ message: 'file id not found' });
+      res.status(404).json({ message: ResponseMessages.DATA_NOT_FOUND });
     }
   } else {
     res.status(405).send('Method not allowed');

@@ -7,18 +7,19 @@ import {
 } from '@/lib/mongoUtils';
 import BcryptedUtils from '../../../utils/bcryptUtils';
 import { InitFormData } from '@/features/users/interfaces';
+import { ResponseMessages } from '@/constants/constants';
 
 const { encryptPassowrd } = BcryptedUtils;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {    
     if (req.method === 'GET') {
         try {
-          const result =  await getCollectionData('users');
+          const result =  await getCollectionData('users') as string;
           const data = JSON.parse(result);
           res.status(200).json(data);
         } catch (error) {
           console.error(error);
-          res.status(408).json({ message: 'Connection Failed' });  
+          res.status(408).json({ message: ResponseMessages.CONNECTION_FAILED });  
         }
 
       } else if (req.method === 'POST') {
@@ -26,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const { name } = formData;
         try {
             if (name) {
-            const result = await getCollectionData('users', undefined, name);    
+            const result = await getCollectionData('users', undefined, name) as string;    
             const parsedResult = JSON.parse(result);
               res.status(201).json(parsedResult);
             } else {
@@ -34,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         } catch (error) {
           console.error('error from getCollectionData', error);
-          res.status(408).json({ message: 'Connection Failed' });
+          res.status(408).json({ message: ResponseMessages.CONNECTION_FAILED });
         }
     } else if (req.method === 'PUT') {
        if(!req.body) {
@@ -48,7 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(200).json(result);
         } catch (error) {
           console.error('error from updateDataCollection', error);
-          res.status(408).json({ message: 'Connection Failed' });
+          res.status(408).json({ message: ResponseMessages.CONNECTION_FAILED });
         }
        }
     } else if (req.method === 'DELETE') {
@@ -67,15 +68,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               resultFromDeleteImages
             });
         } else {
-          res.status(202).json({ message: 'User was not deleted'});
+          res.status(202).json({ message: ResponseMessages.DATA_NOT_DELETED });
          }
          } catch (error) {
           console.error('error from deleteUser functional', error);
-          res.status(408).json({ message: 'Connection Failed' });
+          res.status(408).json({ message: ResponseMessages.CONNECTION_FAILED });
          }
        }
     } else {
-        res.status(405).json({ message: 'Method not allowed' });
+        res.status(405).json({ message: ResponseMessages.METHOD_NOT_ALLOWED });
     }
 };
 
