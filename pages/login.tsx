@@ -49,13 +49,16 @@ const Login = () => {
       body: JSON.stringify(formData)
     });
     const user = await res.json();
+
     if (!user.message) {     
       if(user?.id) {
         const matchedPsw = await bcrypt.compare(formData.password, user.password);
+
         if(matchedPsw) {
           setEncryptedDataToLocalStorage('user', user);
           const { id, name } = user; 
           const token = jwt.sign({ id, name }, process.env.JWT_ACCES_SECRET!, { expiresIn: '15m' });
+
           setEncryptedDataToCookie('token', token);
           dispatch(setUser(user));
           dispatch(setLogged(true));

@@ -26,6 +26,7 @@ export const connectToDatabase = async (): Promise<{
 }> => {
   const client = new MongoClient(uri);
   const db = client.db(dbName);
+
   return { client, db };
 };
 
@@ -46,6 +47,7 @@ export const uploadGridFSFile = async (
   });
 
   const readStream = createReadStream(filePath);
+
   readStream.pipe(uploadStream);
 
   return new Promise((resolve, reject) => {
@@ -69,6 +71,7 @@ export const downLoadFilesFromMongoBucket = async (
         const data = await db
           .collection(`${bucketName}.chunks`)
           .findOne({ files_id: file._id });
+
         return {
           ...file,
           data: `data:${file.contentType};base64,${data?.data.toString(
@@ -87,6 +90,7 @@ export const downLoadFilesFromMongoBucket = async (
         const data = await db
           .collection(`${bucketName}.chunks`)
           .findOne({ files_id: file._id });
+
         return {
           ...file,
           data: `data:${file.contentType};base64,${data?.data.toString(
@@ -106,11 +110,13 @@ export const deleteBucketFile = async (bucketName: string, fileId?: string) => {
   const file = await db
     .collection(`${bucketName}.files`)
     .findOne({ _id: new ObjectId(fileId) });
+
   if (file) {
     try {
       const result = await db
         .collection(`${bucketName}.files`)
         .deleteOne({ _id: new ObjectId(fileId) });
+
       await db
         .collection(`${bucketName}.chunks`)
         .deleteMany({ files_id: new ObjectId(fileId) });
@@ -131,12 +137,15 @@ export const deleteBucketFileByFileNameField= async (
   const file = await db
     .collection(`${bucketName}.files`)
     .findOne({ filename: fileFieldValue });
+
   if (file) {
     const { _id } = file;
+
     try {
       const result = await db
         .collection(`${bucketName}.files`)
         .deleteOne({ _id: new ObjectId(_id) });
+
       await db
         .collection(`${bucketName}.chunks`)
         .deleteMany({ files_id: new ObjectId(_id) });
@@ -152,6 +161,7 @@ export const deleteBucketFileByFileNameField= async (
 
 export const getfileNamesFromDir = async (folderPath: string) => {
   const files = await readdir(folderPath);
+
   if (files.length) {
     return files;
   } else {
@@ -168,6 +178,7 @@ export const writeFileAsync = async (filePath: string, fileContent: string) => {
 
 export const clearAllFilesInFolder = async (folderPath: string) => {
   const files = await readdir(folderPath);
+
   for (const file of files) {
     unlink(`${folderPath}/${file}`, (err) => {
       if (err) throw err;
@@ -182,8 +193,10 @@ export const getCollectionData = async (
 ) => {
   try {
     const { db } = await connectToDatabase();
+
     if (id) {
       const idItem = await db.collection(collectionName).findOne({ id: id });
+
       if (idItem) {
         return JSON.stringify(idItem);
       } else {
@@ -191,6 +204,7 @@ export const getCollectionData = async (
       }
     } else if (name) {
       const nameItem = await db.collection(collectionName).findOne({ name: name });
+
       if (nameItem) {
         return JSON.stringify(nameItem);
       } else {
@@ -198,10 +212,11 @@ export const getCollectionData = async (
       }
     } else {
       const items = await db.collection(collectionName).find().toArray();
+
       if (items) {
         return JSON.stringify(items);
       } else {
-        return JSON.stringify({ message: ResponseMessages.DATA_NOT_FOUND});
+        return JSON.stringify({ message: ResponseMessages.DATA_NOT_FOUND });
       }
     }
   } catch (error) {
@@ -214,8 +229,10 @@ export const deleteCollectionData = async (
   id?: string
 ) => {
   const { db } = await connectToDatabase();
+
   if (id) {
     const itemId = await db.collection(collectionName).deleteOne({ id: id });
+
     if (itemId) {
       return JSON.stringify(itemId);
     } else {
@@ -223,6 +240,7 @@ export const deleteCollectionData = async (
     }
   } else {
     const items = await db.collection(collectionName).deleteMany();
+
     if (items) {
       return JSON.stringify(items);
     } else {
@@ -237,6 +255,7 @@ export const addDataToCollection = async (
 ) => {
   const { db } = await connectToDatabase();
   const result = await db.collection(nameCollection).insertOne(newData as any);
+
   if (result) {
     return result;
   } else {
@@ -252,6 +271,7 @@ export const updateDataCollection = async (
   const result = await db
     .collection(nameCollection)
     .updateOne({ _id: new ObjectId(id) }, { $set: newData });
+
     if (result) {
       return result;
     } else {
@@ -261,6 +281,7 @@ export const updateDataCollection = async (
 export const deleteDataFromCollection = async (nameCollection: string, id: string) => {
   const { db } = await connectToDatabase();  
   const result = await db.collection(nameCollection).deleteOne({ id });
+
   if (result) {
     return result;
   } else {
@@ -273,6 +294,7 @@ export const findUserByName = async (name: string) => {
     (await getCollectionData('users')) as string
   );
   const findedUser = users.find((el) => el.name === name);
+
   return findedUser;
 };
 export const findUserByEmail = async (email: string) => {
@@ -280,11 +302,13 @@ export const findUserByEmail = async (email: string) => {
     (await getCollectionData('users')) as string
   );
   const findedUser = users.find((el) => el.email === email);
+
   return findedUser;
 };
 
 export const findUser = async (name: string, email: string) => {
   const userByName = await findUserByName(name);
   const userByEmail = await findUserByEmail(email);
+
   return { userByName, userByEmail };
 };

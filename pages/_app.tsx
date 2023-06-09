@@ -11,8 +11,10 @@ import store from '@/srore/store';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isDark, setIsDark] = useState<boolean>(false);
+
   useEffect(() => {
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+
     setIsDark(darkThemeMq.matches);
   }, []);
 

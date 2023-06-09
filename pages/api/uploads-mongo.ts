@@ -24,6 +24,7 @@ interface InitUploadData {
 const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     
     const form = new formidable.IncomingForm({ keepExtensions: true });
+
     form.parse(req, async (err, fields, files) => {
       if (err) {
         console.error('error from form.parse', err);
@@ -37,6 +38,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         size: (files.image as any).size,
         mimetype: (files.image as any).mimetype,
       };
+
       try {
         await client.connect();
         const filePath = (files.image as any).filepath;
@@ -48,6 +50,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         bucketFileName,
         initUploadData.mimetype
         );
+
        if(resultUploader) {
         res.status(201).json({ message: ResponseMessages.DATA_UPLOADED });
        } else {

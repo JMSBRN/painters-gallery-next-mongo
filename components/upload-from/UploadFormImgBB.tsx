@@ -20,6 +20,7 @@ const UploadFormImgBB = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file) {
       setFile(file);
     }
@@ -57,13 +58,15 @@ const UploadFormImgBB = () => {
            body: formData,
        });
       const resultImgBb = await res.json();
+
        if(resultImgBb.status === 200) {
          const res = await fetch('/api/uploads-imgbb/', {
           method: 'POST',
-          headers: {'Content-Type':'application/json'},
+          headers: { 'Content-Type':'application/json' },
           body: JSON.stringify({ resultImgBb, id })
          });
           const result = await res.json();
+
           if(result.insertedId) {
             setUploading(false);
             setTimeout(() => {
@@ -79,9 +82,10 @@ const UploadFormImgBB = () => {
         setFile(null);
         const res = await fetch('/api/images-imgbb/', {
           method: 'GET',
-          headers: {'Authorization': JSON.stringify({ secret })},
+          headers: { 'Authorization': JSON.stringify({ secret }) },
         });
         const images: ImageFromImgBb[] = await res.json();                
+
        dispatch(setImagesImgBb(images));
       }
     } else {

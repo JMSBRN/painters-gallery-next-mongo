@@ -8,7 +8,6 @@ import { User } from '@/features/users/interfaces';
 import burgerIcon from '../../public/images/burger_icon.svg..png';
 import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 import styles from './menu.module.scss';
-import { useDispatch } from 'react-redux';
 
 interface MenuProps {
   isDark: boolean;
@@ -28,6 +27,7 @@ const Menu = (props: MenuProps) => {
 
   useEffect(() => {
     const data = getDecryptedDataFromLocalStorage('user');
+
      if (data) {
       setUserFromLocal(data);
       dispatch(setLogged(true));

@@ -6,6 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'GET') {
         const { db } = await connectToDatabase();
         const images = await downLoadFilesFromMongoBucket(db, 'images');
+
         if(images) {
             res.status(200).json(images);
         } else {

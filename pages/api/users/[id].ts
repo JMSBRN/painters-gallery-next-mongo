@@ -4,9 +4,11 @@ import { getCollectionData } from '@/lib/mongoUtils';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.url?.split('/')[3];    
+
     if (req.method === 'GET') {
         try {
           const result =  await getCollectionData('users', id) as string;        
+
           result && res.status(200).json(JSON.parse(result));
         } catch (error) {
             console.error(error);

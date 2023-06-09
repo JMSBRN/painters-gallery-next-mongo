@@ -33,6 +33,7 @@ const ProgressLine = () => {
                 border-left-color: #29D;
               }
             `;
+
           return <style>{modifiedCss}</style>;
         }}
       />

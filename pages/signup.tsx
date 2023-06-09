@@ -15,7 +15,8 @@ export default auth;
 
 export const getServerSideProps:GetServerSideProps<{ users: string}> = async() => {
   const users = await getCollectionData('users') as string;
+
   return {
-   props: {users}
+   props: { users }
  };
 };

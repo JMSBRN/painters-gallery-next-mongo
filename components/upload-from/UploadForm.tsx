@@ -18,6 +18,7 @@ const UploadForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file) {
       setFile(file);
     }
@@ -48,10 +49,11 @@ const UploadForm = () => {
       try {
         const res = await fetch('/api/uploads-mongo/', {
           method: 'POST',
-          headers: {'Authorization': JSON.stringify({ secret })},
+          headers: { 'Authorization': JSON.stringify({ secret }) },
           body: formData,
         });
         const data = await res.json();
+
         if (data.message) {
           setTimeout(() => {
             setFetchMessage(data.message);
@@ -65,9 +67,10 @@ const UploadForm = () => {
         setFile(null);
         const res = await fetch(`/api/images/${id}`, {
           method: 'GET',
-          headers: {'Authorization': JSON.stringify({ secret })}
+          headers: { 'Authorization': JSON.stringify({ secret }) }
         });
         const data = await res.json();
+
         dispatch(setImages(JSON.parse(data)));
       }
     } else {

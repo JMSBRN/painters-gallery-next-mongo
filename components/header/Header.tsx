@@ -47,6 +47,7 @@ const Header = (props: HeaderProps) => {
   
   useEffect(() => {
     const data = getDecryptedDataFromLocalStorage('user');
+
      data && setUserFromLocal(data);
   }, [getDecryptedDataFromLocalStorage, logged]);
 

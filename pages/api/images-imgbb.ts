@@ -7,6 +7,7 @@ import { ResponseMessages } from '@/constants/constants';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {    
     if(req.method === 'GET'){
       const images = await getCollectionData('imgBB') as string;
+
       if (images) {
           res.status(200).json(JSON.parse(images));
       } else {
@@ -17,10 +18,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(204).end();
         } else {
             const { id } = req.body;
+
             if(id) {
                 const images = await getCollectionData('imgBB') as string;
                 const parsedImages: ImageFromImgBb[] = JSON.parse(images);
                 const filteredImages = parsedImages.filter(el => el.id === id);
+
                 if(images) {
                     res.status(200).json(filteredImages);
                 } else {
@@ -35,6 +38,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
          const { id } = auth;
          const { db } = await connectToDatabase();  
          const result = await db.collection('imgBB').deleteOne({ _id: new ObjectId(id) });
+
          res.status(200).json(result);
     } else {
         res.status(405).json({ message: ResponseMessages.METHOD_NOT_ALLOWED });   

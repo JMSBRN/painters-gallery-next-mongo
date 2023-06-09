@@ -33,34 +33,37 @@ const Painter = () => {
   const { user } = useAppSelector(selectUsers);
   const { imagesImgBB } = useAppSelector(selectImages);
   const secret = process.env.CALL_SECRET; 
-  const router = useRouter();
 
   const getImagesFromImgBB = useCallback(async () => {
     const res = await fetch('/api/images-imgbb/', {
       method: 'POST',
       headers: {
+        'Authorization': JSON.stringify({ secret }),
         'Content-Type': 'application/json'
         },
       body: JSON.stringify({ id })
     });   
     const images = await res.json();
+
     if(images) {
       return images;
     } else {
       return null;
     }
-  }, [id]);
+  }, [id, secret]);
    
  useEffect(() => {
   if (id && !user.name) {
     const f = async () => {
       const res = await fetch(`/api/users/${id}`, {
         method: 'GET',
-        headers: { 'Authorization': JSON.stringify({ secret })}
+        headers: { 'Authorization': JSON.stringify({ secret }) }
       });
       const data: User = await res.json();
+
       dispatch(setUser(data));
     };
+
     f();
   }
  }, [dispatch, id, secret, user.name]);
@@ -68,15 +71,18 @@ const Painter = () => {
  useEffect(() => {
   const f = async () => {
     const images = await getImagesFromImgBB();
+
     if(images) {
       dispatch(setImagesImgBb(images));
     }
   };
+
   f();
  }, [dispatch, getImagesFromImgBB, id]);
 
   useEffect(() => {   
     const token = getDecryptedDataFromCookie('token');  
+
     if(token) {
     jwt.verify(token.slice(1, -1), process.env.JWT_ACCES_SECRET!, async (err: any) => {
        if(err) {
@@ -88,6 +94,7 @@ const Painter = () => {
                body: JSON.stringify(id)
            });
            const data = await res.json();
+
            if(data.accessToken) {
             setEncryptedDataToCookie('token', data.accessToken);
              setAuthorized(true);
@@ -109,15 +116,18 @@ const Painter = () => {
       selectedImages.map( async (el) => {        
         const res = await fetch('/api/images-imgbb/', {
           method: 'DELETE',
-          headers: {'Authorization': JSON.stringify({ secret, id: el })},
+          headers: { 'Authorization': JSON.stringify({ secret, id: el }) },
         });
         const result = await res.json();
+
         return result;
       })
     );
       const deletedImages: boolean = promiseResult.every(el => el.deletedCount > 0 ); 
+
       if(deletedImages) {
         const images = await getImagesFromImgBB();
+
         dispatch(setImagesImgBb(images));
          setLoading(false);
          setSelectedImages([]);
@@ -127,6 +137,7 @@ const Painter = () => {
 
   const handleChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>)=> {
      const { value, checked } = e.target;
+
      if(checked) {
        setSelectedImages([...selectedImages, value]);
      } else { 
@@ -172,7 +183,7 @@ const Painter = () => {
                     }
                   }}
                   />
-                  <Link style={{ cursor: 'zoom-in'}} target='_blank' href={el.url}>
+                  <Link style={{ cursor: 'zoom-in' }} target='_blank' href={el.url}>
                     <Image
                       width={220}
                       height={220}

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import usersReducer from '../features/users/usersSlice';
 import imagesReducer from '../features/images/imagesSlice';
+import usersReducer from '../features/users/usersSlice';
 
 const store = configureStore({
     reducer: {

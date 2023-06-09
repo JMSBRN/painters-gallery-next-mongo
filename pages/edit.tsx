@@ -44,8 +44,10 @@ const Edit = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [deleting, setDeleting] = useState<boolean>(false);
   const [deleteMessage, setDeleteMessage] = useState<string>('');
+
   useEffect(() => {
     const dataFromLocal: User = getDecryptedDataFromLocalStorage('user');
+
     dataFromLocal && setUserFromLocal(dataFromLocal);
   }, [getDecryptedDataFromLocalStorage]);
 
@@ -62,6 +64,7 @@ const Edit = () => {
       formData.password,
       userFromLocal.password
     );
+
     if (!matchedPassword) {
       setSignUpErrors({
         passwordError: FormErrorMessages.PASSWORD_VALID_ERROR,
@@ -83,13 +86,16 @@ const Edit = () => {
         body: JSON.stringify(credential),
       });
       const data = await res.json();
+
       if (data.acknowledged) {
         try {
           const { name, email, password } = formData;
           const { id } = userFromLocal;
+
           setLoading(false);
           dispatch(setUser({ name, email, password, id }));
           const securePassword = (await encryptPassowrd(password)) as string;
+
           setEncryptedDataToLocalStorage('user', {
             name,
             email,
@@ -118,6 +124,7 @@ const Edit = () => {
       },
     });
     const data: DeleteResultsFromMongo = await res.json();
+
     if (data.message === 'User was not deleted') {
       router.push('/edit');
       setDeleting(false);
@@ -134,6 +141,7 @@ const Edit = () => {
       const imagesDeleted: boolean = !!resultFromDeleteImages.message;
       const userDeleted: boolean = resultFromDeleteUser.deletedCount > 0;
       const tokenDeleted: boolean = resultFromDeleteToken.deletedCount > 0;
+
       if (userDeleted && tokenDeleted && imagesDeleted) {
         dispatch(setUser({} as User));
         dispatch(setLogged(false));

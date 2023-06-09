@@ -1,10 +1,10 @@
 import { SignUpErrors, User } from '@/features/users/interfaces';
+import { useEffect, useState } from 'react';
 import Form from '../form/Form';
 import { FormErrorMessages } from '@/constants/constants';
 import bcrypt from 'bcryptjs';
 import styles from './signupForm.module.scss';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const SignUpForm = ({ users }: { users: string}) => {
@@ -23,21 +23,28 @@ const SignUpForm = ({ users }: { users: string}) => {
   const [formData, setFormData] = useState(initFormData);
   const [signUpErrors, setSignUpErrors] = useState<Partial<SignUpErrors>>(initSignUpErrors);
   const [loading, setLoading] = useState<boolean>(false);
-  const [usersDb, setUsersDb] = useState<User[]>(JSON.parse(users));
+  const [usersDb, setUsersDb] = useState<User[]>([]);
   const { name, email, password, confirmPassword } = formData;
   const router = useRouter();
   const nakedPassword = password;
+  const secret = process.env.CALL_SECRET;
+
+  useEffect(() => {
+   setUsersDb(JSON.parse(users));
+  }, [users]);
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const confirmed = password.localeCompare(confirmPassword, 'en', { sensitivity: 'base' }) === 0;
+
     if(confirmed) {
        const userByName = usersDb.find(el => el.name === name);
        const userByEmail = usersDb.find(el => el.email === email);
+
         if(userByName) {
           setLoading(false);
-          setSignUpErrors( { nameError:  FormErrorMessages.NAME_ERROR});
+          setSignUpErrors( { nameError:  FormErrorMessages.NAME_ERROR });
         } else if (userByEmail) {
           setLoading(false);
           setSignUpErrors( { emailError: FormErrorMessages.EMAIL_ERROR });
@@ -47,10 +54,14 @@ const SignUpForm = ({ users }: { users: string}) => {
           const id = uuidv4();
           const salt = await bcrypt.genSalt(10);
           const password = await  bcrypt.hash(nakedPassword, salt);
+
           if (password) {
             await fetch('/api/auth/', {
               method: 'POST',
-              headers: { 'Content-Type' : 'application/json' },
+              headers: { 
+                'Authorization': JSON.stringify({ secret }),
+                'Content-Type' : 'application/json'
+               },
               body: JSON.stringify({ id, name, email, password })
             });
              router.push('/login');
@@ -86,5 +97,6 @@ const SignUpForm = ({ users }: { users: string}) => {
     </div>
   );
 };
+
 export default SignUpForm;
 

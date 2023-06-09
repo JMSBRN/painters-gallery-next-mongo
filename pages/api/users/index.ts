@@ -16,6 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           const result =  await getCollectionData('users') as string;
           const data = JSON.parse(result);
+
           res.status(200).json(data);
         } catch (error) {
           console.error(error);
@@ -25,10 +26,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       } else if (req.method === 'POST') {
         const formData: InitFormData = req.body;
         const { name } = formData;
+
         try {
             if (name) {
             const result = await getCollectionData('users', undefined, name) as string;    
             const parsedResult = JSON.parse(result);
+
               res.status(201).json(parsedResult);
             } else {
               res.status(204).end();
@@ -44,8 +47,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           const { id, newUser } = req.body;
           const encryptedPassowrd = await encryptPassowrd(newUser.password);
-          const newDataToMongo = {...newUser, password: encryptedPassowrd };
+          const newDataToMongo = { ...newUser, password: encryptedPassowrd };
           const result = await updateDataCollection('users', id, newDataToMongo );
+
           res.status(200).json(result);
         } catch (error) {
           console.error('error from updateDataCollection', error);
@@ -54,6 +58,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
        }
     } else if (req.method === 'DELETE') {
       const { id } = JSON.parse(req.headers['authorization'] || '');      
+
       if(!id){
         res.status(204).end();
        } else { 
@@ -61,6 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
          const resultFromDeleteUser = await  deleteDataFromCollection('users', id);
          const  resultFromDeleteToken =  await deleteDataFromCollection('tokens', id);
          const  resultFromDeleteImages = await deleteBucketFileByFileNameField('images', id);
+
          if(resultFromDeleteUser && resultFromDeleteToken && resultFromDeleteImages ) {
           res.status(200).json(
             { resultFromDeleteUser,
