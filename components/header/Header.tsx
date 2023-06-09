@@ -68,21 +68,29 @@ const Header = (props: HeaderProps) => {
           <Link href="/help">help</Link>
           {(userFromLocal.name && logged) &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
           </nav>
-        <div className={authLinkContainer}>
-            <Link className={authLink} href={'/login'}>Log In</Link>
-          <Link className={authLink} href={'/signup/'}>Sign Up</Link>
-        </div>
         <div className={themeContainer}>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
         <div className={logedUserContainer}>
           {(userFromLocal.name && logged) && 
-          <>
            <div className={userNameStyle}>{ name ? name : userFromLocal.name }</div>
-           <button onClick={handlClickLogOut}>Log Out</button>
-           <button onClick={handlClickEditProfile}>Edit Profile</button>
-          </>
           }
+        </div>
+        <div className={authLinkContainer}>
+          {logged ? (
+            <>
+            <Link 
+            className={authLink} href="#" onClick={handlClickLogOut}>Log Out</Link>
+            <Link className={authLink}
+              href="#" onClick={handlClickEditProfile}>Edit Profile</Link>
+              </>
+          ) : (
+            <>
+            <Link className={authLink} href={'/login'}>Log In</Link>
+            <Link className={authLink} href={'/signup/'}>Sign Up</Link>
+            </>
+          )}
+           
         </div>
       </div>
     </header>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { selectUsers, setLogged } from '@/features/users/usersSlice';
+import { selectUsers, setLogged, setUser } from '@/features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import ThemeSwitcher from '../theme-switcher/ThemeSwitcher';
 import { User } from '@/features/users/interfaces';
 import burgerIcon from '../../public/images/burger_icon.svg..png';
+import { deleteCookie } from 'cookies-next';
+import router from 'next/router';
 import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 import styles from './menu.module.scss';
 
@@ -34,6 +36,18 @@ const Menu = (props: MenuProps) => {
      }
   }, [dispatch, getDecryptedDataFromLocalStorage, logged]);
 
+  const handlClickLogOut = () => {
+    dispatch(setUser({} as User));
+    dispatch(setLogged(false));
+    setUserFromLocal({} as User);
+    router.push('/');
+    localStorage.clear();
+    deleteCookie('token');
+  };
+  const handlClickEditProfile = () => {
+    router.push('/edit');
+  };
+
   return (
     <div className={menuContainer}>
       <button onClick={handleClick}>
@@ -50,8 +64,23 @@ const Menu = (props: MenuProps) => {
               {(userFromLocal.name && logged) && <Link href={`/painters/${user.id}`}>gallery</Link>}
             </nav>
             <div className={authContainer}>
-              <Link className={authLink} href={'/login'}>Log In</Link>
-              <Link className={authLink} href={'/signup'}>Sign Up</Link>
+              { logged ?
+                (
+                <>
+                  <Link className={authLink} href="#" onClick={handlClickLogOut}>Log Out</Link>
+                  <Link className={authLink}
+                   href="#" onClick={handlClickEditProfile}>Edit Profile</Link>
+                </>
+                )
+                : 
+                (
+                  <>
+                    <Link className={authLink} href={'/login'}>Log In</Link>
+                    <Link className={authLink} href={'/signup'}>Sign Up</Link>
+                  </>
+                )
+              }
+        
             </div>
           </div>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />

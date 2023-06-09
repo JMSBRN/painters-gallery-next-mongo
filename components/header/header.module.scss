@@ -12,6 +12,10 @@
     @include flex(center, center);
     @include respond-to($breakpoint-medium){
       @include flex(space-between, center);
+      & .logedUserContainer {
+        padding-right: 40px;
+        @include flex(center, center);
+      }
     }
     & .menu {
       display: none;
@@ -19,7 +23,7 @@
         margin-left: 20px;
         display: block;
       }
-    } 
+    }
   }
   
   .headerContainer {
@@ -73,19 +77,6 @@
     color: $light;
   }
   .logedUserContainer {
-    min-width: 220px;
-    @include flex(space-arround, center);
-    & button {
-      width: 80px;
-      margin-left: 15px;
-      padding: 3px 5px;
-      border: none;
-      background-color: transparent;
-      color: $light;
-      cursor: pointer;
-      &:hover {
-         border: 1px solid $light;
-         border-radius: 3px;
-      }
-     }
+    width: 100%;
+    @include flex(center, center);
   }
