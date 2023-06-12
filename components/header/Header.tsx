@@ -8,7 +8,6 @@ import { User } from '@/features/users/interfaces';
 import { deleteCookie } from 'cookies-next';
 import secureLocalUtils from '../../utils/secureLocalStorageUtils';
 import styles from './header.module.scss';
-import { useRouter } from 'next/router';
 
 interface HeaderProps {
   isDark: boolean;
@@ -29,7 +28,6 @@ const Header = (props: HeaderProps) => {
      } = styles;
   const dispatch = useAppDispatch();
   const { user, logged } = useAppSelector(selectUsers);
-  const router = useRouter();
   const [userFromLocal, setUserFromLocal] = useState({} as User);
   const [name, setName] = useState<String>(' lkjlkjl');
   
@@ -39,9 +37,6 @@ const Header = (props: HeaderProps) => {
     setUserFromLocal({} as User);
     localStorage.clear();
     deleteCookie('token');
-  };
-  const handlClickEditProfile = () => {
-    router.push('/edit');
   };
   
   useEffect(() => {
@@ -79,9 +74,8 @@ const Header = (props: HeaderProps) => {
           {logged ? (
             <>
             <Link 
-            className={authLink} href="#" onClick={handlClickLogOut}>Log Out</Link>
-            <Link className={authLink}
-              href="#" onClick={handlClickEditProfile}>Edit Profile</Link>
+            className={authLink} href="/" onClick={handlClickLogOut}>Log Out</Link>
+            <Link className={authLink} href="/edit" >Edit Profile</Link>
               </>
           ) : (
             <>
