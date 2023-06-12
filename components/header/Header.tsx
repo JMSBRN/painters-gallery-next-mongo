@@ -37,7 +37,6 @@ const Header = (props: HeaderProps) => {
     dispatch(setUser({} as User));
     dispatch(setLogged(false));
     setUserFromLocal({} as User);
-    router.push('/');
     localStorage.clear();
     deleteCookie('token');
   };

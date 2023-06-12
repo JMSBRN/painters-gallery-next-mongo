@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(204).end();
         } else {
             const { id } = req.body;
-
+            
             if(id) {
                 const images = await getCollectionData('imgBB') as string;
                 const parsedImages: ImageFromImgBb[] = JSON.parse(images);

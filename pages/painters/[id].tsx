@@ -186,7 +186,7 @@ const Painter = () => {
                   <Link style={{ cursor: 'zoom-in' }} target='_blank' href={el.url}>
                     <Image
                       width={220}
-                      height={220}
+                      height={136}
                       className={painterImg}
                       alt={el.title as string}
                       src={el.display_url}
