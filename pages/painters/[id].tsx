@@ -86,11 +86,14 @@ const Painter = () => {
     if(token) {
     jwt.verify(token.slice(1, -1), process.env.JWT_ACCES_SECRET!, async (err: any) => {
        if(err) {
-        console.error('error from verify token in painer', err);
+        console.error('error from verify token in painter', err);
            if (err.message === 'jwt expired') {
              const res = await fetch('/api/refresh-token/',{
                method: 'POST',
-               headers: { 'Content-Type': 'application/json' },
+               headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': JSON.stringify({ secret })
+               },
                body: JSON.stringify(id)
            });
            const data = await res.json();
