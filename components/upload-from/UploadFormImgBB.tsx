@@ -62,7 +62,10 @@ const UploadFormImgBB = () => {
        if(resultImgBb.status === 200) {
          const res = await fetch('/api/uploads-imgbb/', {
           method: 'POST',
-          headers: { 'Content-Type':'application/json' },
+          headers: { 
+            'Content-Type':'application/json',
+            'Authorization': JSON.stringify({ secret })
+         },
           body: JSON.stringify({ resultImgBb, id })
          });
           const result = await res.json();
@@ -76,7 +79,7 @@ const UploadFormImgBB = () => {
           };
        }
       } catch (error) {
-        console.error('Error from UploadForm :', error);
+        console.error('Error from UploadForm imgBB :', error);
       } finally {
         setUploading(false);
         setFile(null);
