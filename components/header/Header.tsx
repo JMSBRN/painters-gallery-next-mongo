@@ -60,7 +60,8 @@ const Header = (props: HeaderProps) => {
           <Link href="/about">about</Link>
           <Link href="/galleries">galleries</Link>
           <Link href="/help">help</Link>
-          {(userFromLocal.name && logged) &&  <Link href={`/painters/${user.id}`}>gallery</Link> }
+          {(userFromLocal.name && logged) && 
+           <Link href={`/painters/${userFromLocal.id}`}>gallery</Link> }
           </nav>
         <div className={themeContainer}>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
