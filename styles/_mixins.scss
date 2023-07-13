@@ -23,7 +23,12 @@
       $primary: $primary-clr-dark;
       $secondary: $secondary-clr-dark;
     }
-
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     header{
       background-color: $primary;
     }
