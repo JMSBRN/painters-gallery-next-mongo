@@ -111,7 +111,7 @@ const Painter = () => {
       return;
     }
       
-  }, [getDecryptedDataFromCookie, id, setEncryptedDataToCookie]);
+  }, [getDecryptedDataFromCookie, id, secret, setEncryptedDataToCookie]);
   
   const handleDeleteSelectedImages = async () => {
     setLoading(true);

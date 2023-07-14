@@ -5,7 +5,6 @@ const Home = () => {
   const { mainContainer, welcomeBlock, secondTitlesContainer } = styles;
 
   return (
-    <>
       <div className={mainContainer}>
         <div className={welcomeBlock}>
           <h1>Welcome to the Painters Gallery!</h1>
@@ -38,7 +37,6 @@ const Home = () => {
             </div>
         </div>
       </div>
-    </>
   );
 };
 

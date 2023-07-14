@@ -1,4 +1,4 @@
-import '../styles/main.scss';
+import '../styles/globals.scss';
 import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Footer from '@/components/footer/Footer';

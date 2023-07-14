@@ -11,6 +11,7 @@
 
   @mixin theme ($mode: null) {
     $bg: $bg-clr;
+    $bg-image:$bg-image;
     $link-text: $text-clr-dark;
     $hover: $hover-clr-dark;
     $text: $text-clr;
@@ -18,6 +19,7 @@
     $secondary: $secondary-clr;
     @if ($mode == 'dark') {
       $bg: $bg-clr-dark;
+      $bg-image:$bg-image-dark;
       $hover: $hover-clr;
       $text: $text-clr-dark;
       $primary: $primary-clr-dark;
@@ -25,23 +27,26 @@
     }
   
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      color: $text;
     }
     header{
+      background-image: $bg-image;
+      background-size:  100%;
+      background-repeat: no-repeat;
       background-color: $primary;
-    }
-    menu {
-      background-color: $primary;
-      & a {
-        color: $text;
-        &:hover {
-          color: $hover;
-        }
+      color: $text;
+      a {
+        color: $text
       }
+      nav a {
+        color: $text;
+      }
+
     }
     main {
+      background-image: $bg-image;
+      background-size: cover;
+      background-repeat: no-repeat;
       background-color: $bg;
       color: $text;
     }
