@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Header isDark={isDark} setIsDark={setIsDark} />
           <Layout>
             <LoaderInProgress />
-            <Component {...pageProps} />
+            <Component isDark={isDark} {...pageProps} />
           </Layout>
           <Footer />
         </div>

@@ -3,61 +3,63 @@ import Image from 'next/image';
 import styles from '../styles/home.module.scss';
 import yachtImage from '../public/svgs/yacht.svg';
 
-const Home = () => {
+const Home = ({ isDark }: { isDark: boolean }) => {
   const { mainContainer, welcomeBlock, secondTitlesContainer, boat } = styles;
   const [width, setWidth] = useState(0);
   const random = Math.random() * (100 + 1);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentNumber , setCurrentNumber] = useState<number>(random);
+  const [currentNumber, setCurrentNumber] = useState<number>(random);
 
   useEffect(() => {
     const maxValue = 100;
     let counter = currentNumber;
 
-const incrementCounter = () => {
-  counter = (counter + 0.01) % (maxValue + 1);
-  setWidth(counter);
-};
+    const incrementCounter = () => {
+      counter = (counter + 0.01) % (maxValue + 1);
+      setWidth(counter);
+    };
 
-setInterval(incrementCounter, 100);
+    setInterval(incrementCounter, 100);
   }, [currentNumber]);
-  
+
   return (
-      <div className={mainContainer}>
-      <div style={{ width: `${width}%` }} className={boat}>
-        <Image src={yachtImage} width={20} alt='yacht'/>
-      </div>
-        <div className={welcomeBlock}>
-          <h1>Welcome to the Painters Gallery!</h1>
-            <div className={secondTitlesContainer}>
-              <p>
-                Immerse yourself in a world of vibrant colors, captivating
-                brushstrokes, and artistic expression. Our gallery is a haven for
-                art enthusiasts and a platform that celebrates the talent and
-                creativity of painters from around the globe.
-              </p>
-              <p>
-                Step into a realm where imagination takes form on canvas, where
-                every stroke tells a story, and where emotions are translated into
-                breathtaking visual masterpieces. From classic landscapes to
-                abstract marvels, our diverse collection showcases a rich tapestry
-                of artistic styles and techniques.
-              </p>
-              <p>
-                As you wander through our gallery, allow the brushstrokes to guide
-                you on a journey of exploration and introspection. Each painting
-                whispers its own narrative, inviting you to pause, reflect, and
-                connect with the artists vision.
-              </p>
-              <p>
-                Whether you are a seasoned collector, an aspiring artist, or simply
-                a lover of beauty, our gallery offers a sanctuary for inspiration
-                and contemplation. Discover new talents and established masters,
-                each with their own unique voice and perspective,
-              </p>
-            </div>
+    <div className={mainContainer}>
+      { !isDark && (
+        <div style={{ width: `${width}%` }} className={boat}>
+          <Image src={yachtImage} width={20} alt="yacht" />
+        </div>
+      )}
+      <div className={welcomeBlock}>
+        <h1>Welcome to the Painters Gallery!</h1>
+        <div className={secondTitlesContainer}>
+          <p>
+            Immerse yourself in a world of vibrant colors, captivating
+            brushstrokes, and artistic expression. Our gallery is a haven for
+            art enthusiasts and a platform that celebrates the talent and
+            creativity of painters from around the globe.
+          </p>
+          <p>
+            Step into a realm where imagination takes form on canvas, where
+            every stroke tells a story, and where emotions are translated into
+            breathtaking visual masterpieces. From classic landscapes to
+            abstract marvels, our diverse collection showcases a rich tapestry
+            of artistic styles and techniques.
+          </p>
+          <p>
+            As you wander through our gallery, allow the brushstrokes to guide
+            you on a journey of exploration and introspection. Each painting
+            whispers its own narrative, inviting you to pause, reflect, and
+            connect with the artists vision.
+          </p>
+          <p>
+            Whether you are a seasoned collector, an aspiring artist, or simply
+            a lover of beauty, our gallery offers a sanctuary for inspiration
+            and contemplation. Discover new talents and established masters,
+            each with their own unique voice and perspective,
+          </p>
         </div>
       </div>
+    </div>
   );
 };
 
