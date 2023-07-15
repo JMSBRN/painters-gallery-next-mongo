@@ -1,3 +1,11 @@
+@import '_variables';
+// responsive
+
+@mixin respond-to($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
 // display 
 @mixin flex($justify: center, $align: center, $direction: null) {
     display: flex;
@@ -83,12 +91,5 @@
         color: $text-clr-dark;
         background-color: $primary;
       }
-    }
-  }
-  // responsive
-
-  @mixin respond-to($breakpoint) {
-    @media only screen and (max-width: $breakpoint) {
-      @content;
     }
   }

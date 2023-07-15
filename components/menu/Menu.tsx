@@ -30,10 +30,10 @@ const Menu = (props: MenuProps) => {
   useEffect(() => {
     const data = getDecryptedDataFromLocalStorage('user');
 
-     if (data) {
+    if (data) {
       setUserFromLocal(data);
       dispatch(setLogged(true));
-     }
+    }
   }, [dispatch, getDecryptedDataFromLocalStorage, logged]);
 
   const handlClickLogOut = () => {
@@ -50,9 +50,13 @@ const Menu = (props: MenuProps) => {
 
   return (
     <div className={menuContainer}>
-      <button onClick={handleClick}>
-        <Image priority={true} width={20} src={burgerIcon} alt="burger menu icon" />
-      </button>
+      <Image
+        onClick={handleClick}
+        priority={true}
+        width={20}
+        src={burgerIcon}
+        alt="burger menu icon"
+      />
       {menu && (
         <menu className={menuStyle}>
           <div onClick={handleClick}>
@@ -61,26 +65,38 @@ const Menu = (props: MenuProps) => {
               <Link href="/about">about</Link>
               <Link href="/galleries">galleries</Link>
               <Link href="/help">help</Link>
-              {(userFromLocal.name && logged) && <Link href={`/painters/${user.id}`}>gallery</Link>}
+              {userFromLocal.name && logged && (
+                <Link href={`/painters/${user.id}`}>gallery</Link>
+              )}
             </nav>
             <div className={authContainer}>
-              { logged ?
-                (
+              {logged ? (
                 <>
-                  <Link className={authLink} href="#" onClick={handlClickLogOut}>Log Out</Link>
-                  <Link className={authLink}
-                   href="#" onClick={handlClickEditProfile}>Edit Profile</Link>
+                  <Link
+                    className={authLink}
+                    href="#"
+                    onClick={handlClickLogOut}
+                  >
+                    Log Out
+                  </Link>
+                  <Link
+                    className={authLink}
+                    href="#"
+                    onClick={handlClickEditProfile}
+                  >
+                    Edit Profile
+                  </Link>
                 </>
-                )
-                : 
-                (
-                  <>
-                    <Link className={authLink} href={'/login'}>Log In</Link>
-                    <Link className={authLink} href={'/signup'}>Sign Up</Link>
-                  </>
-                )
-              }
-        
+              ) : (
+                <>
+                  <Link className={authLink} href={'/login'}>
+                    Log In
+                  </Link>
+                  <Link className={authLink} href={'/signup'}>
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
