@@ -1,4 +1,5 @@
 @import '_variables';
+@import 'mixins';
 
 .mainContainer {
     margin-top: -34px;
@@ -26,6 +27,12 @@
     left: 130px;
     width: 500px;
     height: auto;
+    @include respond-to ($breakpoint-small) {
+        top: 40px;
+        left: 10px;
+        width: 300px;
+        
+    }
 
     ::-webkit-scrollbar-track {
         width: 3px;
@@ -35,6 +42,10 @@
         margin-left: 30px;
         font-size: 50px;
         font-weight: 200;
+        @include respond-to ($breakpoint-small) {
+            font-size: 30px;
+            font-weight: 300;
+        }
     }
 
     .secondTitlesContainer {
@@ -43,6 +54,11 @@
         height: 200px;
         overflow: hidden;
         overflow-y: auto;
+        @include respond-to ($breakpoint-small) {
+            width: 355px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
 
         p {
             margin: 13px;

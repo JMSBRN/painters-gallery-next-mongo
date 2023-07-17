@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import React from 'react';
 import styles from '../styles/home.module.scss';
 import yachtImage from '../public/svgs/yacht.svg';
 
 const Home = ({ isDark }: { isDark: boolean }) => {
   const { mainContainer, welcomeBlock, secondTitlesContainer, boat } = styles;
-  const [width, setWidth] = useState(0);
-  const random = Math.random() * (100 + 1);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentNumber, setCurrentNumber] = useState<number>(random);
-
-  useEffect(() => {
-    const maxValue = 100;
-    let counter = currentNumber;
-
-    const incrementCounter = () => {
-      counter = (counter + 0.01) % (maxValue + 1);
-      setWidth(counter);
-    };
-
-    setInterval(incrementCounter, 100);
-  }, [currentNumber]);
 
   return (
     <div className={mainContainer}>
       { !isDark && (
-        <div style={{ width: `${width}%` }} className={boat}>
+        <div style={{ width: `${Math.random() * (100 + 1)}%` }} className={boat}>
           <Image src={yachtImage} width={20} alt="yacht" />
         </div>
       )}
