@@ -4,7 +4,7 @@ import styles from '../styles/home.module.scss';
 import yachtImage from '../public/svgs/yacht.svg';
 
 const Home = ({ isDark }: { isDark: boolean }) => {
-  const { mainContainer, welcomeBlock, secondTitlesContainer, boat } = styles;
+  const { mainContainer, welcomeBlock, secondTitlesContainer, secondTilteHover, boat } = styles;
 
   return (
     <div className={mainContainer}>
@@ -15,7 +15,7 @@ const Home = ({ isDark }: { isDark: boolean }) => {
       )}
       <div className={welcomeBlock}>
         <h1>Welcome to the Painters Gallery!</h1>
-        <div className={secondTitlesContainer}>
+        <div className={isDark ? secondTitlesContainer : secondTilteHover}>
           <p>
             Immerse yourself in a world of vibrant colors, captivating
             brushstrokes, and artistic expression. Our gallery is a haven for

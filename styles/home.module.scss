@@ -48,6 +48,8 @@
         max-height: 300px;
         overflow: hidden;
         overflow-y: auto;
+        transition: background  1s;
+
         @include respond-to ($breakpoint-small) {
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
@@ -62,9 +64,17 @@
 
     }
 }
+
+ .secondTilteHover {
+    @extend .secondTitlesContainer;
+    &:hover {
+        background-color:rgba($light, .9);
+        color: $text-clr;
+    }
+ }
 .boat {
     position: absolute;
-    top: 378px;
+    top: 222px;
     left: 0;
     text-align: end;
     z-index: 10;

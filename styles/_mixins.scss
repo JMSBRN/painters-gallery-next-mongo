@@ -58,12 +58,19 @@
     input {
       color: $text;
     }
-    form button {
+    form {
+      input {
+        border-color: red;
+        
+      }
+     button {
       color: $text;
+  
       &:hover {
         color: $text-clr-dark;
         background-color: $primary;
       }
+     }
     }
     button {
       color: $text;

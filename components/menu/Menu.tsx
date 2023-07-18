@@ -49,9 +49,8 @@ const Menu = (props: MenuProps) => {
   };
 
   return (
-    <div className={menuContainer}>
+    <div className={menuContainer} onClick={handleClick}>
       <Image
-        onClick={handleClick}
         priority={true}
         width={20}
         src={burgerIcon}
