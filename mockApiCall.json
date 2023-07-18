@@ -1,0 +1,2089 @@
+{
+    "pagination": {
+        "total": 119817,
+        "limit": 12,
+        "offset": 0,
+        "total_pages": 9985,
+        "current_page": 1,
+        "next_url": "https://api.artic.edu/api/v1/artworks?page=2"
+    },
+    "data": [
+        {
+            "id": 111260,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/111260",
+            "is_boosted": false,
+            "title": "Frieze Section from the Rothschild Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBwAFAPQAANfX19jY2NnZ2dra2tvb29zc3N7e3t/f3+Hh4eLi4uPj4+Tk5OXl5ebm5ujo6Ozs7O3t7e7u7u/v7/Pz8/f39/r6+vz8/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAAIf8LSW1hZ2VNYWdpY2sOZ2FtbWE9MC40NTQ1NDUALAAAAAAHAAUAAAUd4OJAUvQ4g1AkyqEUg9IwiBMARoIQyURVFkuFEgIAOw==",
+                "width": 3000,
+                "height": 2048,
+                "alt_text": "A work made of cast iron."
+            },
+            "main_reference_number": "1974.11",
+            "has_not_been_viewed_much": false,
+            "boost_rank": null,
+            "date_start": 1881,
+            "date_end": 1881,
+            "date_display": "1881",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Adler and Sullivan (American, 1883-1896)\nLouis Sullivan (American, 1856–1924)\nDankmar Adler (American, born Germany, 1844–1900)",
+            "place_of_origin": "Chicago",
+            "dimensions": "45.1 × 94 cm (17 3/4 × 37 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 0,
+                    "depth_in": 0,
+                    "width_cm": 94,
+                    "width_in": 37,
+                    "height_cm": 45.1,
+                    "height_in": 17.75,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Cast iron",
+            "inscriptions": null,
+            "credit_line": "Purchased from Mr. John Vinci; Purchased with funds provided by Mr. and Mrs. Robert Hixon Glore",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 0,
+                "l": 47,
+                "s": 0,
+                "percentage": 0.002475630512146062,
+                "population": 12
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 30393,
+            "artist_title": "Adler & Sullivan, Architects",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                30393
+            ],
+            "artist_titles": [
+                "Adler & Sullivan, Architects"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "Chicago",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "5e261c0b-cc0c-a328-180e-1d53b8da1230",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1974.11"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Frieze Section from the Rothschild Building, Chicago, Illinois"
+                    ],
+                    "weight": 402,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:03-05:00",
+            "updated_at": "2023-07-18T09:15:58-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 38908,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/38908",
+            "is_boosted": false,
+            "title": "Frieze Section from the Rothschild Store, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBAAFAPQAAGpqam1tbY+Pj5SUlJeXl5iYmJubm56enqenp6mpqaurq6ysrLCwsLe3t7m5ucvLy87OzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAAIf8LSW1hZ2VNYWdpY2sOZ2FtbWE9MC40NTQ1NDUALAAAAAAEAAUAAAURYCAIAMEwQ4IoS1MYDnQcTwgAOw==",
+                "width": 1624,
+                "height": 2250,
+                "alt_text": "A work made of cast iron."
+            },
+            "main_reference_number": "1972.319",
+            "has_not_been_viewed_much": false,
+            "boost_rank": null,
+            "date_start": 1881,
+            "date_end": 1881,
+            "date_display": "1881",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Adler and Sullivan (American, 1883-1896)\nLouis Sullivan (American, 1856–1924)\nDankmar Adler (American, born Germany, 1844–1900)",
+            "place_of_origin": "United States",
+            "dimensions": "171.5 × 96.3 cm (67 1/2 × 37 7/8 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 0,
+                    "depth_in": 0,
+                    "width_cm": 96.3,
+                    "width_in": 37.875,
+                    "height_cm": 171.5,
+                    "height_in": 67.5,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Cast iron",
+            "inscriptions": null,
+            "credit_line": "Purchased from National Wrecking Company; gift of the Antiquarian Society through the Mrs. Robert Hixon Glore fund",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 0,
+                "l": 53,
+                "s": 0,
+                "percentage": 0.059515104242837874,
+                "population": 586
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 30393,
+            "artist_title": "Adler & Sullivan, Architects",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                30393
+            ],
+            "artist_titles": [
+                "Adler & Sullivan, Architects"
+            ],
+            "category_ids": [
+                "PC-5",
+                "PC-154"
+            ],
+            "category_titles": [
+                "Architecture and Design",
+                "Chicago Artists"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": null,
+            "alt_subject_ids": [],
+            "subject_ids": [],
+            "subject_titles": [],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [
+                "Chicago Artists"
+            ],
+            "image_id": "357dd4ac-02e4-e1d8-a36f-ecb5f75959e6",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1972.319"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Frieze Section from the Rothschild Store, Chicago, Illinois"
+                    ],
+                    "weight": 584,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:10:52-05:00",
+            "updated_at": "2023-07-18T09:15:58-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 105696,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/105696",
+            "is_boosted": false,
+            "title": "Cornice section from the Gage Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBwAFAPQAAF9cQ2FdSGFfSGViSnRxW4+OgZeTh5qYip6bjqyqoLKxqsTDvM/MydfW0NnY0d7c2uLh3Obm4vLx7vPy8fT08vb29vn4+fr4+fr5+/v6+/z8/f/9///+/////wAAAAAAACH5BAAAAAAALAAAAAAHAAUAAAUbYKVlXWlRkeRAzVQIBDAExpIoB8I8GNdtv0sIADs=",
+                "width": 2997,
+                "height": 2250,
+                "alt_text": "A work made of cast iron."
+            },
+            "main_reference_number": "1976.686",
+            "has_not_been_viewed_much": false,
+            "boost_rank": null,
+            "date_start": 1898,
+            "date_end": 1899,
+            "date_display": "1898–99",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Louis H. Sullivan (American, 1856–1924)\nModeled by Kristian Schneider (American, born Norway, 1864–1935)\nCast by Winslow Brothers Iron Works (American, 1887–1921)\n\nArchitect: Holabird & Roche",
+            "place_of_origin": "Michigan Avenue, 18 South",
+            "dimensions": "45.8 × 126 × 16.5 cm (18 1/16 × 49 5/8 × 6 1/2 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 16.5,
+                    "depth_in": 6.4961,
+                    "width_cm": 126,
+                    "width_in": 49.6063,
+                    "height_cm": 45.8,
+                    "height_in": 18.0315,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Cast iron",
+            "inscriptions": null,
+            "credit_line": "Gift of Mr. and Mrs. L. Lattin Smith",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1982,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 14.3005,
+            "color": {
+                "h": 50,
+                "l": 46,
+                "s": 14,
+                "percentage": 0.07177405602124362,
+                "population": 383
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 32803,
+            "artist_title": "Louis H. Sullivan",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                32803
+            ],
+            "artist_titles": [
+                "Louis H. Sullivan"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "casting (process)",
+                "Chicago",
+                "forming",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": "TM-3881",
+            "alt_technique_ids": [
+                "TM-4027"
+            ],
+            "technique_ids": [
+                "TM-3881",
+                "TM-4027"
+            ],
+            "technique_titles": [
+                "casting (process)",
+                "forming"
+            ],
+            "theme_titles": [],
+            "image_id": "200caaa0-258c-1b2b-02da-25d56b6ff547",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1976.686"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Cornice section from the Gage Building, Chicago, Illinois"
+                    ],
+                    "weight": 718,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:27-05:00",
+            "updated_at": "2023-07-18T09:15:57-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 46632,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/46632",
+            "is_boosted": false,
+            "title": "Newel Post from the Morris Selz House, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhCAAFAPUAAC8kHkI1LlhRS2NZUmRdWHNqZXhybH95c46JhJyYlamloq+pprezsMO/vcPAvsrHxMrIxdHPzNPQztTSz9nX1eDe3Obk4uzr6u3s6u7t7O/u7PDv7/Tz8fb19Pj39fj39vv6+v7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAIAAUAAAYkQJBIFBp+NhdH4sFYFBoRhOAwCAAUnc/EgiEYKBiNh5OBSCpBADs=",
+                "width": 6392,
+                "height": 10265,
+                "alt_text": "A work made of cast iron."
+            },
+            "main_reference_number": "1974.81",
+            "has_not_been_viewed_much": false,
+            "boost_rank": null,
+            "date_start": 1883,
+            "date_end": 1883,
+            "date_display": "1883 (demolished 1967)",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Adler and Sullivan (American, 1883-1896)\nLouis Sullivan (American, 1856–1924)\nDankmar Adler (American, born Germany, 1844–1900)",
+            "place_of_origin": "United States",
+            "dimensions": "55.9 × 124.5 × 7.7 cm (22 × 49 × 3 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 7.7,
+                    "depth_in": 3,
+                    "width_cm": 124.5,
+                    "width_in": 49,
+                    "height_cm": 55.9,
+                    "height_in": 22,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Cast iron",
+            "inscriptions": null,
+            "credit_line": "Gift by exchange from Southern Illinois University at Edwardsville",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1982,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 37,
+                "l": 64,
+                "s": 5,
+                "percentage": 0.00017221965840154554,
+                "population": 113
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 30393,
+            "artist_title": "Adler & Sullivan, Architects",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                30393
+            ],
+            "artist_titles": [
+                "Adler & Sullivan, Architects"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": null,
+            "alt_subject_ids": [],
+            "subject_ids": [],
+            "subject_titles": [],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "6a988f82-3c46-70f2-c1fe-cd7b43aee24a",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1974.81"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Newel Post from the Morris Selz House, Chicago, Illinois"
+                    ],
+                    "weight": 422,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:20-05:00",
+            "updated_at": "2023-07-18T09:15:57-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 46630,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/46630",
+            "is_boosted": false,
+            "title": "Spandrel Panel from the Rosenfeld Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBwAFAPUAAF45K2QzI245KG0/LW8/L2Y/MWtBM3JCM31INXFMPnNMPnZNPH9SP3xTQ4VZRJFxZpxxZJt5bp16bZ+Ad6SCd6aDdqqAcaqKfqyJfayKfqeTi7CXjbGclLWflbijm7qknr6wq8OspcS2sQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAHAAUAAAYhwM8kk7lUQpAAAXEQWCIFRUNhqDwACweDIAFpOJ7ORhQEADs=",
+                "width": 13874,
+                "height": 10150,
+                "alt_text": "A work made of terracotta."
+            },
+            "main_reference_number": "1974.80",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1881,
+            "date_end": 1882,
+            "date_display": "1881/82",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Adler and Sullivan (American, 1883-1896)\nLouis Sullivan (American, 1856–1924)\nDankmar Adler (American, born Germany, 1844–1900)",
+            "place_of_origin": "United States",
+            "dimensions": "Not including projecting ornament: 68 × 104.8 × 16.6 cm (26 3/4 × 41 1/4 × 6 1/2 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 16.6,
+                    "depth_in": 6.5,
+                    "width_cm": 104.8,
+                    "width_in": 41.25,
+                    "height_cm": 68,
+                    "height_in": 26.75,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": "Not including projecting ornament"
+                }
+            ],
+            "medium_display": "Terracotta",
+            "inscriptions": null,
+            "credit_line": "By exchange from Southern Illinois University",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1982,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 349,
+                "l": 89,
+                "s": 1,
+                "percentage": 0.0015878302328273248,
+                "population": 2236
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 30393,
+            "artist_title": "Adler & Sullivan, Architects",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                30393
+            ],
+            "artist_titles": [
+                "Adler & Sullivan, Architects"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": null,
+            "alt_subject_ids": [],
+            "subject_ids": [],
+            "subject_titles": [],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "0c72f139-e39b-4212-4766-d31f9292ad1b",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1974.80"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Spandrel Panel from the Rosenfeld Building, Chicago, Illinois"
+                    ],
+                    "weight": 127,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:09-05:00",
+            "updated_at": "2023-07-18T09:15:57-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 235617,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/235617",
+            "is_boosted": false,
+            "title": "Elevator Grille from the Manhattan Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBQAFAPQAAExBO0xDQFZMSVhQT2NWUmBYW2lfXGleXWtgXWVeYWxiYW1ma3BpaH1wbod+fI+EfYeAgJyTj5yUkaefm6WipsC8vsbEyMzJy83KygAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAFAAUAAAUV4EMcTRUBAXJJwsBYk6E4GFQkCxUCADs=",
+                "width": 2194,
+                "height": 2250,
+                "alt_text": "A work made of copper-plated cast iron."
+            },
+            "main_reference_number": "1981.942-946",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1889,
+            "date_end": 1891,
+            "date_display": "1889–91",
+            "date_qualifier_title": "Made",
+            "date_qualifier_id": 4,
+            "artist_display": "Jenney & Mundie (American, 1891–1905)\nWilliam LeBaron Jenney (American, 1832–1907)\nWilliam B. Mundie (American, born Canada, 1863–1939)",
+            "place_of_origin": "United States",
+            "dimensions": "226 × 229 × 4 cm (89 × 90 × 1 1/2 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 4,
+                    "depth_in": 1.5,
+                    "width_cm": 229,
+                    "width_in": 90,
+                    "height_cm": 226,
+                    "height_in": 89,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Copper-plated cast iron",
+            "inscriptions": null,
+            "credit_line": "Gift of the Manhattan Associates",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1982,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 10.5318,
+            "color": {
+                "h": 9,
+                "l": 52,
+                "s": 5,
+                "percentage": 0.13206343982062413,
+                "population": 963
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 62941,
+            "artist_title": "Jenney & Mundie",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                62941
+            ],
+            "artist_titles": [
+                "Jenney & Mundie"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "copper plate",
+                "architectural fragment"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-10104",
+            "classification_title": "copper plate",
+            "alt_classification_ids": [
+                "TM-184"
+            ],
+            "classification_ids": [
+                "TM-10104",
+                "TM-184"
+            ],
+            "classification_titles": [
+                "copper plate",
+                "architectural fragment"
+            ],
+            "subject_id": null,
+            "alt_subject_ids": [],
+            "subject_ids": [],
+            "subject_titles": [],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "4447b7af-813b-57b5-2566-be925fbae44c",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1981.942-946"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Elevator Grille from the Manhattan Building, Chicago, Illinois"
+                    ],
+                    "weight": 49,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:34-05:00",
+            "updated_at": "2023-07-18T09:15:56-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 100246,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/100246",
+            "is_boosted": false,
+            "title": "Interior Column from the Winston Block, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhAQAFAPIAAI+KhrCpn7WwqL+9uMfHxQAAAAAAAAAAACH5BAAAAAAALAAAAAABAAUAAAMEGDIECQA7",
+                "width": 595,
+                "height": 2250,
+                "alt_text": "A work made of painted cast iron."
+            },
+            "main_reference_number": "1983.260",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1872,
+            "date_end": 1872,
+            "date_display": "1872",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Frederick H. Baumann (American, born Germany, 1826-1921) \nEdward Baumann (American, born Germany, 1828-1889)",
+            "place_of_origin": "Chicago",
+            "dimensions": "376 × 50.7 × 50.7 cm (148 1/16 × 20 × 20 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 50.7,
+                    "depth_in": 19.9607,
+                    "width_cm": 50.7,
+                    "width_in": 19.9607,
+                    "height_cm": 376,
+                    "height_in": 148.0315,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Painted cast iron",
+            "inscriptions": null,
+            "credit_line": "Department of Architecture Purchase Fund",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 12.4699,
+            "color": {
+                "h": 155,
+                "l": 65,
+                "s": 0,
+                "percentage": 0.0024186190503831836,
+                "population": 65
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 1818,
+            "artist_title": "Frederick H. Baumann",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                1818
+            ],
+            "artist_titles": [
+                "Frederick H. Baumann"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "Chicago",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "5d928d3d-54a4-a5af-daa4-9e685bec5b4a",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1983.260"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Interior Column from the Winston Block, Chicago, Illinois"
+                    ],
+                    "weight": 82,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:43-05:00",
+            "updated_at": "2023-07-18T09:15:56-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 137138,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/137138",
+            "is_boosted": false,
+            "title": "Rosette Fragment from the E.G. Raymond Store and Flats, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBwAFAPUAAEIpH0QpHkIsJEUuJUw0K1IyJVg2KFE6MlU9NG9eVXVjWnZjWoNyaYp5cZB9dJiGfqSIeqaQhrOVhryaiaKalK6jnrqglMu4r8y8teLh3+Tk4ujo5uzr6ezs6u/v7e/w7/Hx8fP08wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAHAAUAAAYhwM9lYpFgQB+IgVCIhDiNAULw8GwYgEPA0clQEopFRRMEADs=",
+                "width": 12153,
+                "height": 9114,
+                "alt_text": "A work made of terracotta."
+            },
+            "main_reference_number": "1985.119a",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1884,
+            "date_end": 1884,
+            "date_display": "1884",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Treat and Foltz (American, 1871-1897)\nSamuel Treat (American, 1839–1910)\nFrederick L. Foltz (American, 1843–1916)",
+            "place_of_origin": "Chicago",
+            "dimensions": "32 × 32 × 18 cm (13 × 13 × 7 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 18,
+                    "depth_in": 7,
+                    "width_cm": 32,
+                    "width_in": 13,
+                    "height_cm": 32,
+                    "height_in": 13,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Terracotta",
+            "inscriptions": null,
+            "credit_line": "Department of Architecture Purchase Fund",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": "Art Institute of Chicago, Architectural Fragments from Chicago, Apr. 21, 2023 - present.\n\nAIC exhibit, 1990-continuing: \"Fragments of Chicago's Past\"",
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Cataloged",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": null,
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 26566,
+            "artist_title": "Treat & Foltz",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                26566
+            ],
+            "artist_titles": [
+                "Treat & Foltz"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "earthenware",
+                "terracotta",
+                "Chicago",
+                "ceramics",
+                "architectural fragment",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-74",
+            "classification_title": "earthenware",
+            "alt_classification_ids": [
+                "TM-46",
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-74",
+                "TM-46",
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "earthenware",
+                "ceramics",
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": "TM-2433",
+            "alt_material_ids": [],
+            "material_ids": [
+                "TM-2433"
+            ],
+            "material_titles": [
+                "terracotta"
+            ],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "d1743d0c-d0a8-9b47-1fb5-62c7d8821664",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1985.119a"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Rosette Fragment from the E.G. Raymond Store and Flats, Chicago, Illinois"
+                    ],
+                    "weight": 91,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:14:45-05:00",
+            "updated_at": "2023-07-18T09:15:55-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 105203,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/105203",
+            "is_boosted": true,
+            "title": "Triptych Window from the Coonley Playhouse, Riverside, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhCAAFAPUAAGpUTGZdSX9iX2JoY3FrY3VuaHxxZoJgV41oX4ZvZ5Vya559d42QboeAeIeCeXp9j4uKgpGUgJyXkJ+bkZuZlKujnqinn6qppa6qpK+sp7CrqbSwqrm1xNXU2ODX2d7k7e3n4u3v7/Ps7PDz8fzz8vv8+////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAIAAUAAAYlwEFgAjkgAImIgfMBkRaVzaMTGpkuGQumJPKYNAwHgaIQSAqNIAA7",
+                "width": 6396,
+                "height": 3904,
+                "alt_text": "A triptych glass window in an oak frame with an asymmetrical geometric pattern of circles, squares, and rectangles in clear, red, green, blue, and black glass."
+            },
+            "main_reference_number": "1986.88",
+            "has_not_been_viewed_much": false,
+            "boost_rank": null,
+            "date_start": 1912,
+            "date_end": 1912,
+            "date_display": "1912",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Frank Lloyd Wright\nAmerican, 1867-1959",
+            "place_of_origin": "United States",
+            "dimensions": "Center panel: 35 1/4 × 43 in. (89.5 × 109.2 cm)\nTwo side panels: 36 × 7 3/4 in. (91.4 × 19.7 cm) (each)",
+            "dimensions_detail": [],
+            "medium_display": "Clear and colored leaded glass in oak frames",
+            "inscriptions": null,
+            "credit_line": "Purchased with funds provided by Dr. and Mrs. Edwin J. DeCosta and the Walter E. Heller Foundation",
+            "catalogue_display": null,
+            "publication_history": "Zukowsky, John, ed. 1987. Chicago Architecture and Design, 1872-1922: Birth of a Metropolis. Exh. cat. Art Institute of Chicago/Prestel, cat. no. 183, p. 390.\n\nSaliga, Pauline, ed. 1990. Fragments of Chicago's Past: The Collection of Architectural Fragments at The Art Institute of Chicago. Exh. cat. Art Institute of Chicago, cat. no. 95.\n\nWilson, Richard Guy. 1995. \"Prairie School Works in the Department of Architecture at the Art Institute of Chicago.\" Museum Studies 21(2): 93-111. Cat. no. \n\nZukowsky, John, and Martha Thorne. 2004. Masterpieces of Chicago Architecture. Art Institute of Chicago/Rizzoli, p. 59.\n\nAlso used in various museum graphics, museum shop items, posters, calendars, etc.",
+            "exhibition_history": "Art Institute of Chicago, Architectural Fragments from Chicago, Apr. 21, 2023 - present.\n\nArt Institute of Chicago, Chicago Architecture and Design, 1872-1922: Birth of a Metropolis, cat. no. 183; traveled to Paris, Musée d'Orsay, Oct. 2, 1987–Jan. 4, 1988; Frankfurt am Main, Deutsches Architekturmuseum, Feb. 5-Apr. 25, 1988; and Art Institute of Chicago, July 16–Sept. 5, 1988.\n\nArt Institute of Chicago, Fragments of Chicago's Past, Gallery 200, ongoing exhibition.\n\nArt Institute of Chicago, Silk Roads, December 9, 2006–January 28, 2007.",
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Cataloged",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": false,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": true,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 42.7285,
+            "color": {
+                "h": 2,
+                "l": 45,
+                "s": 96,
+                "percentage": 0.06265187898052493,
+                "population": 272
+            },
+            "latitude": 41.8795285207284,
+            "longitude": -87.6236180785389,
+            "latlon": "41.879528520728,41.879528520728",
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 37362,
+            "artist_title": "Frank Lloyd Wright",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                37362
+            ],
+            "artist_titles": [
+                "Frank Lloyd Wright"
+            ],
+            "category_ids": [
+                "PC-5",
+                "PC-109",
+                "PC-154",
+                "PC-831"
+            ],
+            "category_titles": [
+                "Architecture and Design",
+                "Art Institute Icons",
+                "Chicago Artists",
+                "Essentials"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "stained glass (material)",
+                "interiors",
+                "Prairie School",
+                "glassworking",
+                "circles",
+                "patterns",
+                "flags",
+                "architecture",
+                "wood (plant material)",
+                "glass",
+                "lead glass",
+                "geometric"
+            ],
+            "style_id": "TM-7039",
+            "style_title": "Prairie School",
+            "alt_style_ids": [],
+            "style_ids": [
+                "TM-7039"
+            ],
+            "style_titles": [
+                "Prairie School"
+            ],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12285",
+            "alt_subject_ids": [
+                "TM-8803",
+                "TM-12793",
+                "TM-12701",
+                "TM-9124"
+            ],
+            "subject_ids": [
+                "TM-12285",
+                "TM-8803",
+                "TM-12793",
+                "TM-12701",
+                "TM-9124"
+            ],
+            "subject_titles": [
+                "interiors",
+                "circles",
+                "patterns",
+                "flags",
+                "geometric"
+            ],
+            "material_id": "TM-2666",
+            "alt_material_ids": [
+                "TM-2431",
+                "TM-2453",
+                "TM-2623"
+            ],
+            "material_ids": [
+                "TM-2666",
+                "TM-2431",
+                "TM-2453",
+                "TM-2623"
+            ],
+            "material_titles": [
+                "stained glass (material)",
+                "wood (plant material)",
+                "glass",
+                "lead glass"
+            ],
+            "technique_id": "TM-4136",
+            "alt_technique_ids": [],
+            "technique_ids": [
+                "TM-4136"
+            ],
+            "technique_titles": [
+                "glassworking"
+            ],
+            "theme_titles": [
+                "Art Institute Icons",
+                "Chicago Artists",
+                "Essentials"
+            ],
+            "image_id": "cd6c543d-a649-8f25-d224-6d22e7f86dcd",
+            "alt_image_ids": [],
+            "document_ids": [
+                "dc48ba05-b1ff-f1cd-a7d2-80152cb35b22"
+            ],
+            "sound_ids": [
+                "dc48ba05-b1ff-f1cd-a7d2-80152cb35b22"
+            ],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_boosted": "Triptych Window from the Coonley Playhouse, Riverside, Illinois",
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1986.88"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Triptych Window from the Coonley Playhouse, Riverside, Illinois"
+                    ],
+                    "weight": 24332,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:14:57-05:00",
+            "updated_at": "2023-07-18T09:15:55-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 100247,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/100247",
+            "is_boosted": false,
+            "title": "Interior Column Capital from the Winston Block, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhCgAFAPUAAGJURXRnWX1uX4d4a4l+b4yCdJWJepmLfJqLfJqMfZeNgpuOgJ6Rg6CThaKWiaWai6KZj6OckaickKqhl62hla2ilrKrpLOrpLOvp7atpLSupLmwp7qyp7qzp7uzp7ewqL23qry4rsC5r8G7scK7ssO8s8S9scG+tMG/tcO/tcbAt8bDu8vHvsvKxdHNxdzc2N7e2wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAKAAUAAAYuwApF4mAsEocEYqMakUqijofTyJhcrBcsBXoYLJNPaNXCEAqKC2SgQZ0igIAgCAA7",
+                "width": 3000,
+                "height": 1519,
+                "alt_text": "A work made of painted cast iron."
+            },
+            "main_reference_number": "1983.261",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1872,
+            "date_end": 1872,
+            "date_display": "1872",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Frederick H. Baumann (American, 1826-1921) and Edward Baumann (American, 1828-1889)",
+            "place_of_origin": "Chicago",
+            "dimensions": "32 × 107 × 39 cm (12 5/8 × 42 3/16 × 15 3/8 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 39,
+                    "depth_in": 15.3544,
+                    "width_cm": 107,
+                    "width_in": 42.126,
+                    "height_cm": 32,
+                    "height_in": 12.5985,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Painted cast iron",
+            "inscriptions": null,
+            "credit_line": "Department of Architecture Purchase Fund",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": null,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 13.8678,
+            "color": {
+                "h": 40,
+                "l": 74,
+                "s": 11,
+                "percentage": 0.3505935365220121,
+                "population": 1262
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 1818,
+            "artist_title": "Frederick H. Baumann",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                1818
+            ],
+            "artist_titles": [
+                "Frederick H. Baumann"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "Chicago",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "2260cd0a-eb7f-8a84-0035-127e5c5fd8ca",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1983.261"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Interior Column Capital from the Winston Block, Chicago, Illinois"
+                    ],
+                    "weight": 70,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:11:50-05:00",
+            "updated_at": "2023-07-18T09:15:55-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 110546,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/110546",
+            "is_boosted": false,
+            "title": "Anchor plate from the Pullman-Jennings Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhBAAFAPQAAI45MI86MKtwaapxaraHgbmPiMGjn8Olocurp8qrqMqvrMywrM21sc60serr7Ozu7u7v8O3w8e7y8/D19QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAEAAUAAAUR4LMoDkQUETIMCRMEzHQYUQgAOw==",
+                "width": 10228,
+                "height": 12153,
+                "alt_text": "A work made of painted cast iron."
+            },
+            "main_reference_number": "1987.4.1",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1882,
+            "date_end": 1883,
+            "date_display": "1882/83 (demolished 1978)",
+            "date_qualifier_title": "",
+            "date_qualifier_id": null,
+            "artist_display": "Solon Spencer Beman\nAmerican, 1853-1914",
+            "place_of_origin": "Madison Street, 1214-1222 West",
+            "dimensions": "58 × 45 × 11 cm (22 7/8 × 17 3/4 × 4 3/8 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 11,
+                    "depth_in": 4.3308,
+                    "width_cm": 45,
+                    "width_in": 17.7166,
+                    "height_cm": 58,
+                    "height_in": 22.8347,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": null
+                }
+            ],
+            "medium_display": "Painted cast iron",
+            "inscriptions": null,
+            "credit_line": "Gift of Timothy Samuelson",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1987,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": true,
+            "is_zoomable": true,
+            "max_zoom_window_size": -1,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 6,
+                "l": 43,
+                "s": 41,
+                "percentage": 0.0010265413719825194,
+                "population": 1276
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 33593,
+            "artist_title": "Solon Spencer Beman",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                33593
+            ],
+            "artist_titles": [
+                "Solon Spencer Beman"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "iron (metal)",
+                "casting (process)",
+                "Chicago",
+                "metal",
+                "forming",
+                "painting (image making)",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": "TM-2526",
+            "alt_material_ids": [
+                "TM-2568"
+            ],
+            "material_ids": [
+                "TM-2526",
+                "TM-2568"
+            ],
+            "material_titles": [
+                "iron (metal)",
+                "metal"
+            ],
+            "technique_id": "TM-3881",
+            "alt_technique_ids": [
+                "TM-4027",
+                "TM-3891"
+            ],
+            "technique_ids": [
+                "TM-3881",
+                "TM-4027",
+                "TM-3891"
+            ],
+            "technique_titles": [
+                "casting (process)",
+                "forming",
+                "painting (image making)"
+            ],
+            "theme_titles": [],
+            "image_id": "1253368b-bbc0-2535-2e50-f424531b6842",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1987.4.1"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Anchor plate from the Pullman-Jennings Building, Chicago, Illinois"
+                    ],
+                    "weight": 157,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:15:25-05:00",
+            "updated_at": "2023-07-18T09:15:54-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        },
+        {
+            "id": 68787,
+            "api_model": "artworks",
+            "api_link": "https://api.artic.edu/api/v1/artworks/68787",
+            "is_boosted": false,
+            "title": "Facade Panel from the Jordan Building, Chicago, Illinois",
+            "alt_titles": null,
+            "thumbnail": {
+                "lqip": "data:image/gif;base64,R0lGODlhCgAFAPUAAIqAc4qBc5CHeJCIe5eOgJuThZ6Uhp+XiZyXjJ+YjKGajqKajqOdkaSckKWdkaSelKehla+onLGrobKroLOtpbOvp7WvprSvp7axqbm0q765ssK9tcbAt8XAucfCuMXBusnEvsvGv8jGwcvGwMvIwsrIw8zJw83Lxs7Lxs7Mx8/NyNfU0NjV0drZ1tza2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAKAAUAAAYuwNVntNFoQKAP6zIYCBYOAgBAyUAQhw/H8HBcMAlGQRJxSBYXF0mVMpFOqVErCAA7",
+                "width": 13702,
+                "height": 6983,
+                "alt_text": "A work made of glazed terra-cotta."
+            },
+            "main_reference_number": "1987.3",
+            "has_not_been_viewed_much": true,
+            "boost_rank": null,
+            "date_start": 1916,
+            "date_end": 1917,
+            "date_display": "1916–17",
+            "date_qualifier_title": "Built",
+            "date_qualifier_id": 51,
+            "artist_display": "John N. Coleman\nAmerican, 1875–1922",
+            "place_of_origin": "Chicago",
+            "dimensions": "Approx: 42 × 100 × 13 cm (16 9/16 × 39 3/8 × 5 1/8 in.)",
+            "dimensions_detail": [
+                {
+                    "depth_cm": 13,
+                    "depth_in": 5.1182,
+                    "width_cm": 100,
+                    "width_in": 39.3701,
+                    "height_cm": 42,
+                    "height_in": 16.5355,
+                    "diameter_cm": 0,
+                    "diameter_in": 0,
+                    "clarification": "Approx"
+                }
+            ],
+            "medium_display": "Glazed terra-cotta",
+            "inscriptions": null,
+            "credit_line": "Gift of the Commission on Chicago Historical and Architectural Landmarks",
+            "catalogue_display": null,
+            "publication_history": null,
+            "exhibition_history": null,
+            "provenance_text": null,
+            "edition": null,
+            "publishing_verification_level": "Web Basic",
+            "internal_department_id": 25,
+            "fiscal_year": 1987,
+            "fiscal_year_deaccession": null,
+            "is_public_domain": false,
+            "is_zoomable": false,
+            "max_zoom_window_size": 843,
+            "copyright_notice": null,
+            "has_multimedia_resources": false,
+            "has_educational_resources": false,
+            "has_advanced_imaging": false,
+            "colorfulness": 0,
+            "color": {
+                "h": 39,
+                "l": 59,
+                "s": 35,
+                "percentage": 0.000003135416572386433,
+                "population": 3
+            },
+            "latitude": null,
+            "longitude": null,
+            "latlon": null,
+            "is_on_view": true,
+            "on_loan_display": null,
+            "gallery_title": "Gallery 200",
+            "gallery_id": 2147477218,
+            "artwork_type_title": "Architectural fragment",
+            "artwork_type_id": 19,
+            "department_title": "Architecture and Design",
+            "department_id": "PC-5",
+            "artist_id": 5064,
+            "artist_title": "John N. Coleman",
+            "alt_artist_ids": [],
+            "artist_ids": [
+                5064
+            ],
+            "artist_titles": [
+                "John N. Coleman"
+            ],
+            "category_ids": [
+                "PC-5"
+            ],
+            "category_titles": [
+                "Architecture and Design"
+            ],
+            "term_titles": [
+                "architectural fragment",
+                "Chicago",
+                "architecture"
+            ],
+            "style_id": null,
+            "style_title": null,
+            "alt_style_ids": [],
+            "style_ids": [],
+            "style_titles": [],
+            "classification_id": "TM-184",
+            "classification_title": "architectural fragment",
+            "alt_classification_ids": [
+                "TM-103"
+            ],
+            "classification_ids": [
+                "TM-184",
+                "TM-103"
+            ],
+            "classification_titles": [
+                "architectural fragment",
+                "architecture"
+            ],
+            "subject_id": "TM-12075",
+            "alt_subject_ids": [],
+            "subject_ids": [
+                "TM-12075"
+            ],
+            "subject_titles": [
+                "Chicago"
+            ],
+            "material_id": null,
+            "alt_material_ids": [],
+            "material_ids": [],
+            "material_titles": [],
+            "technique_id": null,
+            "alt_technique_ids": [],
+            "technique_ids": [],
+            "technique_titles": [],
+            "theme_titles": [],
+            "image_id": "edd6e951-e49b-e711-bb5b-dca24c3217c9",
+            "alt_image_ids": [],
+            "document_ids": [],
+            "sound_ids": [],
+            "video_ids": [],
+            "text_ids": [],
+            "section_ids": [],
+            "section_titles": [],
+            "site_ids": [],
+            "suggest_autocomplete_all": [
+                {
+                    "input": [
+                        "1987.3"
+                    ],
+                    "contexts": {
+                        "groupings": [
+                            "accession"
+                        ]
+                    }
+                },
+                {
+                    "input": [
+                        "Facade Panel from the Jordan Building, Chicago, Illinois"
+                    ],
+                    "weight": 1,
+                    "contexts": {
+                        "groupings": [
+                            "title"
+                        ]
+                    }
+                }
+            ],
+            "source_updated_at": "2023-07-18T09:15:18-05:00",
+            "updated_at": "2023-07-18T09:15:54-05:00",
+            "timestamp": "2023-07-18T09:20:43-05:00"
+        }
+    ],
+    "info": {
+        "license_text": "The data in this response is licensed under a Creative Commons Zero (CC0) 1.0 designation and the Terms and Conditions of artic.edu.",
+        "license_links": [
+            "https://creativecommons.org/publicdomain/zero/1.0/",
+            "https://www.artic.edu/terms"
+        ],
+        "version": "1.8"
+    },
+    "config": {
+        "iiif_url": "https://www.artic.edu/iiif/2",
+        "website_url": "http://www.artic.edu"
+    }
+}
