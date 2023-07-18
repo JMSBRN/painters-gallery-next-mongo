@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <div className={isDark ? 'theme-dark' : 'theme'}>
           <Header isDark={isDark} setIsDark={setIsDark} />
-          <Layout>
+          <Layout isDark={isDark} >
             <LoaderInProgress />
             <Component isDark={isDark} {...pageProps} />
           </Layout>

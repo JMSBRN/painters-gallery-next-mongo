@@ -5,7 +5,6 @@
     margin: -34px auto 0 auto;
     width: 95%;
     height: 100vh;
-
     ::-webkit-scrollbar {
         width: 2px;
     }
@@ -69,4 +68,7 @@
     left: 0;
     text-align: end;
     z-index: 10;
+    @include respond-to ($breakpoint-small) {
+      visibility: hidden;
+    }
 }
