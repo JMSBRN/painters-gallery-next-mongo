@@ -7,12 +7,12 @@
     @include flex(center, center);
     @include respond-to($breakpoint-medium){
       @include flex(space-between, center);
-      & .logedUserContainer {
+      .logedUserContainer {
         padding-right: 40px;
         @include flex(center, center);
       }
     }
-    & .menu {
+     .menu {
       display: none;
       @include respond-to($breakpoint-medium){
         margin-left: 20px;
@@ -28,12 +28,12 @@
     @include respond-to($breakpoint-medium){
       padding: 0 20px;
       };
-   & nav  {
+    nav  {
      @include respond-to($breakpoint-medium){
       display: none;
       };
       @include flex(space-arround, center);
-      & a {
+      a {
         text-decoration: none;
         color: $light;
         margin-right: 20px;

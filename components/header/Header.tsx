@@ -63,9 +63,6 @@ const Header = (props: HeaderProps) => {
           {(userFromLocal.name && logged) && 
            <Link href={`/painters/${userFromLocal.id}`}>gallery</Link> }
           </nav>
-        <div className={themeContainer}>
-          <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
-        </div>
         <div className={logedUserContainer}>
           {(userFromLocal.name && logged) && 
            <div className={userNameStyle}>{ name ? name : userFromLocal.name }</div>
@@ -84,7 +81,9 @@ const Header = (props: HeaderProps) => {
             <Link className={authLink} href={'/signup/'}>Sign Up</Link>
             </>
           )}
-           
+        </div>
+        <div className={themeContainer}>
+          <ThemeSwitcher isDark={isDark} setIsDark={setIsDark} />
         </div>
       </div>
     </header>

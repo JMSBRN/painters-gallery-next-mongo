@@ -36,6 +36,9 @@
   
     * {
       color: $text;
+      a {
+        color: red;
+      }
     }
     header{
       background-image: $bg-image;
@@ -49,7 +52,9 @@
       nav a {
         color: $text;
       }
-
+    }
+    menu {
+      background-color: $bg;
     }
     main {
       background-image: $bg-image;

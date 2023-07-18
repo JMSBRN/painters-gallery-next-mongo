@@ -13,7 +13,7 @@
   width: 100%;
   @include flex(center, center);
 
-  & .deleteImagesBtn {
+  .deleteImagesBtn {
     margin-top: 13px;
   }
 }
@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
 
-  & .ImageLayout {
+  .ImageLayout {
     width: 220px;
     height: 170px;
     border: 0.2px solid rgb(196, 196, 196);
@@ -39,7 +39,7 @@
     @include flex(center, flex-start, column);
   }
 
-  & .painterImg {
+  .painterImg {
     background-color: rgb(217, 217, 217);
   }
 }
