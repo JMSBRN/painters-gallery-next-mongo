@@ -18,7 +18,7 @@ const ProgressLine = () => {
               /* modify the progress bar height */
               #nprogress .bar {
                 position: absolut;
-                top: 80px;
+                top: 0px;
                 z-index: 8;
               }
   

@@ -4,7 +4,6 @@
 .header {
     width: 100%;
     z-index: 9;
-    @include flex(center, center);
     @include respond-to($breakpoint-medium){
       @include flex(space-between, center);
       .logedUserContainer {
@@ -22,8 +21,13 @@
   }
   
   .headerContainer {
+    margin: 0 auto;
     max-width: 1000px;
-    height: 80px;
+    height: 100px;
+     nav {
+      min-width: 380px;
+      @include flex(space-between, center);
+     }
     @include flex(space-arround, center);
     @include respond-to($breakpoint-medium){
       padding: 0 20px;
