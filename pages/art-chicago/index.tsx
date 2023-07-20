@@ -1,16 +1,30 @@
 import { Artworks } from '@/styles/art-chicago/iInterfaces';
+import Image from 'next/image';
 import React from 'react';
 import { getArtWorks } from '@/styles/art-chicago/artApiUtils';
 import styles from '../../styles/artChicago.module.scss';
 
 const ArtChicago = ({ fetchedData }: { fetchedData: Artworks }) => {
-  const { data } = fetchedData;
+  const { mainContainer, artWorks, imageConatiner } = styles;
 
+  const { data } = fetchedData;
+    
   return (
-    <div className={styles.mainContainer}>
+    <div className={mainContainer}>
+      <div className={artWorks}>
       {data.map( el => (
-        <div key={el.id}>{el.id}</div>
+        <div key={el.id}>
+          <div className={imageConatiner}>
+            <Image 
+            src={`https://www.artic.edu/iiif/2/${el.image_id}/full/400,/0/default.jpg`}
+            width={100}
+            height={120}
+            alt={el.thumbnail.alt_text}
+            />
+          </div>
+        </div>
       ))}
+      </div>
     </div>
   );
 };
