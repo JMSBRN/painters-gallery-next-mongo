@@ -1,3 +1,4 @@
+import BackGroundImage from '@/components/back_ground-image/BackGroundImage';
 import React from 'react';
 import styles from '../styles/about.module.scss';
 
@@ -10,6 +11,7 @@ const AboutPage = ({ isDark }: { isDark: boolean }) => {
 
   return (
     <div className={container}>
+      <BackGroundImage  isDark={isDark}/>
       <div className={isDark ? welcomeText: welcomeTextWithHover }>
         <h3>Welcome to my About page!</h3>
         <p>

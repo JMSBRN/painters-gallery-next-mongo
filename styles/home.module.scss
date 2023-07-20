@@ -23,6 +23,7 @@
     margin: 0 auto 0 10px;
     max-width: 500px;
     height: auto;
+    z-index: 100;
     @include respond-to ($breakpoint-small) {
         margin: 0 auto;
     }
@@ -75,13 +76,3 @@
         }
     }
  }
-.boat {
-    position: absolute;
-    top: 222px;
-    left: 0;
-    text-align: end;
-    z-index: 10;
-    @include respond-to ($breakpoint-small) {
-      visibility: hidden;
-    }
-}

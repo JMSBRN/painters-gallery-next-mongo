@@ -1,13 +1,15 @@
-import Image, { StaticImageData  } from 'next/image';
+import Image from 'next/image';
 import React from 'react';
+import backGroundImageDark from '../../public/images/tree-736885_1280.jpg';
+import backGroundImageLight from '../../public/images/sea.jpg';
 import styles from './backGroundImage.module.scss';
 
 interface BackGroundImageProps {
-   src: StaticImageData;
+   isDark: boolean;
    width?: number;
 }
 const BackGroundImage = ({
- src,
+ isDark,
  width,
 }: BackGroundImageProps) => {
 
@@ -17,7 +19,7 @@ const BackGroundImage = ({
         className={styles.backGroundImage}
         priority={true}
         quality={100}
-        src={src}
+        src={isDark ? backGroundImageDark : backGroundImageLight}
         width={width && width | 800}
         alt='background image'
         />

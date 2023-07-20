@@ -36,6 +36,7 @@
       color: $text;
     }
     header{
+      background-color: $bg;
       color: $text;
       a {
         color: $text
@@ -48,8 +49,8 @@
       background-color: $bg;
     }
     main {
+      background-color: rgba($bg, .5);
       color: $text;
-
     }
     footer {
       background-color: black;
@@ -59,10 +60,6 @@
       color: $text;
     }
     form {
-      input {
-        border-color: red;
-        
-      }
      button {
       color: $text;
   

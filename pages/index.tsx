@@ -1,3 +1,4 @@
+import BackGroundImage from '@/components/back_ground-image/BackGroundImage';
 import React from 'react';
 import styles from '../styles/home.module.scss';
 
@@ -6,6 +7,7 @@ const Home = ({ isDark }: { isDark: boolean }) => {
 
   return (
     <div className={mainContainer}>
+      <BackGroundImage isDark={isDark} />
       <div className={welcomeBlock}>
         <h1>Welcome to the Painters Gallery!</h1>
         <div className={isDark ? secondTitlesContainer : secondTilteHover}>
