@@ -1,18 +1,11 @@
-import Image from 'next/image';
 import React from 'react';
 import styles from '../styles/home.module.scss';
-import yachtImage from '../public/svgs/yacht.svg';
 
 const Home = ({ isDark }: { isDark: boolean }) => {
-  const { mainContainer, welcomeBlock, secondTitlesContainer, secondTilteHover, boat } = styles;
+  const { mainContainer, welcomeBlock, secondTitlesContainer, secondTilteHover } = styles;
 
   return (
     <div className={mainContainer}>
-      { !isDark && (
-        <div style={{ width: `${Math.random() * (100 + 1)}%` }} className={boat}>
-          <Image src={yachtImage} width={20} alt="yacht" />
-        </div>
-      )}
       <div className={welcomeBlock}>
         <h1>Welcome to the Painters Gallery!</h1>
         <div className={isDark ? secondTitlesContainer : secondTilteHover}>
