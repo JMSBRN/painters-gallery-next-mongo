@@ -1,0 +1,10 @@
+@import '_mixins';
+@import '_variables';
+
+.layout {
+    height: auto;
+    min-height: 100vh;
+    img {
+        height: 107vh;
+    }
+}

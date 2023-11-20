@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'mixins';
+
+.formContainer {
+   margin: 0px auto;
+   width: 100%;
+   max-width: 500px;
+   padding-top: 30px;
+}
+
+.failedConnecionMsg {
+  margin-top: 20px;
+  max-width: 500px;
+   a {
+    color: $primary-clr;
+      &:hover {
+       font-weight: 550;
+       color: $primary-clr;
+      }
+  }
+}

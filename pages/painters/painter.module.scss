@@ -1,0 +1,45 @@
+@import 'variables';
+@import 'mixins';
+
+.painterContainer {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 460px;
+  margin-bottom: -30px;
+}
+
+.uploadsStyle {
+  width: 100%;
+  @include flex(center, center);
+
+  .deleteImagesBtn {
+    margin-top: 13px;
+  }
+}
+
+.imagesStyle {
+  margin: 30px auto;
+  width: 95%;
+  max-width: 900px;
+  height: auto;
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  row-gap: 50px;
+  column-gap: 30px;
+  justify-content: center;
+  align-items: center;
+
+  .ImageLayout {
+    width: 220px;
+    height: 170px;
+    border: 0.2px solid rgb(196, 196, 196);
+    border-radius: 5px;
+    @include flex(center, flex-start, column);
+  }
+
+  .painterImg {
+    background-color: rgb(217, 217, 217);
+  }
+}

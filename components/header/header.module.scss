@@ -1,0 +1,81 @@
+@import 'variables';
+@import 'mixins';
+
+.header {
+    width: 100%;
+    z-index: 9;
+    @include respond-to($breakpoint-medium){
+      @include flex(space-between, center);
+      .logedUserContainer {
+        padding-right: 40px;
+        @include flex(center, center);
+      }
+    }
+     .menu {
+      display: none;
+      @include respond-to($breakpoint-medium){
+        margin-left: 20px;
+        display: block;
+      }
+    }
+  }
+  
+  .headerContainer {
+    margin: 0 auto;
+    max-width: 1000px;
+    height: 100px;
+     nav {
+      min-width: 380px;
+      @include flex(space-between, center);
+     }
+    @include flex(space-arround, center);
+    @include respond-to($breakpoint-medium){
+      padding: 0 20px;
+      };
+    nav  {
+     @include respond-to($breakpoint-medium){
+      display: none;
+      };
+      @include flex(space-arround, center);
+      a {
+        text-decoration: none;
+        color: $light;
+        margin-right: 20px;
+      }
+    }
+  }
+  .authLinkContainer {
+    width: 100%;
+    min-width: 180px;
+    margin-left: 30px;
+    @include flex(center, center);
+    @include respond-to($breakpoint-medium){
+      display: none;
+    }
+  }
+
+  .authLink {
+    text-decoration: none;
+    color: $light;
+    margin-right: 10px;
+  }
+  .themeContainer {
+    width: 50px;
+    @include flex(center, center);
+    @include respond-to($breakpoint-medium){
+      display: none;
+    }
+  }
+  .userNameStyle {
+    padding: 5px 0;
+    padding-left: 5px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    border: 1px solid $light;
+    border-radius: 5px;
+    color: $light;
+  }
+  .logedUserContainer {
+    width: 100%;
+    @include flex(center, center);
+  }

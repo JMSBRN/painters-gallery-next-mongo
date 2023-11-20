@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import 'variables';
+@import 'mixins';
+@import '../styles//login.module.scss';
+@import '../styles//edit.module.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.theme {
+  @include theme();
+}
+.theme-dark {
+  @include theme('dark');
+}

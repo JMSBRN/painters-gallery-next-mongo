@@ -1,0 +1,44 @@
+@import 'mixins';
+@import 'variables';
+
+.menuContainer {
+  img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    filter: invert(95%) sepia(95%) saturate(0%) hue-rotate(74deg) brightness(103%) contrast(106%);
+  }
+  &:active {
+    border: 1px solid $light;
+    border-radius: 3px;
+  }
+}
+
+.menuStyle {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: 230px;
+  z-index: 9;
+  nav {
+    @include flex (center, flex-start, column);
+    margin-bottom: 10px;
+    a {
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+  }
+}
+
+.authContainer {
+  width: 90%;
+  min-width: 100px;
+  max-width: 300px;
+  @include flex (flex-start, center);
+  .authLink {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+}
